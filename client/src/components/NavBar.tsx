@@ -10,6 +10,7 @@ function NavBar() {
   };
 
   return (
+
     <>
       {/* Affichage du bouton Burger uniquement sur mobile */}
       <div className="block md:hidden mr-6">
@@ -97,6 +98,7 @@ function NavBar() {
         </ul>
       </nav>
     </>
+
   );
 }
 

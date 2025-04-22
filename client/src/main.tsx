@@ -8,6 +8,8 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 // Import the main app component
 import App from "./App";
 import Accueil from "./pages/Accueil";
+import Cgv from "./pages/Cgv";
+import Legal from "./pages/Legal";
 import Nos_Chambres from "./pages/Nos_Chambres";
 import Notre_Alsace from "./pages/Notre_Alsace";
 import Reservation from "./pages/Reservation";
@@ -30,7 +32,7 @@ const router = createBrowserRouter([
 
     children: [
       {
-        path: "/Accueil",
+        path: "/",
         element: <Accueil />,
       },
       {
@@ -49,6 +51,14 @@ const router = createBrowserRouter([
       {
         path: "/Notre_Alsace",
         element: <Notre_Alsace />,
+      },
+      {
+        path: "/Cgv",
+        element: <Cgv />,
+      },
+      {
+        path: "/Legal",
+        element: <Legal />,
       },
     ],
     // Renders the App component for the home page
