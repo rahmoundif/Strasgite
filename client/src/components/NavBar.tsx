@@ -5,7 +5,7 @@ function NavBar() {
     <nav>
       <ul className="flex gap-2">
         <li>
-          <Link to="/Accueil">Accueil</Link>
+          <Link to="/">Accueil</Link>
         </li>
         <li>
           <Link to="/Nos_Chambres"> Nos chambres </Link>
