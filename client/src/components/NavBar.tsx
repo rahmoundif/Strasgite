@@ -19,6 +19,9 @@ function NavBar() {
         <li>
           <Link to="/Reservation"> Reservation </Link>
         </li>
+        <li>
+          <Link to="/contact"> Contact </Link>
+        </li>
       </ul>
     </nav>
   );
