@@ -15,7 +15,10 @@ h1 {
   color: #e2b846;
 }
 
+main {
+  min-height: 100vh;
+}
+
 #root {
-  height: 100vh;
   background-color: #f4ebd0;
 }
