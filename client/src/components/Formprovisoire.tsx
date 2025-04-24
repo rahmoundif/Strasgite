@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import type React from "react";
+import { useState } from "react";
 
 export default function FormProvisoire() {
   const [form, setForm] = useState({
@@ -29,10 +30,11 @@ export default function FormProvisoire() {
       className="space-y-4 p-4 max-w-md mx-auto border-2 border-[#2c7865] rounded-sm"
     >
       <div>
-        <label className="block font-semibold mb-1">
+        <label htmlFor="raison" className="block font-semibold mb-1">
           Raison de la visite *
         </label>
         <select
+          id="raison"
           name="raison"
           value={form.raison}
           onChange={handleChange}
@@ -47,8 +49,11 @@ export default function FormProvisoire() {
       </div>
 
       <div>
-        <label className="block font-semibold mb-1">Date d'arrivée *</label>
+        <label htmlFor="arrivee" className="block font-semibold mb-1">
+          Date d'arrivée *
+        </label>
         <input
+          id="arrivee"
           type="date"
           name="arrivee"
           value={form.arrivee}
@@ -59,8 +64,11 @@ export default function FormProvisoire() {
       </div>
 
       <div>
-        <label className="block font-semibold mb-1">Date de départ *</label>
+        <label htmlFor="depart" className="block font-semibold mb-1">
+          Date de départ *
+        </label>
         <input
+          id="depart"
           type="date"
           name="depart"
           value={form.depart}
@@ -72,8 +80,11 @@ export default function FormProvisoire() {
 
       <div className="flex space-x-4">
         <div className="flex-1">
-          <label className="block font-semibold mb-1">Nombre d'adulte *</label>
+          <label htmlFor="adultes" className="block font-semibold mb-1">
+            Nombre d'adulte *
+          </label>
           <input
+            id="adultes"
             type="number"
             name="adultes"
             min="0"
@@ -85,8 +96,11 @@ export default function FormProvisoire() {
           />
         </div>
         <div className="flex-1">
-          <label className="block font-semibold mb-1">Nombre d'enfant *</label>
+          <label htmlFor="enfants" className="block font-semibold mb-1">
+            Nombre d'enfant *
+          </label>
           <input
+            id="enfants"
             type="number"
             name="enfants"
             min="0"
@@ -100,8 +114,11 @@ export default function FormProvisoire() {
       </div>
 
       <div>
-        <label className="block font-semibold mb-1">Petit déjeuner *</label>
+        <label htmlFor="petitDej" className="block font-semibold mb-1">
+          Petit déjeuner *
+        </label>
         <select
+          id="petitDej"
           name="petitDej"
           value={form.petitDej}
           onChange={handleChange}
