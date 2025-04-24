@@ -9,8 +9,6 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 import App from "./App";
 import Accueil from "./pages/Accueil";
 
-import Contact from "./pages/Contact";
-
 import Cgv from "./pages/Cgv";
 import Legal from "./pages/Legal";
 
