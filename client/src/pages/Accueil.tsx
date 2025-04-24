@@ -3,6 +3,7 @@ import RoomShow from "../components/Rooms/RoomShow";
 
 function Accueil() {
   return (
+
     <section>
       <div>
         <h1 className="p-2">
@@ -16,6 +17,7 @@ function Accueil() {
 
       <section className="lg:flex justify-center my-10 place-items-center">
         <div className="px-10">
+
           <Formulaire />
         </div>
 
