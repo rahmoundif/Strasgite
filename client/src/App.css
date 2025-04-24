@@ -22,3 +22,52 @@ main {
 #root {
   background-color: #f4ebd0;
 }
+/* STYLE DU CALENDRIER */
+
+.react-calendar {
+  width: 100%;
+  border: 2px solid #2c7865;
+  border-radius: 0.375rem;
+}
+
+.react-calendar__tile {
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+}
+
+.react-calendar__tile:hover {
+  background-color: #d9bf77;
+}
+
+.react-calendar__tile--active {
+  background-color: #2c7865;
+  color: white;
+}
+
+.react-calendar__tile--now {
+  border: 1px solid #2c7865;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.react-calendar__navigation__prev-button,
+.react-calendar__navigation__next-button {
+  padding: 0.5rem;
+}
+
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
+
+.tile-desactivee {
+  background-color: #808080;
+  color: #d3d3d3;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
