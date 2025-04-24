@@ -5,7 +5,7 @@ function Accueil() {
     <>
       <section>
         <div>
-          <h1 className="p-2">
+          <h1 className="p-4  md:mt-15">
             Nichée à deux pas du Parlement européen, sur le quai Mullenheim,
             notre maison d'hôte vous offre un cadre confortable et convivial
             pour votre séjour à Strasbourg. Idéale pour les voyageurs, elle vous
