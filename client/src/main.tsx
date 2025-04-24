@@ -8,14 +8,12 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 // Import the main app component
 import App from "./App";
 import Accueil from "./pages/Accueil";
-
-import Contact from "./pages/Contact";
-
 import Cgv from "./pages/Cgv";
+import Contact from "./pages/Contact";
 import Legal from "./pages/Legal";
-
 import Nos_Chambres from "./pages/Nos_Chambres";
 import Notre_Alsace from "./pages/Notre_Alsace";
+import Order from "./pages/Order";
 import Reservation from "./pages/Reservation";
 import Services from "./pages/Services";
 
@@ -69,6 +67,11 @@ const router = createBrowserRouter([
       {
         path: "/Legal",
         element: <Legal />,
+      },
+
+      {
+        path: "/Order",
+        element: <Order />,
       },
     ],
     // Renders the App component for the home page
