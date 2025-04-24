@@ -57,10 +57,6 @@ const router = createBrowserRouter([
         element: <Notre_Alsace />,
       },
       {
-
-        path: "/contact",
-        element: <Contact />,
-
         path: "/Cgv",
         element: <Cgv />,
       },
