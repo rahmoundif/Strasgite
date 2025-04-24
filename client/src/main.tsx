@@ -35,9 +35,8 @@ const router = createBrowserRouter([
 
     children: [
       {
-  
         path: "/",
-        element: <Accueil/>,
+        element: <Accueil />,
       },
       {
         path: "/Reservation",
@@ -57,12 +56,10 @@ const router = createBrowserRouter([
         element: <Notre_Alsace />,
       },
       {
-
         path: "/contact",
         element: <Contact />,
       },
       {
-
         path: "/Cgv",
         element: <Cgv />,
       },

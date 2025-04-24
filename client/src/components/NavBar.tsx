@@ -20,10 +20,7 @@ function NavBar() {
       <nav className="hidden md:flex h-auto md:z-40 md:fixed md:top-0 md:left-0">
         <ul className="flex space-x-4 m-3">
           <li className="group relative">
-            <Link
-              to="/"
-              className="text-[#d9bf77] py-2 relative text-xl"
-            >
+            <Link to="/" className="text-[#d9bf77] py-2 relative text-xl">
               Accueil
               <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#d9bf77] transition-all duration-300 group-hover:w-full" />
             </Link>
