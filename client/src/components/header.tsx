@@ -2,12 +2,12 @@ import NavBar from "./NavBar";
 
 function Header() {
   return (
-    <section className="relative flex flex-row-reverse bg-[url('/desktop_banner.png')] h-full w-full bg-contain bg-no-repeat min-h-screen bg-top ">
+    <section className="relative flex flex-row-reverse bg-[url('/desktop_banner.png')] h-full w-full bg-contain md:bg-cover md:bg-center bg-no-repeat min-h-70 md:min-h-100 bg-top lg:min-h-150 ">
       <div className=" mb:absolute relative z-50">
         <NavBar />
       </div>
       <section className="absolute w-full z-0">
-        <div className="flex flex-col items-center text-center mt-13 gap-21 md:mt-30 md:gap-43 lg:mt-40 lg:gap-75 w-full">
+        <div className="flex flex-col items-center text-center mt-13 gap-21 md:mt-18 md:gap-32 lg:mt-30 lg:gap-55 w-full ">
           <img
             src="/stras_gite_logo.png"
             alt="Logo La Maison Strasbourgeoise"
