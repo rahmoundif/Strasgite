@@ -20,19 +20,26 @@ function Footer() {
         </div>
         <div className="flex justify-center gap-10 text-white">
           {/* Téléphone avec icône */}
-          <a
-            href="tel:0382886768"
-            className="flex items-center gap-2 hover:underline"
-          >
-            <svg
-              className="w-5 h-5 fill-white hover:fill-[#E2B846] transition"
-              viewBox="0 0 24 24"
-            >
-              <title>Logo telephone</title>
-              <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1.003 1.003 0 011.01-.24c1.12.37 2.33.57 3.58.57.55 0 1 .45 1 1v3.5c0 .55-.45 1-1 1C10.07 21 3 13.93 3 5.5c0-.55.45-1 1-1H7.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.58.13.33.05.71-.24 1.01l-2.2 2.2z" />
-            </svg>
-            03.82.88.67.68
-          </a>
+          <p className="flex items-center gap-2 hover:underline">
+            <Link to="/contact" className="flex items-center hover:underline">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-5 h-5 mr-2"
+              >
+                <title>icon contactez nous</title>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25H4.5a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5H4.5a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.923l-7.5 4.5a2.25 2.25 0 01-2.36 0l-7.5-4.5A2.25 2.25 0 013 6.993V6.75"
+                />
+              </svg>
+              Contactez-nous
+            </Link>
+          </p>
 
           {/* Réseaux sociaux */}
           <div className="flex flex-col items-center gap-2">
