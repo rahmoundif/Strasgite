@@ -1,8 +1,12 @@
 import Formulaire from "../components/Formulaire";
+import RoomShow from "../components/Rooms/RoomShow";
+
 
 function Accueil() {
+
+
   return (
-    <>
+    
       <section>
         <div>
           <h1 className="p-2">
@@ -12,12 +16,20 @@ function Accueil() {
             permet de profiter pleinement de la ville tout en étant proche des
             institutions européennes.
           </h1>
+          
         </div>
-        <div className="px-5 py-10">
+        
+        <section className="lg:flex justify-center my-10 place-items-center">
+        <div className="px-10">
           <Formulaire />
-        </div>
+          </div>
+
+
+          <RoomShow/>
+          </section>
+          
       </section>
-    </>
+    
   );
 }
 

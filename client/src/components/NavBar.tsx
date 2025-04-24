@@ -21,7 +21,7 @@ function NavBar() {
         <ul className="flex space-x-4 m-3">
           <li className="group relative">
             <Link
-              to="/Accueil"
+              to="/"
               className="text-[#d9bf77] py-2 relative text-xl"
             >
               Accueil

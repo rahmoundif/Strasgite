@@ -31,13 +31,13 @@ import Services from "./pages/Services";
 // You can add more routes as you build out your app!
 const router = createBrowserRouter([
   {
-    path: "/",
     element: <App />,
 
     children: [
       {
-        path: "/Accueil",
-        element: <Accueil />,
+  
+        path: "/",
+        element: <Accueil/>,
       },
       {
         path: "/Reservation",
@@ -60,6 +60,8 @@ const router = createBrowserRouter([
 
         path: "/contact",
         element: <Contact />,
+      },
+      {
 
         path: "/Cgv",
         element: <Cgv />,

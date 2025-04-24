@@ -5,7 +5,7 @@ function Nos_Chambres() {
   return (
     <>
       <RoomsProvider>
-        <section className="m-4 grid lg:grid-cols-3 lg:grid-row-2 gap-4 opacity-90">
+        <section className="m-4 grid lg:grid-cols-3 lg:grid-row-2 gap-4 opacity-90 lg:mt-20">
           <RoomList />
         </section>
       </RoomsProvider>
