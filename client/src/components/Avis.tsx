@@ -3,7 +3,7 @@ import RatingStars from "./RatingStars";
 function Avis() {
   return (
     <>
-      <section className="md:flex">
+      <section className="md:flex lg:flex flex-col">
         <section className="flex flex-col p-5 gap-5 m-5 rounded-md shadow-md bg-white">
           <RatingStars />
           <div className="flex">
