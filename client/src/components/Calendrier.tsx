@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import Calendar from "react-calendar";
 import { useNavigate } from "react-router";
 import "../App.css";
@@ -58,6 +59,9 @@ function Calendrier() {
     );
   };
 
+
+  // Gestion du changement de date
+
   const handleChange = (value: Value) => {
     setShowAlert(false);
     setShowValidation(false);
@@ -115,6 +119,7 @@ function Calendrier() {
         console.error("Erreur lors du parsing des dates réservées :", error);
       }
     }
+
   };
 
   return (
@@ -147,6 +152,10 @@ function Calendrier() {
         value={selectedDate}
       />
 
+
+      {/* affichage alerte erreur date */}
+
+
       {showAlert && (
         <div className="fixed inset-0 flex items-center justify-center bg-[#2c7865]/70 z-50">
           <div className="bg-[#f4ebd0] p-6 rounded-lg shadow-lg max-w-md w-full text-center">
@@ -164,6 +173,9 @@ function Calendrier() {
           </div>
         </div>
       )}
+
+
+      {/* CAffichage bouton validation de réservation */}
 
       {showValidation && (
         <div className="mt-4 text-center">
