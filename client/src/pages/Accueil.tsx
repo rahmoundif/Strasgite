@@ -1,3 +1,4 @@
+import Avis from "../components/Avis";
 import Formulaire from "../components/Formulaire";
 
 function Accueil() {
@@ -15,6 +16,9 @@ function Accueil() {
         </div>
         <div className="px-5 py-10">
           <Formulaire />
+        </div>
+        <div>
+          <Avis />
         </div>
       </section>
     </>
