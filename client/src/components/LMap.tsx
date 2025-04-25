@@ -23,7 +23,7 @@ const LMap = () => {
 
   return (
     <MapContainer
-      center={center}
+      center={center as [number, number]}
       zoom={zoom}
       className="w-full h-[300px] sm:h-[400px] md:h-[500px]"
     >

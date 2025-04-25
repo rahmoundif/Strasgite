@@ -59,7 +59,6 @@ function Calendrier() {
     );
   };
 
-
   // Gestion du changement de date
 
   const handleChange = (value: Value) => {
@@ -119,7 +118,6 @@ function Calendrier() {
         console.error("Erreur lors du parsing des dates réservées :", error);
       }
     }
-
   };
 
   return (
@@ -152,9 +150,7 @@ function Calendrier() {
         value={selectedDate}
       />
 
-
       {/* affichage alerte erreur date */}
-
 
       {showAlert && (
         <div className="fixed inset-0 flex items-center justify-center bg-[#2c7865]/70 z-50">
@@ -173,7 +169,6 @@ function Calendrier() {
           </div>
         </div>
       )}
-
 
       {/* CAffichage bouton validation de réservation */}
 
