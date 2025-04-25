@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-
 import Calendar from "react-calendar";
 import "../App.css";
 
@@ -61,12 +60,10 @@ function Calendrier() {
     );
   };
 
-
   // Gestion du changement de date
   const handleChange = (value: Value) => {
     setShowAlert(false);
     setShowValidation(false);
-
 
     if (Array.isArray(value)) {
       const [start, end] = value;
@@ -104,7 +101,6 @@ function Calendrier() {
       alert("Réservation enregistrée avec succès !");
       setShowValidation(false);
     }
-
   };
 
   return (
@@ -130,7 +126,6 @@ function Calendrier() {
         prevLabel="< Mois précédent"
       />
 
-
       {/* affichage alerte erreur date */}
 
       {showAlert && (
@@ -139,7 +134,6 @@ function Calendrier() {
             <p className="text-gray-800 mb-4">
               <b>Alerte</b> : Votre sélection inclut une ou plusieurs dates déjà
               réservées. Veuillez ajuster vos dates de réservation.
-
             </p>
             <button
               type="button"
@@ -151,7 +145,6 @@ function Calendrier() {
           </div>
         </div>
       )}
-
 
       {/* CAffichage bouton validation de réservation */}
       {showValidation && (
@@ -167,7 +160,6 @@ function Calendrier() {
           </button>
         </div>
       )}
-
     </div>
   );
 }

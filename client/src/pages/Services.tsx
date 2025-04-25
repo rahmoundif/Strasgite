@@ -1,4 +1,7 @@
+import { Link } from "react-router";
+
 import CartesServices from "../components/CartesServices";
+import LMap from "../components/LMap";
 
 function Services() {
   return (
@@ -38,6 +41,7 @@ function Services() {
           Notre maison d'hôtes est facilement accessible depuis les principales
           attractions touristiques, les restaurants et les boutiques.
         </p>
+        <LMap />
       </section>
 
       <section className="mb-6">
@@ -55,12 +59,12 @@ function Services() {
       <CartesServices />
 
       <div className="text-center">
-        <a
-          href="src/pages/Reservation.tsx"
+        <Link
+          to="/reservation"
           className="inline-block py-3 px-6 bg-[#2c7865] text-[#E2B846] text-lg font-semibold rounded-lg shadow-lg hover:bg-[#1d5b49] transition"
         >
           Réservez maintenant
-        </a>
+        </Link>
       </div>
     </div>
   );
