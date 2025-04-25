@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import { useNavigate } from "react-router";
 
 function Formulaire() {
   const [showCalendrierDepart, setShowCalendrierDepart] = useState(false);
@@ -13,22 +12,42 @@ function Formulaire() {
   const [motif, setMotif] = useState("...");
   const [petitDejOui, setPetitDejOui] = useState(false);
   const [petitDejNon, setPetitDejNon] = useState(false);
-  const [loading, setLoading] = useState(false); // 👈 Ajouté ici
-  const navigate = useNavigate(); // 👈 Ajouté ici
+  const [loading, setLoading] = useState(false);
+
+  // Vérification du localStorage et initialisation des valeurs du formulaire
+  useEffect(() => {
+    const saved = localStorage.getItem("search");
+    if (saved) {
+      const data = JSON.parse(saved);
+      setMotif(data.motif || "...");
+      setSelectDateDepart(data.datedepart ? new Date(data.datedepart) : null);
+      setSelectDateArrivee(
+        data.datearrivee ? new Date(data.datearrivee) : null,
+      );
+      setNombreVoyageurs(data.nombreVoyageurs || 1);
+      setNombreEnfants(data.nombreEnfants || 1);
+      setNombrePmr(data.nombrePmr || 0);
+      setPetitDejOui(data.petitDej === "oui");
+      setPetitDejNon(data.petitDej === "non");
+    }
+  }, []);
 
   const handleOnChangeVoyageurs = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     setNombreVoyageurs(Number(event.target.value));
   };
+
   const handleOnChangeEnfant = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     setNombreEnfants(Number(event.target.value));
   };
+
   const handleOnChangePmr = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setNombrePmr(Number(event.target.value));
   };
+
   const handleOnChangeMotif = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setMotif(event.target.value);
   };
@@ -42,6 +61,7 @@ function Formulaire() {
     setPetitDejNon(!petitDejNon);
     setPetitDejOui(false); // décocher l'autre
   };
+
   const handleSubmit = () => {
     const search = {
       motif: motif,
@@ -50,6 +70,7 @@ function Formulaire() {
       nombreVoyageurs: nombreVoyageurs,
       nombreEnfants: nombreEnfants,
       nombrePmr: nombrePmr,
+      petitDej: petitDejOui ? "oui" : petitDejNon ? "non" : "", // Sauvegarder petit déjeuner
     };
 
     localStorage.setItem("search", JSON.stringify(search));
@@ -57,8 +78,7 @@ function Formulaire() {
     setLoading(true); // Démarrer l'animation de chargement
 
     setTimeout(() => {
-      // Après 1,5 seconde, rediriger vers la page Reservation
-      navigate("/Reservation");
+      setLoading(false); // Fin de l'animation après 1,5 seconde
     }, 1500);
   };
 
@@ -222,7 +242,7 @@ function Formulaire() {
           {loading ? (
             <span className="animate-spin inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
           ) : (
-            "Rechercher"
+            "Sauvegarder"
           )}
         </button>
       </form>

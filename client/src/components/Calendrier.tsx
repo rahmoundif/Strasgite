@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import Calendar from "react-calendar";
+import { useNavigate } from "react-router";
 import "../App.css";
 
-// Types pour la gestion d'une date ou d'une plage de dates
 type ValuePiece = Date | null;
 type Value = ValuePiece | [ValuePiece, ValuePiece];
 
@@ -12,8 +12,9 @@ function Calendrier() {
   const [showAlert, setShowAlert] = useState(false);
   const [datesReservees, setDatesReservees] = useState<Date[]>([]);
   const [showValidation, setShowValidation] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  // Lecture du localStorage pour récupérer les dates réservées
   useEffect(() => {
     const resa = localStorage.getItem("search");
     if (resa) {
@@ -27,7 +28,6 @@ function Calendrier() {
     }
   }, []);
 
-  // Dates désactivées prédéfinies
   const datesDesactivees = [
     new Date(2025, 4, 5),
     new Date(2025, 4, 6),
@@ -53,14 +53,15 @@ function Calendrier() {
     new Date(2025, 9, 9),
   ];
 
-  // Fonction pour vérifier si une date est désactivée
   const isDateDesactivee = (date: Date): boolean => {
     return [...datesDesactivees, ...datesReservees].some(
       (d) => d.toDateString() === date.toDateString(),
     );
   };
 
+
   // Gestion du changement de date
+
   const handleChange = (value: Value) => {
     setShowAlert(false);
     setShowValidation(false);
@@ -85,26 +86,56 @@ function Calendrier() {
         return;
       }
     }
-    setSelectedDate(value);
 
+    setSelectedDate(value);
     setShowValidation(true);
   };
 
-  // Mise a jour ou replissage du local storage a vaildation de la réservation
   const handleValidation = () => {
     if (selectedDate) {
       const reservationData = {
         dates: selectedDate,
-        // Ajoutez ici d'autres informations pertinentes
       };
       localStorage.setItem("search", JSON.stringify(reservationData));
-      alert("Réservation enregistrée avec succès !");
-      setShowValidation(false);
     }
+
+    setLoading(true);
+    setTimeout(() => {
+      navigate("/Order");
+    }, 1500);
+  };
+
+  // Fonction pour charger les dates depuis le localStorage et mettre à jour le calendrier
+  const loadDatesFromStorage = () => {
+    const resa = localStorage.getItem("search");
+    if (resa) {
+      try {
+        const parsedDates = JSON.parse(resa);
+        const dates = parsedDates.map((dateStr: string) => new Date(dateStr));
+        setDatesReservees(dates);
+        // Appliquer les dates réservées directement au calendrier
+        setSelectedDate(dates); // Met à jour la sélection du calendrier
+      } catch (error) {
+        console.error("Erreur lors du parsing des dates réservées :", error);
+      }
+    }
+
   };
 
   return (
-    <div className="">
+    <div>
+      {/* Bouton pour vérifier les disponibilités et charger les dates */}
+      <div className="mb-4 text-center">
+        <button
+          type="button"
+          onClick={loadDatesFromStorage}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+          Vérifier les disponibilités
+        </button>
+      </div>
+
+      {/* Calendrier */}
       <Calendar
         tileDisabled={({ date, view }) =>
           view === "month" && isDateDesactivee(date)
@@ -112,21 +143,18 @@ function Calendrier() {
         tileClassName={({ date, view }) =>
           view === "month" && isDateDesactivee(date) ? "tile-desactivee" : null
         }
-        navigationAriaLabel="Navigation du calendrier"
         navigationLabel={({ label }) => <span>{label}</span>}
-        goToRangeStartOnSelect={true}
-        selectRange={true}
+        goToRangeStartOnSelect
+        selectRange
         minDate={new Date(2025, 0, 1)}
         maxDate={new Date(2026, 11, 31)}
         onChange={handleChange}
         value={selectedDate}
-        nextAriaLabel="Aller au mois suivant"
-        nextLabel="Mois Suivant >"
-        prevAriaLabel="Aller au mois précédent"
-        prevLabel="< Mois précédent"
       />
 
+
       {/* affichage alerte erreur date */}
+
 
       {showAlert && (
         <div className="fixed inset-0 flex items-center justify-center bg-[#2c7865]/70 z-50">
@@ -146,17 +174,21 @@ function Calendrier() {
         </div>
       )}
 
+
       {/* CAffichage bouton validation de réservation */}
+
       {showValidation && (
         <div className="mt-4 text-center">
           <button
             type="button"
-            onClick={() => {
-              handleValidation();
-            }}
-            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
+            onClick={handleValidation}
+            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition flex items-center justify-center gap-2 min-w-[200px]"
           >
-            Valider la réservation
+            {loading ? (
+              <span className="animate-spin inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
+            ) : (
+              "Valider la réservation"
+            )}
           </button>
         </div>
       )}
