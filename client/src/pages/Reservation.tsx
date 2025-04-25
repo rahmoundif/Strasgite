@@ -1,5 +1,5 @@
 import Calendrier from "../components/Calendrier";
-import FormProvisoire from "../components/Formprovisoire";
+import FormulaireResa from "../components/FormulaireResa";
 
 function Reservation() {
   return (
@@ -9,7 +9,7 @@ function Reservation() {
       </h1>
 
       <div className="px-5 py-10">
-        <FormProvisoire />
+        <FormulaireResa />
       </div>
 
       <div className="px-5 py-10">

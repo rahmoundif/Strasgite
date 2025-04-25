@@ -1,3 +1,4 @@
+import Avis from "../components/Avis";
 import Formulaire from "../components/Formulaire";
 import RoomShow from "../components/Rooms/RoomShow";
 
@@ -21,7 +22,13 @@ function Accueil() {
           <Formulaire />
         </div>
 
+
         <RoomShow />
+
+        <div>
+          <Avis />
+        </div>
+
       </section>
     </section>
   );
