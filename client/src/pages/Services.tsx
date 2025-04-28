@@ -5,7 +5,7 @@ import LMap from "../components/LMap";
 
 function Services() {
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="container mx-auto px-4  sm:px-6 lg:px-8 py-12">
       <h1 className="text-2xl mb-12 sm:text-3xl lg:text-4xl font-semibold text-center mb-6">
         <span className="text-[#2c7865]">
           {" "}
