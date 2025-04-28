@@ -1,6 +1,5 @@
+import emailjs from "@emailjs/browser";
 import { useState } from "react";
-import emailjs from '@emailjs/browser';
-
 
 interface FormData {
   name: string;
@@ -30,25 +29,24 @@ function Contact() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     emailjs
-    .send(
-      'service_titn84h', 
-      'template_7bk3svj', 
-      formData as unknown as Record<string, unknown>,    
-      'IIFqChO4rwLKNF-QV'    
-    )
-    .then(
-      (result) => {
-        console.log('Message envoyé !', result.text);
-        alert('Votre message a été envoyé avec succès.');
-        setFormData({ name: '', prenom: '', email: '', message: '' }); 
-      },
-      (error) => {
-        console.log('Erreur :', error.text);
-        alert('Une erreur est survenue. Merci de réessayer.');
-      }
-    );
-};
-  
+      .send(
+        "service_titn84h",
+        "template_7bk3svj",
+        formData as unknown as Record<string, unknown>,
+        "IIFqChO4rwLKNF-QV",
+      )
+      .then(
+        (result) => {
+          console.log("Message envoyé !", result.text);
+          alert("Votre message a été envoyé avec succès.");
+          setFormData({ name: "", prenom: "", email: "", message: "" });
+        },
+        (error) => {
+          console.log("Erreur :", error.text);
+          alert("Une erreur est survenue. Merci de réessayer.");
+        },
+      );
+  };
 
   return (
     <div className="container mx-auto px-4  sm:px-8 py-12 ">
