@@ -1,47 +1,55 @@
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
+import { useEffect } from "react";
 
+// Interface pour un marqueur
 interface MarkerData {
   position: [number, number];
   popupText: string;
 }
 
-const LMap = () => {
-  const center: [number, number] = [48.587634520914676, 7.762212068056825];
-  const zoom: number = 13;
+// Composant pour définir la vue initiale de la carte
+function SetView({ center, zoom }: { center: [number, number]; zoom: number }) {
+  const map = useMap();
+
+  useEffect(() => {
+    map.setView(center, zoom);
+  }, [map, center, zoom]);
+
+  return null;
+}
+
+function LMap() {
+  const center: [number, number] = [48.5876, 7.7622];
+  const zoom = 13;
 
   const markers: MarkerData[] = [
     {
-      position: [48.587634520914676, 7.762212068056825],
-      popupText: "La Maison Strasbourgeoise",
+      position: [48.5876, 7.7622],
+      popupText: "La Maison Strabourgeoise",
     },
     {
-      position: [48.597699784759264, 7.768581057462948],
+      position: [48.5977, 7.7685],
       popupText: "Parlement européen",
     },
   ];
 
   return (
-    <MapContainer
-      center={center as [number, number]}
-      zoom={zoom}
-      className="w-full h-[300px] sm:h-[400px] md:h-[500px]"
-    >
+    <MapContainer className="w-full h-[500px]">
+      <SetView center={center} zoom={zoom} />
+
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        attribution="© OpenStreetMap"
       />
 
       {markers.map((marker) => (
-        <Marker
-          key={`${marker.position[0]}-${marker.position[1]}`}
-          position={marker.position}
-        >
+        <Marker key={marker.popupText} position={marker.position}>
           <Popup>{marker.popupText}</Popup>
         </Marker>
       ))}
     </MapContainer>
   );
-};
+}
 
 export default LMap;
