@@ -13,7 +13,7 @@ const LMap = () => {
   const markers: MarkerData[] = [
     {
       position: [48.587634520914676, 7.762212068056825],
-      popupText: "StrasGite",
+      popupText: "La Maison Strasbourgeoise",
     },
     {
       position: [48.597699784759264, 7.768581057462948],

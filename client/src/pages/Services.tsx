@@ -2,11 +2,12 @@ import { Link } from "react-router";
 
 import CartesServices from "../components/CartesServices";
 import LMap from "../components/LMap";
+import SwiperCarousel from "../components/SwiperCarousel";
 
 function Services() {
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-2xl mb-12 sm:text-3xl lg:text-4xl font-semibold text-center mb-6">
+      <h1 className="text-2xl sm:mt-12 mb-8 sm:text-3xl lg:text-4xl font-semibold text-center ">
         <span className="text-[#2c7865]">
           {" "}
           StrasGite - Votre maison d'hôtes
@@ -29,6 +30,7 @@ function Services() {
           romantique, un voyage d'affaires ou un séjour prolongé, StrasGite
           offre un hébergement haut de gamme.
         </p>
+        <SwiperCarousel images={["/devanture.png", "/petitdej.png"]} />
       </section>
 
       <section className="mb-12">
