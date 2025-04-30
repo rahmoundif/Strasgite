@@ -1,5 +1,5 @@
 import RoomList from "../components/Rooms/RoomList";
-import { RoomsProvider } from "../components/context/RoomsContext";
+import { RoomsProvider } from "../context/RoomsContext";
 
 function Nos_Chambres() {
   return (

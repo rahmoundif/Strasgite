@@ -1,4 +1,4 @@
-import { useRooms } from "../context/RoomsContext";
+import { useRooms } from "../../context/RoomsContext";
 import RoomCard from "./RoomCard";
 
 function RoomList() {

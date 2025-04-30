@@ -1,66 +1,31 @@
-import { useState } from "react";
 import Calendar from "react-calendar";
-import { useNavigate } from "react-router";
+import { useForm } from "../../src/context/FormContext";
 
 function Formulaire() {
-  const [showCalendrierDepart, setShowCalendrierDepart] = useState(false);
-  const [showCalendrierArrivee, setShowCalendrierArrivee] = useState(false);
-  const [selectDateDepart, setSelectDateDepart] = useState<Date | null>(null);
-  const [selectDateArrivee, setSelectDateArrivee] = useState<Date | null>(null);
-  const [nombreVoyageurs, setNombreVoyageurs] = useState<number>(1);
-  const [nombreEnfants, setNombreEnfants] = useState<number>(1);
-  const [nombrePmr, setNombrePmr] = useState<number>(0);
-  const [motif, setMotif] = useState("...");
-  const [petitDejOui, setPetitDejOui] = useState(false);
-  const [petitDejNon, setPetitDejNon] = useState(false);
-  const [loading, setLoading] = useState(false); // 👈 Ajouté ici
-  const navigate = useNavigate(); // 👈 Ajouté ici
-
-  const handleOnChangeVoyageurs = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setNombreVoyageurs(Number(event.target.value));
-  };
-  const handleOnChangeEnfant = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setNombreEnfants(Number(event.target.value));
-  };
-  const handleOnChangePmr = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setNombrePmr(Number(event.target.value));
-  };
-  const handleOnChangeMotif = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setMotif(event.target.value);
-  };
-
-  const handleOnChangePetitDejOui = () => {
-    setPetitDejOui(!petitDejOui);
-    setPetitDejNon(false); // décocher l'autre
-  };
-
-  const handleOnChangePetitDejNon = () => {
-    setPetitDejNon(!petitDejNon);
-    setPetitDejOui(false); // décocher l'autre
-  };
-  const handleSubmit = () => {
-    const search = {
-      motif: motif,
-      datedepart: selectDateDepart,
-      datearrivee: selectDateArrivee,
-      nombreVoyageurs: nombreVoyageurs,
-      nombreEnfants: nombreEnfants,
-      nombrePmr: nombrePmr,
-    };
-
-    localStorage.setItem("search", JSON.stringify(search));
-
-    setLoading(true); // Démarrer l'animation de chargement
-
-    setTimeout(() => {
-      // Après 1,5 seconde, rediriger vers la page Reservation
-      navigate("/Reservation");
-    }, 1500);
-  };
+  const {
+    showCalendrierDepart,
+    showCalendrierArrivee,
+    selectDateDepart,
+    selectDateArrivee,
+    nombreVoyageurs,
+    nombreEnfants,
+    nombrePmr,
+    motif,
+    petitDejOui,
+    petitDejNon,
+    loading,
+    setShowCalendrierDepart,
+    setShowCalendrierArrivee,
+    setSelectDateDepart,
+    setSelectDateArrivee,
+    handleOnChangeVoyageurs,
+    handleOnChangePmr,
+    handleOnChangeEnfant,
+    handleOnChangeMotif,
+    handleOnChangePetitDejNon,
+    handleOnChangePetitDejOui,
+    handleSubmit,
+  } = useForm();
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import roomsData from "../../data/roomsData.json";
+import roomsData from "../data/roomsData.json";
 
 interface Room {
   key: number;
