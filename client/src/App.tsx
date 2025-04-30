@@ -1,19 +1,22 @@
 import { Outlet } from "react-router";
 
 import Footer from "./components/Footer";
-import { LoginProvider } from "./components/context/LoginContext";
 import Header from "./components/header";
+import { FormProvider } from "./context/FormContext";
+import { LoginProvider } from "./context/LoginContext";
 
 function App() {
   return (
     <LoginProvider>
-      <Header />
+      <FormProvider>
+        <Header />
 
-      <div>
-        <Outlet />
-      </div>
+        <div className="flex-grow">
+          <Outlet />
+        </div>
 
-      <Footer />
+        <Footer />
+      </FormProvider>
     </LoginProvider>
   );
 }

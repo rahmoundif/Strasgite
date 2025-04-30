@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router";
-import { useLogin } from "../../src/components/context/LoginContext";
+import { useLogin } from "../../src/context/LoginContext";
 import Burger from "./burger";
 
 function NavBar() {

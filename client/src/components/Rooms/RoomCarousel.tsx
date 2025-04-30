@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRooms } from "../context/RoomsContext";
+import { useRooms } from "../../context/RoomsContext";
 
 function RoomCarousel() {
   const { rooms } = useRooms();
