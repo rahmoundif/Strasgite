@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { useLogin } from "../../src/components/context/LoginContext";
 import Burger from "./burger";
-import { useLogin } from "./context/LoginContext";
 
 function NavBar() {
   const { isConnected, userRole } = useLogin();
@@ -39,10 +39,10 @@ function NavBar() {
       </div>
 
       {/* Navigation principale pour desktop */}
-      <nav className="hidden md:flex md:justify-center h-auto md:z-40">
-        <ul className="flex space-x-4 m-3 justify-start">
+      <nav className="hidden md:flex md:justify-center md:items-center md:z-40 px-4 md:px-8 lg:px-12 ">
+        <ul className="flex flex-wrap justify-center space-x-4 md:space-x-6 lg:space-x-8 m-4">
           {/* (Ton code des <li> ne change pas) */}
-          <li className="group relative">
+          <li className="group relative md:pb-2">
             <Link
               to="/"
               className="text-[#d9bf77] py-2 relative text-xl lg:text-3xl"
