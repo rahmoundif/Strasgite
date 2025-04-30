@@ -1,3 +1,4 @@
+import emailjs from "@emailjs/browser";
 import { useState } from "react";
 
 interface FormData {
@@ -27,12 +28,29 @@ function Contact() {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("Form Data:", formData);
+    emailjs
+      .send(
+        "service_titn84h",
+        "template_7bk3svj",
+        formData as unknown as Record<string, unknown>,
+        "IIFqChO4rwLKNF-QV",
+      )
+      .then(
+        (result) => {
+          console.log("Message envoyé !", result.text);
+          alert("Votre message a été envoyé avec succès.");
+          setFormData({ name: "", prenom: "", email: "", message: "" });
+        },
+        (error) => {
+          console.log("Erreur :", error.text);
+          alert("Une erreur est survenue. Merci de réessayer.");
+        },
+      );
   };
 
   return (
-    <div className="container mx-auto px-4 sm:px-8 py-12 ">
-      <h1 className="text-2xl sm:text-3xl font-semibold text-center mb-6">
+    <div className="container mx-auto px-4  sm:px-8 py-12 ">
+      <h1 className="text-2xl sm:text-3xl font-semibold  text-center mb-6 sm:mt-16 ">
         Contactez-nous
       </h1>
       <form

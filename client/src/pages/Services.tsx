@@ -6,8 +6,10 @@ import SwiperCarousel from "../components/SwiperCarousel";
 
 function Services() {
   return (
+
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <h1 className="text-2xl sm:mt-12 mb-8 sm:text-3xl lg:text-4xl font-semibold text-center ">
+
         <span className="text-[#2c7865]">
           {" "}
           StrasGite - Votre maison d'hôtes
