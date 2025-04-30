@@ -6,7 +6,7 @@ function Footer() {
   return (
     <section className="bg-[#2c7865]/80 text-sm md:text-lg py-4 px-2">
       <div className="flex flex-col-reverse text-center gap-5 ">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-4">
           <p className="underline">
             <Link to="/Legal">Mentions légales</Link>
           </p>

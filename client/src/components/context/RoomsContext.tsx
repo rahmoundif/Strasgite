@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import rooms from "../../data/rooms.json";
+import roomsData from "../../data/roomsData.json";
 
 interface Room {
   key: number;
@@ -7,16 +7,24 @@ interface Room {
   title: string;
   description: string;
   price: string | number;
+  kids: number;
+  singleBed: boolean;
+  sb_n: number;
+  doubleBed: boolean;
+  db_n: number;
+  pmrRoom: boolean;
 }
 
 interface RoomsContextType {
   rooms: Room[];
 }
 
+const rooms: Room[] = roomsData as Room[];
+
 // creation du context
 const RoomsContext = createContext<RoomsContextType | undefined>(undefined);
 
-// creation du provider afin de consommer le context
+// creation du provider afin de consommer le context avec securité
 export const RoomsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -29,7 +37,7 @@ export const RoomsProvider: React.FC<{ children: React.ReactNode }> = ({
 export const useRooms = (): RoomsContextType => {
   const context = useContext(RoomsContext);
   if (!context) {
-    throw new Error("useRooms must be used within a RoomsProvider");
+    throw new Error("Error");
   }
   return context;
 };
