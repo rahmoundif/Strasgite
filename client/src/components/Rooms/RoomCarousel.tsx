@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRooms } from "../../context/RoomsContext";
 
 function RoomCarousel() {
-  const { rooms } = useRooms();
+  const rooms = useRooms();
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideCount = rooms.length;
 
@@ -14,9 +14,9 @@ function RoomCarousel() {
     <div className="relative w-full">
       {/* A. Slides container */}
       <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
-        {rooms.map((room, i) => (
+        {rooms.map((Room, i) => (
           <div
-            key={room.key}
+            key={Room.id}
             className={`
               absolute inset-0
               transition-opacity duration-700
@@ -24,7 +24,7 @@ function RoomCarousel() {
             `}
           >
             <img
-              src={room.imageUrl}
+              src={Room.imageUrl}
               alt={`Room ${i + 1}`}
               className="w-full h-full object-cover"
             />

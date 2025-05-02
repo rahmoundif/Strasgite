@@ -1,6 +1,6 @@
 [
   {
-    "key": 0,
+    "id": 0,
     "imageUrl": "https://i.ibb.co/vvgzbNN6/chambre-1.png",
     "title": "Le Coquelicot",
     "description": "Cette chambre lumineuse aux touches rouges vives vous plonge dans une ambiance chaleureuse. Lit double, petit bureau et vue sur le jardin fleuri offrent un cadre reposant.",
@@ -10,10 +10,10 @@
     "sb_n": 1,
     "doubleBed": true,
     "db_n": 2,
-    "pmrRoom": false
+    "pmrRoom": true
   },
   {
-    "key": 1,
+    "id": 1,
     "imageUrl": "https://i.ibb.co/W43KnWqx/chambre-2.png",
     "title": "La Lavande",
     "description": "Dominante de violet pastel et mobilier en bois clair, cette chambre invite à la détente. La grande fenêtre laisse entrer le parfum subtil des champs environnants.",
@@ -22,11 +22,11 @@
     "singleBed": false,
     "sb_n": 0,
     "doubleBed": true,
-    "db_n": 1,
+    "db_n": 2,
     "pmrRoom": true
   },
   {
-    "key": 2,
+    "id": 2,
     "imageUrl": "https://i.ibb.co/h1TMbCy9/chambre-3.png",
     "title": "Le Tournesol",
     "description": "Couleurs chaudes et imprimés floraux, cette chambre ensoleillée rayonne toute la journée. Lit queen-size, chaise longue et table de nuit en rotin complètent l’ensemble.",
@@ -39,7 +39,7 @@
     "pmrRoom": false
   },
   {
-    "key": 3,
+    "id": 3,
     "imageUrl": "https://i.ibb.co/rKJSVMdg/chambre-4.png",
     "title": "L’Érable",
     "description": "Avec ses murs couleur crème et son mobilier en bois d’érable, cette chambre dégage une élégance naturelle. Le coin lecture près de la fenêtre vous invite à la rêverie.",
@@ -52,7 +52,7 @@
     "pmrRoom": false
   },
   {
-    "key": 4,
+    "id": 4,
     "imageUrl": "https://i.ibb.co/FLyQPQrD/chambre-5.png",
     "title": "La Glycine",
     "description": "Ambiance romantique avec ses voilages légers et son papier peint à motif glycines. Lit à baldaquin, bougeoirs en fer forgé et parquet ancien créent un charme d’antan.",
@@ -65,7 +65,7 @@
     "pmrRoom": true
   },
   {
-    "key": 5,
+    "id": 5,
     "imageUrl": "https://i.ibb.co/W43KnWqx/chambre-2.png",
     "title": "Le Nid Douillet",
     "description": "Petite chambre cosy aux tons neutres, idéale pour une escapade en duo. Couette moelleuse, suspensions douces et rangements pratiques pour un séjour minimaliste.",
