@@ -2,34 +2,33 @@ import NavBar from "./NavBar";
 
 function Header() {
   return (
-    <section className="relative flex flex-col items-center h-auto w-full min-h-70 md:min-h-100 lg:min-h-150">
+    <section className="relative w-full flex flex-col h-[70vh] md:h-[100vh] lg:h-[120vh] xl:h-[140vh]">
       {/* Image de fond */}
       <img
         src="/desktop_banner.png"
         alt="Bannière"
-        className="w-full h-full object-cover z-0"
+        className="absolute inset-0 w-full h-full object-cover"
       />
 
       {/* Barre de navigation */}
-      <div className="absolute z-50 top-0 w-full">
+      <div className="absolute top-0 inset-x-0 z-50">
         <NavBar />
       </div>
 
-      {/* Contenu principal */}
-      <div className="absolute z-10 w-full text-center">
-        <div className="flex flex-col items-center gap-17.5 md:gap-43 lg:gap-66 ">
-          {/* Logo */}
-          <img
-            src="/stras_gite_logo.png"
-            alt="Logo La Maison Strasbourgeoise"
-            className="mt-8 md:mt-20 lg:mt-35 w-25 h-25 md:w-50 md:h-50 lg:w-75 lg:h-75 mb-4"
-          />
+      {/* Logo */}
+      <div className="absolute inset-x-0 top-1/3 z-10 flex justify-center px-4">
+        <img
+          src="/stras_gite_logo.png"
+          alt="Logo La Maison Strasbourgeoise"
+          className="w-25 h-25 md:w-50 md:h-50 lg:w-50 lg:h-50 xl:w-70 xl:h-70"
+        />
+      </div>
 
-          {/* Titre */}
-          <h1 className="text-2xl text-[#d9bf77] bg-[#2c7865] md:text-4xl lg:text-6xl py-1 px-2 w-full">
-            La Maison Strasbourgeoise
-          </h1>
-        </div>
+      {/* Titre collé en bas et full width */}
+      <div className="absolute bottom-0 inset-x-0 z-20">
+        <h1 className="w-full text-center text-xl md:text-2xl lg:text-4xl xl:text-6xl font-semibold text-[#d9bf77] bg-[#2c7865]/80 py-4">
+          La Maison Strasbourgeoise
+        </h1>
       </div>
     </section>
   );

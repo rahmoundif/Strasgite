@@ -9,7 +9,9 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 import App from "./App";
 import Accueil from "./pages/Accueil";
 import Cgv from "./pages/Cgv";
+import Connexion from "./pages/Connexion";
 import Contact from "./pages/Contact";
+import EspaceVisiteur from "./pages/EspaceVisiteur";
 import Legal from "./pages/Legal";
 import Nos_Chambres from "./pages/Nos_Chambres";
 import Notre_Alsace from "./pages/Notre_Alsace";
@@ -70,6 +72,14 @@ const router = createBrowserRouter([
       {
         path: "/Order",
         element: <Order />,
+      },
+      {
+        path: "/LogIn",
+        element: <Connexion />,
+      },
+      {
+        path: "/EspaceVisiteur",
+        element: <EspaceVisiteur />,
       },
     ],
     // Renders the App component for the home page

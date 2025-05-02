@@ -79,8 +79,12 @@ main {
   size: 10rem;
 }
 
-
 .date-reservee {
   background-color: #ffcccc;
   color: #a00;
+}
+
+.custom-swiper .swiper-button-next,
+.custom-swiper .swiper-button-prev {
+  color: #2c7865;
 }
