@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+:root[data-theme="default"] {
+  --color-primary: #2c7865;
+  --color-background: #f4ebd0;
+  --color-accent: #e2b846;
+  --header-bg: url("/desktop_banner.png");
+  --color-primary-90: rgba(44, 120, 101, 0.9);
+}
+
+:root[data-theme="Europe"] {
+  --color-primary: #1d3286;
+  --color-background: #ffffff;
+  --color-accent: #fff600;
+  --header-bg: url("/europebanner.png");
+  --color-primary-90: rgba(29, 50, 134, 0.9);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -16,7 +32,7 @@ main {
 }
 
 #root {
-  background-color: #f4ebd0;
+  background-color: var(--color-background);
 }
 /* STYLE DU CALENDRIER */
 

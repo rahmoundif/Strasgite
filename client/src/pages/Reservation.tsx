@@ -4,10 +4,6 @@ import Formulaire from "../components/Formulaire";
 function Reservation() {
   return (
     <>
-      <h1 className="text-center text-2xl font-bold mb-5 text-[#2c7865]">
-        Reservation
-      </h1>
-
       <div className="px-5 py-10">
         <Formulaire />
       </div>

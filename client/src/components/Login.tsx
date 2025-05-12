@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useLogin } from "../../src/context/LoginContext";
 
 function Login() {
@@ -15,15 +17,23 @@ function Login() {
     setPemid,
     message,
     handleLogin,
-    handleLogout,
+    userRole,
   } = useLogin();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      isConnected === true &&
+      (userRole === "User" || userRole === "Europe")
+    ) {
+      navigate("/EspaceVisiteur");
+    }
+  }, [isConnected, userRole, navigate]);
 
   return (
     <>
-      <div>
-        <button type="button" onClick={handleLogout}>
-          Déconnexion
-        </button>
+      <div className="p-5">
         {message && (
           <div className="text-center text-green-600 font-semibold my-4">
             {message}
