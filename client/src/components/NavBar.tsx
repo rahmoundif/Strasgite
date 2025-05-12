@@ -5,7 +5,9 @@ import { useTranslation } from "../context/TranslationContext";
 import TranslationButtons from "./TranslationButtons";
 import Burger from "./burger";
 
-function NavBar() {
+interface NavBarProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+const NavBar: React.FC<NavBarProps> = () => {
   const { isConnected, userRole } = useLogin();
   const [isNavOpen, setisNavOpen] = useState(false);
 
@@ -16,7 +18,7 @@ function NavBar() {
   const { text_translation } = useTranslation();
 
   return (
-    <>
+    <section>
       {/* Haut de page mobile : avatar + burger */}
       <div className="flex justify-end items-center p-4 md:hidden">
         {/* Avatar qui change en fonction du state */}
@@ -38,7 +40,6 @@ function NavBar() {
           />
         </Link>
 
-        {/* Bouton Burger */}
         <Burger toggleMenu={toggleMenu} isOpen={isNavOpen} />
       </div>
 
@@ -56,7 +57,6 @@ function NavBar() {
 
       <nav className="hidden md:flex md:justify-center md:items-center md:z-40 px-4 md:px-8 lg:px-12 ">
         <ul className="flex flex-wrap justify-center space-x-4 md:space-x-6 lg:space-x-8 m-4">
-          {/* (Ton code des <li> ne change pas) */}
           <li className="group relative md:pb-2">
             <Link
               to="/"
@@ -137,6 +137,10 @@ function NavBar() {
         className={`${
           isNavOpen ? "translate-x-0" : "translate-x-full"
         } bg-[#2c7865]/95 w-full h-screen pt-16 z-40 fixed top-0 right-0 md:hidden transition-transform duration-300`}
+        style={{
+          color: "var(--color-accent)",
+          backgroundColor: "var(--color-primary-90)",
+        }}
       >
         <ul className="flex flex-col items-start space-y-4 m-4 mt-25">
           <li className="group relative">
@@ -210,8 +214,8 @@ function NavBar() {
           </li>
         </ul>
       </nav>
-    </>
+    </section>
   );
-}
+};
 
 export default NavBar;

@@ -9,8 +9,13 @@ function Services() {
   const { text_translation } = useTranslation();
 
   return (
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h1 className="text-2xl sm:mt-12 mb-8 sm:text-3xl lg:text-4xl font-semibold text-center">
+    <div
+      className="container mx-auto px-4 sm:px-6 lg:px-8 py-12"
+      style={{
+        color: "var(--color-accent)",
+      }}
+    >
+      <h1 className="text-2xl sm:mt-12 mb-8 sm:text-3xl lg:text-4xl font-semibold text-center ">
         <span className="text-[#2c7865]">
           {text_translation("services_h1")}
         </span>

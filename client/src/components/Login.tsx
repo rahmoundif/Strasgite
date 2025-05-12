@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useLogin } from "../../src/context/LoginContext";
 import { useTranslation } from "../context/TranslationContext";
 
@@ -16,10 +18,22 @@ function Login() {
     setPemid,
     message,
     handleLogin,
+    userRole,
     handleLogout,
   } = useLogin();
 
   const { text_translation } = useTranslation();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (
+      isConnected === true &&
+      (userRole === "User" || userRole === "Europe")
+    ) {
+      navigate("/EspaceVisiteur");
+    }
+  }, [isConnected, userRole, navigate]);
 
   return (
     <>
@@ -27,6 +41,8 @@ function Login() {
         <button type="button" onClick={handleLogout}>
           {text_translation("login_btn_logout")}
         </button>
+      </div>
+      <div className="p-5">
         {message && (
           <div className="text-center text-green-600 font-semibold my-4">
             {message}

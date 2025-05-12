@@ -32,7 +32,13 @@ function Formulaire() {
 
   return (
     <>
-      <form className="flex flex-col bg-[#2c7865] p-6 gap-6 rounded-xl shadow-md">
+      <form
+        className="flex flex-col bg-[#2c7865] p-6 gap-6 rounded-xl shadow-md"
+        style={{
+          color: "var(--color-accent)",
+          backgroundColor: "var(--color-primary)",
+        }}
+      >
         <div>
           <label
             htmlFor="motifVoyage"
