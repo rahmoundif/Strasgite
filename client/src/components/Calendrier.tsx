@@ -1,7 +1,10 @@
 import Calendar from "react-calendar";
 import { useCalendar } from "../context/CalendarContext";
+import { useTranslation } from "../context/TranslationContext";
 
 function Calendrier() {
+  const { text_translation } = useTranslation();
+
   const {
     selectedDate,
     showAlert,
@@ -16,14 +19,14 @@ function Calendrier() {
 
   return (
     <div>
-      {/* Bouton pour vérifier les disponibilités et charger les dates */}
+      {/* Bouton pour vérifier les disponibilités */}
       <div className="mb-4 text-center">
         <button
           type="button"
           onClick={loadDatesFromStorage}
           className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
         >
-          Vérifier les disponibilités
+          {text_translation("calendrier_btn_check")}
         </button>
       </div>
 
@@ -44,28 +47,26 @@ function Calendrier() {
         value={selectedDate}
       />
 
-      {/* affichage alerte erreur date */}
-
+      {/* Alerte sélection */}
       {showAlert && (
         <div className="fixed inset-0 flex items-center justify-center bg-[#2c7865]/70 z-50">
           <div className="bg-[#f4ebd0] p-6 rounded-lg shadow-lg max-w-md w-full text-center">
             <p className="text-gray-800 mb-4">
-              <b>Alerte</b> : Votre sélection inclut une ou plusieurs dates déjà
-              réservées. Veuillez ajuster vos dates de réservation.
+              <b>{text_translation("calendrier_alert_title")}</b> :{" "}
+              {text_translation("calendrier_alert_message")}
             </p>
             <button
               type="button"
               onClick={() => setShowAlert(false)}
               className="mt-2 px-4 py-2 bg-[#2c7865] text-white rounded hover:bg-red-700 transition"
             >
-              Fermer
+              {text_translation("calendrier_btn_close")}
             </button>
           </div>
         </div>
       )}
 
-      {/* CAffichage bouton validation de réservation */}
-
+      {/* Bouton validation de réservation */}
       {showValidation && (
         <div className="mt-4 text-center">
           <button
@@ -76,7 +77,7 @@ function Calendrier() {
             {loading ? (
               <span className="animate-spin inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
             ) : (
-              "Valider la réservation"
+              text_translation("calendrier_btn_validate")
             )}
           </button>
         </div>

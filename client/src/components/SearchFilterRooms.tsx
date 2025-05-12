@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
 import { useForm } from "../context/FormContext";
+import { useTranslation } from "../context/TranslationContext";
 
 function SearchFilterRooms() {
   const {
@@ -11,8 +12,6 @@ function SearchFilterRooms() {
     nombreVoyageurs,
     nombreEnfants,
     nombrePmr,
-    petitDejOui,
-    petitDejNon,
     setShowCalendrierDepart,
     setShowCalendrierArrivee,
     setSelectDateDepart,
@@ -20,8 +19,6 @@ function SearchFilterRooms() {
     handleOnChangeVoyageurs,
     handleOnChangePmr,
     handleOnChangeEnfant,
-    handleOnChangePetitDejNon,
-    handleOnChangePetitDejOui,
     nombreLitsSimples,
     nombreLitsDoubles,
     handleOnChangeLitsSimples,
@@ -75,6 +72,8 @@ function SearchFilterRooms() {
   const modalClass =
     "mt-2 p-4 border rounded-lg bg-white shadow-lg absolute z-99";
 
+  const { text_translation } = useTranslation();
+
   return (
     //Design General
 
@@ -91,7 +90,7 @@ function SearchFilterRooms() {
             }
           }}
         >
-          <p>&#128197; Dates</p>
+          <p>&#128197; {text_translation("filter_dates")}</p>
         </div>
 
         {dateOpen && (
@@ -104,7 +103,8 @@ function SearchFilterRooms() {
                 className="w-full text-left text-sm mb-1 hover:underline"
                 onClick={() => setShowCalendrierArrivee((open) => !open)}
               >
-                Arrivée : {formatDate(selectDateArrivee)}
+                {text_translation("filter_arrival")}{" "}
+                {formatDate(selectDateArrivee)}
               </button>
               {showCalendrierArrivee && (
                 <Calendar
@@ -128,7 +128,8 @@ function SearchFilterRooms() {
                 className="w-full text-left text-sm mb-1 hover:underline"
                 onClick={() => setShowCalendrierDepart((open) => !open)}
               >
-                Départ : {formatDate(selectDateDepart)}
+                {text_translation("filter_departure")}{" "}
+                {formatDate(selectDateDepart)}
               </button>
 
               {showCalendrierDepart && (
@@ -160,7 +161,7 @@ function SearchFilterRooms() {
             }
           }}
         >
-          Visiteurs
+          {text_translation("filter_visitors")}
         </div>
         {visitorOpen && (
           <div className={modalClass} style={{ minWidth: 150 }}>
@@ -168,7 +169,7 @@ function SearchFilterRooms() {
 
             <div className="mb-3">
               <label htmlFor="adultes-select" className="block text-sm mb-1">
-                Adulte
+                {text_translation("filter_adult")}
               </label>
               <select
                 id="adultes-select"
@@ -188,7 +189,7 @@ function SearchFilterRooms() {
 
             <div className="mb-3">
               <label htmlFor="enfants-select" className="block text-sm mb-1">
-                Enfant
+                {text_translation("filter_child")}
               </label>
               <select
                 id="enfants-select"
@@ -208,7 +209,7 @@ function SearchFilterRooms() {
 
             <div>
               <label htmlFor="pmr-select" className="block text-sm mb-1">
-                PMR
+                {text_translation("filter_pmr")}
               </label>
               <select
                 id="pmr-select"
@@ -239,7 +240,7 @@ function SearchFilterRooms() {
             }
           }}
         >
-          Couchages
+          {text_translation("filter_beds")}
         </div>
 
         {/* Lits Simple */}
@@ -248,7 +249,7 @@ function SearchFilterRooms() {
           <div className={modalClass} style={{ minWidth: 120 }}>
             <div className="mb-3">
               <label htmlFor="lits-simples" className="block text-sm mb-1">
-                Lits simples
+                {text_translation("filter_single_beds")}
               </label>
               <select
                 id="lits-simples"
@@ -268,7 +269,7 @@ function SearchFilterRooms() {
 
             <div>
               <label htmlFor="lits-doubles" className="block text-sm mb-1">
-                Lits doubles
+                {text_translation("filter_double_beds")}
               </label>
               <select
                 id="lits-doubles"
@@ -286,29 +287,6 @@ function SearchFilterRooms() {
           </div>
         )}
       </section>
-
-      <div>
-        <label className="inline-flex items-center ">
-          <input
-            type="radio"
-            name="petitDej"
-            checked={petitDejOui}
-            onChange={handleOnChangePetitDejOui}
-            className="mr-2"
-          />{" "}
-          Oui
-        </label>
-        <label className="inline-flex items-center">
-          <input
-            type="radio"
-            name="petitDej"
-            checked={petitDejNon}
-            onChange={handleOnChangePetitDejNon}
-            className="mr-2"
-          />{" "}
-          Non
-        </label>
-      </div>
     </div>
   );
 }

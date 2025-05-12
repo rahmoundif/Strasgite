@@ -3,9 +3,9 @@ import RatingStars from "./RatingStars";
 function Avis() {
   return (
     <>
-      <section className="md:flex lg:flex flex-col">
+      <section className="md:flex lg:flex flex-col md:flex-row">
         <section className="flex flex-col p-5 gap-5 m-5 rounded-md shadow-md bg-white">
-          <RatingStars />
+          <RatingStars rating={5} />
           <div className="flex">
             <img
               src="/avatar_f_asiatique.png"
@@ -25,7 +25,7 @@ function Avis() {
           </div>
         </section>
         <section className="flex flex-col p-5 gap-5 m-5 rounded-md shadow-md bg-white">
-          <RatingStars />
+          <RatingStars rating={4} />
           <div className="flex">
             <img
               src="/avatar_h_noir.png"
@@ -45,7 +45,7 @@ function Avis() {
           </div>
         </section>
         <section className="flex flex-col p-5 gap-5 m-5 rounded-md shadow-md bg-white">
-          <RatingStars />
+          <RatingStars rating={5} />
           <div className="flex">
             <img
               src="/avatar_h_blanc.png"

@@ -1,4 +1,5 @@
 import { useLogin } from "../../src/context/LoginContext";
+import { useTranslation } from "../context/TranslationContext";
 
 function Login() {
   const {
@@ -18,11 +19,13 @@ function Login() {
     handleLogout,
   } = useLogin();
 
+  const { text_translation } = useTranslation();
+
   return (
     <>
       <div>
         <button type="button" onClick={handleLogout}>
-          Déconnexion
+          {text_translation("login_btn_logout")}
         </button>
         {message && (
           <div className="text-center text-green-600 font-semibold my-4">
@@ -48,7 +51,7 @@ function Login() {
               className="p-3 bg-white border border-[#d9bf77] text-gray-800 text-base rounded-lg focus:ring-[#d9bf77] focus:border-[#d9bf77] block w-full mb-5"
             />
             <label className="flex flex-col items-center text-center mb-2 text-lg font-semibold text-[#f4ebd0]">
-              Êtes-vous membre du Parlement européen ?
+              {text_translation("login_label_pem")}
               <div className="flex gap-x-4">
                 <input
                   type="radio"
@@ -58,7 +61,9 @@ function Login() {
                   value="Oui"
                   onChange={togglePEMID}
                 />
-                <label htmlFor="Oui">Oui</label>
+                <label htmlFor="Oui">
+                  {text_translation("login_option_oui")}
+                </label>
                 <input
                   type="radio"
                   id="Non"
@@ -67,7 +72,9 @@ function Login() {
                   value="Non"
                   onChange={togglePEMID}
                 />
-                <label htmlFor="Non">Non</label>
+                <label htmlFor="Non">
+                  {text_translation("login_option_non")}
+                </label>
               </div>
             </label>
 
@@ -107,25 +114,19 @@ Example : PE-FR-RAH0054`}
             {info && (
               <div className="bg-blue-50 text-blue-700 border border-blue-200 rounded-lg shadow-md p-4 mt-4">
                 <p>
-                  <strong>Où trouver votre PEMID ?</strong> Votre PEMID
-                  (Parliamentarian European Member ID) est un identifiant unique
-                  attribué aux membres du Parlement Européen. Il peut être
-                  trouvé dans les documents officiels que vous recevez de
-                  l'administration du Parlement Européen.
+                  <strong>{text_translation("login_info_title")}</strong>{" "}
+                  {text_translation("login_info_txt1")}
                 </p>
                 <p>
-                  <strong>Format du PEMID :</strong> Le PEMID suit un format
-                  spécifique :
+                  <strong>{text_translation("login_info_txt2")}</strong>
                 </p>
                 <ul className="list-disc pl-5">
-                  <li>PE : Parlement Européen</li>
-                  <li>CC : Code du pays (ex : FR, DE)</li>
-                  <li>XXX : 3 premières lettres du nom</li>
-                  <li>NNN : Numéro unique</li>
+                  <li>{text_translation("login_info_list1")}</li>
+                  <li>{text_translation("login_info_list2")}</li>
+                  <li>{text_translation("login_info_list3")}</li>
+                  <li>{text_translation("login_info_list4")}</li>
                 </ul>
-                <p>
-                  Exemple : <strong>PE-FR-RAH0054</strong>
-                </p>
+                <p>{text_translation("login_info_example")}</p>
               </div>
             )}
 
@@ -135,7 +136,7 @@ Example : PE-FR-RAH0054`}
                 className="p-3 bg-[#a84448] hover:bg-[#922f33] rounded-4xl text-white text-base font-semibold transition duration-200"
                 onClick={handleLogin}
               >
-                Connexion
+                {text_translation("login_btn_login")}
               </button>
             </div>
           </form>

@@ -5,24 +5,27 @@ import { CalendarProvider } from "./context/CalendarContext";
 import { FormProvider } from "./context/FormContext";
 import { LoginProvider } from "./context/LoginContext";
 import { RoomsProvider } from "./context/RoomsContext";
+import { TranslationProvider } from "./context/TranslationContext";
 
 function App() {
   return (
-    <LoginProvider>
+    <TranslationProvider>
       <FormProvider>
-        <CalendarProvider>
-          <RoomsProvider>
-            <Header />
+        <LoginProvider>
+          <CalendarProvider>
+            <RoomsProvider>
+              <Header />
 
-            <div className="flex-grow">
-              <Outlet />
-            </div>
+              <div className="flex-grow">
+                <Outlet />
+              </div>
 
-            <Footer />
-          </RoomsProvider>
-        </CalendarProvider>
+              <Footer />
+            </RoomsProvider>
+          </CalendarProvider>
+        </LoginProvider>
       </FormProvider>
-    </LoginProvider>
+    </TranslationProvider>
   );
 }
 

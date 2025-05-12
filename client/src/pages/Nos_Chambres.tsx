@@ -3,8 +3,10 @@ import RoomCard from "../components/Rooms/RoomCard";
 import SearchFilterRooms from "../components/SearchFilterRooms";
 import { useForm } from "../context/FormContext";
 import { useRooms } from "../context/RoomsContext";
+import { useTranslation } from "../context/TranslationContext";
 
 function Nos_Chambres() {
+  const { text_translation } = useTranslation();
   const rooms = useRooms();
   const { nombreEnfants, nombrePmr, nombreLitsSimples, nombreLitsDoubles } =
     useForm();
@@ -26,7 +28,7 @@ function Nos_Chambres() {
         {filteredRooms.length > 0 ? (
           filteredRooms.map((room) => <RoomCard key={room.id} {...room} />)
         ) : (
-          <p>Aucune chambre</p>
+          <p>{text_translation("no_rooms")}</p>
         )}
       </section>
     </>

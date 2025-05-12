@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import { useTranslation } from "../context/TranslationContext";
 import roomsData from "../data/roomsData.json";
 
 //Typage d'une chambre
@@ -24,16 +25,19 @@ interface RoomsContextType {
 // creation du context
 const RoomsContext = createContext<RoomsContextType>({ rooms: [] });
 
-// creation du provider afin de consommer le context avec securité
 export const RoomsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const { text_translation } = useTranslation();
+
+  const localizedRooms: Room[] = roomsData.map((room) => ({
+    ...room,
+    description: text_translation(`room_${room.id}_description`),
+    price: text_translation(`room_${room.id}_price`),
+  }));
+
   return (
-    <RoomsContext.Provider
-      value={{
-        rooms: roomsData,
-      }}
-    >
+    <RoomsContext.Provider value={{ rooms: localizedRooms }}>
       {children}
     </RoomsContext.Provider>
   );

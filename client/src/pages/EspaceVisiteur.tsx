@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../context/LoginContext";
+import { useTranslation } from "../context/TranslationContext";
 
 function EspaceVisiteur() {
+  const { text_translation } = useTranslation();
   const navigate = useNavigate();
 
   const { isConnected } = useLogin();
@@ -15,7 +17,7 @@ function EspaceVisiteur() {
 
   return (
     <section>
-      <h1>Réservations précédentes :</h1>
+      <h1>{text_translation("espace_visiteur_h1")}</h1>
     </section>
   );
 }

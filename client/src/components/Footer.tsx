@@ -1,6 +1,9 @@
 import { Link } from "react-router";
+import { useTranslation } from "../context/TranslationContext";
 
 function Footer() {
+  const { text_translation } = useTranslation();
+
   const currentYear = new Date().getFullYear();
 
   return (
@@ -8,14 +11,16 @@ function Footer() {
       <div className="flex flex-col-reverse text-center gap-5 ">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-4">
           <p className="underline">
-            <Link to="/Legal">Mentions légales</Link>
+            <Link to="/Legal">{text_translation("footer_link_legal")}</Link>
           </p>
           <p className="underline">
-            <Link to="/Cgv">Conditions générales de vente</Link>
+            <Link to="/Cgv">{text_translation("footer_link_cgv")}</Link>
           </p>
           <p>
-            &copy; {currentYear} La Maison Strasbourgeoise - Tous droits
-            réservés
+            {text_translation("footer_copyright").replace(
+              "{year}",
+              String(currentYear),
+            )}
           </p>
         </div>
         <div className="flex justify-center gap-10 text-white">
@@ -37,13 +42,15 @@ function Footer() {
                   d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25H4.5a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5H4.5a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.923l-7.5 4.5a2.25 2.25 0 01-2.36 0l-7.5-4.5A2.25 2.25 0 013 6.993V6.75"
                 />
               </svg>
-              Contactez-nous
+              {text_translation("footer_contact")}
             </Link>
           </p>
 
           {/* Réseaux sociaux */}
           <div className="flex flex-col items-center gap-2">
-            <p className="text-white font-semibold">Suivez-nous</p>
+            <p className="text-white font-semibold">
+              {text_translation("footer_follow_us")}
+            </p>
             <div className="flex justify-center items-center gap-6">
               {/* Facebook */}
               <a
