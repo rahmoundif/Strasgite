@@ -19,7 +19,6 @@ function Login() {
     message,
     handleLogin,
     userRole,
-    handleLogout,
   } = useLogin();
 
   const { text_translation } = useTranslation();
@@ -37,11 +36,6 @@ function Login() {
 
   return (
     <>
-      <div>
-        <button type="button" onClick={handleLogout}>
-          {text_translation("login_btn_logout")}
-        </button>
-      </div>
       <div className="p-5">
         {message && (
           <div className="text-center text-green-600 font-semibold my-4">

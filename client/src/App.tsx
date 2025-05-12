@@ -11,9 +11,9 @@ import { TranslationProvider } from "./context/TranslationContext";
 function App() {
   return (
     <TranslationProvider>
-      <ThemeProvider>
+      <LoginProvider>
         <FormProvider>
-          <LoginProvider>
+          <ThemeProvider>
             <CalendarProvider>
               <RoomsProvider>
                 <div className="flex flex-col min-h-screen">
@@ -29,9 +29,9 @@ function App() {
                 </div>
               </RoomsProvider>
             </CalendarProvider>
-          </LoginProvider>
+          </ThemeProvider>
         </FormProvider>
-      </ThemeProvider>
+      </LoginProvider>
     </TranslationProvider>
   );
 }
