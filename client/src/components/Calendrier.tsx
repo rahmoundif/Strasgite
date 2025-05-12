@@ -1,124 +1,18 @@
-import { useEffect, useState } from "react";
-
 import Calendar from "react-calendar";
-import { useNavigate } from "react-router";
-import "../App.css";
-
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+import { useCalendar } from "../context/CalendarContext";
 
 function Calendrier() {
-  const [selectedDate, setSelectedDate] = useState<Value>(new Date());
-  const [showAlert, setShowAlert] = useState(false);
-  const [datesReservees, setDatesReservees] = useState<Date[]>([]);
-  const [showValidation, setShowValidation] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const resa = localStorage.getItem("search");
-    if (resa) {
-      try {
-        const parsedDates = JSON.parse(resa);
-        const dates = parsedDates.map((dateStr: string) => new Date(dateStr));
-        setDatesReservees(dates);
-      } catch (error) {
-        console.error("Erreur lors du parsing des dates réservées :", error);
-      }
-    }
-  }, []);
-
-  const datesDesactivees = [
-    new Date(2025, 4, 5),
-    new Date(2025, 4, 6),
-    new Date(2025, 4, 7),
-    new Date(2025, 4, 8),
-    new Date(2025, 4, 10),
-    new Date(2025, 4, 15),
-    new Date(2025, 5, 2),
-    new Date(2025, 5, 3),
-    new Date(2025, 5, 4),
-    new Date(2025, 5, 5),
-    new Date(2025, 6, 7),
-    new Date(2025, 6, 8),
-    new Date(2025, 6, 9),
-    new Date(2025, 6, 10),
-    new Date(2025, 8, 8),
-    new Date(2025, 8, 9),
-    new Date(2025, 8, 10),
-    new Date(2025, 8, 11),
-    new Date(2025, 9, 6),
-    new Date(2025, 9, 7),
-    new Date(2025, 9, 8),
-    new Date(2025, 9, 9),
-  ];
-
-  const isDateDesactivee = (date: Date): boolean => {
-    return [...datesDesactivees, ...datesReservees].some(
-      (d) => d.toDateString() === date.toDateString(),
-    );
-  };
-
-  // Gestion du changement de date
-
-  const handleChange = (value: Value) => {
-    setShowAlert(false);
-    setShowValidation(false);
-
-    if (Array.isArray(value)) {
-      const [start, end] = value;
-      if (start && end) {
-        const currentDate = new Date(start);
-        while (currentDate <= end) {
-          if (isDateDesactivee(currentDate)) {
-            setSelectedDate(null);
-            setShowAlert(true);
-            return;
-          }
-          currentDate.setDate(currentDate.getDate() + 1);
-        }
-      }
-    } else {
-      if (value && isDateDesactivee(value)) {
-        setSelectedDate(null);
-        setShowAlert(true);
-        return;
-      }
-    }
-
-    setSelectedDate(value);
-    setShowValidation(true);
-  };
-
-  const handleValidation = () => {
-    if (selectedDate) {
-      const reservationData = {
-        dates: selectedDate,
-      };
-      localStorage.setItem("search", JSON.stringify(reservationData));
-    }
-
-    setLoading(true);
-    setTimeout(() => {
-      navigate("/Order");
-    }, 1500);
-  };
-
-  // Fonction pour charger les dates depuis le localStorage et mettre à jour le calendrier
-  const loadDatesFromStorage = () => {
-    const resa = localStorage.getItem("search");
-    if (resa) {
-      try {
-        const parsedDates = JSON.parse(resa);
-        const dates = parsedDates.map((dateStr: string) => new Date(dateStr));
-        setDatesReservees(dates);
-        // Appliquer les dates réservées directement au calendrier
-        setSelectedDate(dates); // Met à jour la sélection du calendrier
-      } catch (error) {
-        console.error("Erreur lors du parsing des dates réservées :", error);
-      }
-    }
-  };
+  const {
+    selectedDate,
+    showAlert,
+    showValidation,
+    loading,
+    setShowAlert,
+    handleValidation,
+    handleChange,
+    loadDatesFromStorage,
+    isDateDesactivee,
+  } = useCalendar();
 
   return (
     <div>

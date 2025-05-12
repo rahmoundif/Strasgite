@@ -63,26 +63,6 @@ function Formulaire() {
 
         <input
           type="text"
-          placeholder="Départ"
-          className="p-3 bg-white border border-[#d9bf77] text-gray-800 text-base rounded-lg focus:ring-[#d9bf77] focus:border-[#d9bf77] block w-full"
-          onClick={() => setShowCalendrierDepart(!showCalendrierDepart)}
-          value={selectDateDepart ? selectDateDepart.toLocaleDateString() : ""}
-          readOnly
-        />
-        {showCalendrierDepart && (
-          <div>
-            <Calendar
-              onChange={(date) => {
-                setSelectDateDepart(date as Date);
-                setShowCalendrierDepart(false);
-              }}
-              value={selectDateDepart}
-            />
-          </div>
-        )}
-
-        <input
-          type="text"
           placeholder="Arrivée"
           className="p-3 bg-white border border-[#d9bf77] text-gray-800 text-base rounded-lg focus:ring-[#d9bf77] focus:border-[#d9bf77] block w-full"
           onClick={() => setShowCalendrierArrivee(!showCalendrierArrivee)}
@@ -99,6 +79,26 @@ function Formulaire() {
                 setShowCalendrierArrivee(false);
               }}
               value={selectDateArrivee}
+            />
+          </div>
+        )}
+
+        <input
+          type="text"
+          placeholder="Départ"
+          className="p-3 bg-white border border-[#d9bf77] text-gray-800 text-base rounded-lg focus:ring-[#d9bf77] focus:border-[#d9bf77] block w-full"
+          onClick={() => setShowCalendrierDepart(!showCalendrierDepart)}
+          value={selectDateDepart ? selectDateDepart.toLocaleDateString() : ""}
+          readOnly
+        />
+        {showCalendrierDepart && (
+          <div>
+            <Calendar
+              onChange={(date) => {
+                setSelectDateDepart(date as Date);
+                setShowCalendrierDepart(false);
+              }}
+              value={selectDateDepart}
             />
           </div>
         )}
