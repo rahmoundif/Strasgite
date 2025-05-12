@@ -1,34 +1,49 @@
+import { useTheme } from "../context/ThemeContext";
 import NavBar from "./NavBar";
+import "../App.css";
 
 function Header() {
+  const { theme } = useTheme();
+
+  const headerBanner =
+    theme === "Europe" ? "/europebanner2.png" : "/desktop_banner.png";
+
   return (
-    <section className="relative w-full flex flex-col h-[70vh] md:h-[100vh] lg:h-[120vh] xl:h-[140vh]">
-      {/* Image de fond */}
+    <section className="relative w-full flex flex-col h-full">
       <img
-        src="/desktop_banner.png"
+        src={headerBanner}
         alt="Bannière"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="w-full h-full object-cover"
       />
 
-      {/* Barre de navigation */}
+      {/* Barre de navigation (au-dessus de l'image) */}
       <div className="absolute top-0 inset-x-0 z-50">
-        <NavBar />
-      </div>
-
-      {/* Logo */}
-      <div className="absolute inset-x-0 top-1/3 z-10 flex justify-center px-4">
-        <img
-          src="/stras_gite_logo.png"
-          alt="Logo La Maison Strasbourgeoise"
-          className="w-25 h-25 md:w-50 md:h-50 lg:w-50 lg:h-50 xl:w-70 xl:h-70"
+        <NavBar
+          style={{
+            color: "var(--color-accent)",
+            backgroundColor: "var(--color-primary)",
+          }}
         />
       </div>
 
-      {/* Titre collé en bas et full width */}
-      <div className="absolute bottom-0 inset-x-0 z-20">
-        <h1 className="w-full text-center text-xl md:text-2xl lg:text-4xl xl:text-6xl font-semibold text-[#d9bf77] bg-[#2c7865]/80 py-4">
-          La Maison Strasbourgeoise
-        </h1>
+      {/* Logo superposé */}
+      <div className="absolute inset-x-0 md:top-1/7 mt-5 z-10 flex justify-center px-4">
+        <img
+          src="/stras_gite_logo.png"
+          alt="Logo La Maison Strasbourgeoise"
+          className="w-24 h-24 md:w-40 md:h-40 lg:w-60 lg:h-60"
+        />
+      </div>
+
+      {/* Titre juste sous l’image */}
+      <div
+        className="w-full text-center text-xl md:text-2xl lg:text-4xl xl:text-6xl font-semibold py-4"
+        style={{
+          color: "var(--color-accent)",
+          backgroundColor: "var(--color-primary)",
+        }}
+      >
+        La Maison Strasbourgeoise
       </div>
     </section>
   );
