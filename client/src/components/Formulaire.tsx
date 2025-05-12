@@ -1,5 +1,6 @@
 import Calendar from "react-calendar";
 import { useForm } from "../../src/context/FormContext";
+import { useTranslation } from "../context/TranslationContext";
 
 function Formulaire() {
   const {
@@ -27,6 +28,8 @@ function Formulaire() {
     handleSubmit,
   } = useForm();
 
+  const { text_translation } = useTranslation();
+
   return (
     <>
       <form
@@ -41,7 +44,7 @@ function Formulaire() {
             htmlFor="motifVoyage"
             className="block mb-2 text-lg font-semibold text-[#f4ebd0]"
           >
-            Motif du séjour :
+            {text_translation("form_motif_label")}
           </label>
           <select
             id="motifVoyage"
@@ -52,11 +55,17 @@ function Formulaire() {
             <option value={"..."} disabled hidden>
               ...
             </option>
-            <option value={"Loisir"}>Loisir</option>
-            <option value={"Tourisme"}>Tourisme</option>
-            <option value={"Professionnel"}>Professionnel</option>
+            <option value={"Loisir"}>
+              {text_translation("form_option_loisir")}
+            </option>
+            <option value={"Tourisme"}>
+              {text_translation("form_option_tourisme")}
+            </option>
+            <option value={"Professionnel"}>
+              {text_translation("form_option_professionnel")}
+            </option>
             <option value={"Séance Plénière"}>
-              Séance plénière du parlement Européen
+              {text_translation("form_option_pleniere")}
             </option>
           </select>
         </div>
@@ -105,7 +114,7 @@ function Formulaire() {
 
         <div className="flex justify-between items-center bg-white border border-[#d9bf77] text-sm text-gray-800 rounded-lg px-1 py-3 gap-2">
           <label htmlFor="nombreVoyageurs" className="font-medium">
-            Adultes :
+            {text_translation("form_label_adultes")}
           </label>
           <select
             id="nombreVoyageurs"
@@ -121,7 +130,7 @@ function Formulaire() {
           </select>
 
           <label htmlFor="nombreEnfants" className="font-medium">
-            Enfants :
+            {text_translation("form_label_enfants")}
           </label>
           <select
             id="nombreEnfants"
@@ -137,7 +146,7 @@ function Formulaire() {
           </select>
 
           <label htmlFor="nombrePMR" className="font-medium">
-            PMR :
+            {text_translation("form_label_pmr")}
           </label>
           <select
             id="nombrePMR"
@@ -156,7 +165,7 @@ function Formulaire() {
         <section className="mb-2 text-lg font-semibold text-[#f4ebd0]">
           <fieldset>
             <legend className="mb-2 text-center">
-              Souhaitez-vous un petit déjeuner ?
+              {text_translation("form_breakfast_legend")}
             </legend>
             <div className="flex flex-row items-center justify-center gap-x-4">
               <div className="flex items-center gap-1">
@@ -168,7 +177,9 @@ function Formulaire() {
                   checked={petitDejOui}
                   onChange={handleOnChangePetitDejOui}
                 />
-                <label htmlFor="oui">Oui</label>
+                <label htmlFor="oui">
+                  {text_translation("form_checkbox_yes")}
+                </label>
               </div>
               <div className="flex items-center gap-1">
                 <input
@@ -179,7 +190,9 @@ function Formulaire() {
                   checked={petitDejNon}
                   onChange={handleOnChangePetitDejNon}
                 />
-                <label htmlFor="non">Non</label>
+                <label htmlFor="non">
+                  {text_translation("form_checkbox_no")}
+                </label>
               </div>
             </div>
           </fieldset>

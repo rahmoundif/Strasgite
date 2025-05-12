@@ -1,5 +1,6 @@
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
+import { useTranslation } from "../context/TranslationContext";
 
 interface FormData {
   name: string;
@@ -9,6 +10,8 @@ interface FormData {
 }
 
 function Contact() {
+  const { text_translation } = useTranslation();
+
   const [formData, setFormData] = useState<FormData>({
     name: "",
     prenom: "",
@@ -37,32 +40,32 @@ function Contact() {
       )
       .then(
         (result) => {
-          console.log("Message envoyé !", result.text);
-          alert("Votre message a été envoyé avec succès.");
+          console.log(text_translation("console_success"), result.text);
+          alert(text_translation("alert_success"));
           setFormData({ name: "", prenom: "", email: "", message: "" });
         },
         (error) => {
-          console.log("Erreur :", error.text);
-          alert("Une erreur est survenue. Merci de réessayer.");
+          console.log(text_translation("console_error"), error.text);
+          alert(text_translation("alert_error"));
         },
       );
   };
 
   return (
-    <div className="container mx-auto px-4  sm:px-8 py-12 ">
-      <h1 className="text-2xl sm:text-3xl font-semibold  text-center mb-6 sm:mt-16 ">
-        Contactez-nous
+    <div className="container mx-auto px-4 sm:px-8 py-12">
+      <h1 className="text-2xl sm:text-3xl font-semibold text-center mb-6 sm:mt-16">
+        {text_translation("contact_h1")}
       </h1>
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-lg mx-auto p-6 sm:p-8 bg-white shadow-lg rounded-lg border-2 border-[#E2B846]"
       >
-        <div className="mb-4 ">
+        <div className="mb-4">
           <label
             htmlFor="name"
             className="block text-lg font-medium text-gray-700"
           >
-            Nom
+            {text_translation("label_name")}
           </label>
           <input
             type="text"
@@ -71,17 +74,17 @@ function Contact() {
             value={formData.name}
             onChange={handleChange}
             required
-            aria-label="Votre nom"
+            aria-label={text_translation("aria_name")}
             className="w-full p-3 mt-2 border border-gray-300 rounded-lg"
           />
         </div>
 
-        <div className="mb-4 ">
+        <div className="mb-4">
           <label
             htmlFor="prenom"
             className="block text-lg font-medium text-gray-700"
           >
-            Prénom
+            {text_translation("label_prenom")}
           </label>
           <input
             type="text"
@@ -90,7 +93,7 @@ function Contact() {
             value={formData.prenom}
             onChange={handleChange}
             required
-            aria-label="Votre prénom"
+            aria-label={text_translation("aria_prenom")}
             className="w-full p-3 mt-2 border border-gray-300 rounded-lg"
           />
         </div>
@@ -100,7 +103,7 @@ function Contact() {
             htmlFor="email"
             className="block text-lg font-medium text-gray-700"
           >
-            Email
+            {text_translation("label_email")}
           </label>
           <input
             type="email"
@@ -109,7 +112,7 @@ function Contact() {
             value={formData.email}
             onChange={handleChange}
             required
-            aria-label="Votre email"
+            aria-label={text_translation("aria_email")}
             className="w-full p-3 mt-2 border border-gray-300 rounded-lg"
           />
         </div>
@@ -119,7 +122,7 @@ function Contact() {
             htmlFor="message"
             className="block text-lg font-medium text-gray-700"
           >
-            Message
+            {text_translation("label_message")}
           </label>
           <textarea
             id="message"
@@ -127,18 +130,18 @@ function Contact() {
             value={formData.message}
             onChange={handleChange}
             required
-            aria-label="Votre message"
-            className="w-full p-3 mt-2 border border-gray-300 rounded-lg "
+            aria-label={text_translation("aria_message")}
+            className="w-full p-3 mt-2 border border-gray-300 rounded-lg"
           />
         </div>
 
         <div className="text-center">
           <button
             type="submit"
-            className="w-full p-3 mt-4 bg-[#2c7865] text-[#E2B846] rounded-lg "
-            aria-label="Envoyer le message"
+            className="w-full p-3 mt-4 bg-[#2c7865] text-[#E2B846] rounded-lg"
+            aria-label={text_translation("button_send")}
           >
-            Envoyer
+            {text_translation("button_send")}
           </button>
         </div>
       </form>

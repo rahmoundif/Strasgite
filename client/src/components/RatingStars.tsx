@@ -1,9 +1,15 @@
 import { useState } from "react";
 
-function RatingStars() {
-  const [Rated, setRated] = useState(0);
+interface RatingStarsProps {
+  rating?: number; // Optional prop for fixed rating
+}
+
+function RatingStars({ rating }: RatingStarsProps) {
+  const [Rated, setRated] = useState(rating || 0);
   const toggleRating = (star: number) => {
-    setRated((prev) => (prev === star ? 0 : star));
+    if (rating === undefined) {
+      setRated((prev) => (prev === star ? 0 : star));
+    }
   };
   return (
     <section className="flex space-x-0.5 mb-1">
