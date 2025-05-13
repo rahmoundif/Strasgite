@@ -1,9 +1,26 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Calendrier from "../components/Calendrier";
-import Formulaire from "../components/Formulaire";
+import SearchFilterRooms from "../components/SearchFilterRooms";
+import { useLogin } from "../context/LoginContext";
 import { useTranslation } from "../context/TranslationContext";
 
 function Reservation() {
   const { text_translation } = useTranslation();
+  const navigate = useNavigate();
+  const { isConnected, userRole } = useLogin();
+
+  useEffect(() => {
+    if (
+      isConnected === true &&
+      (userRole === "User" || userRole === "Europe")
+    ) {
+      navigate("/Reservation");
+    } else {
+      navigate("/LogIn");
+    }
+  }, [isConnected, userRole, navigate]);
+
   return (
     <>
       <h1 className="text-center text-2xl font-bold mb-5 text-[#2c7865]">
@@ -11,7 +28,7 @@ function Reservation() {
       </h1>
 
       <div className="px-5 py-10">
-        <Formulaire />
+        <SearchFilterRooms />
       </div>
 
       <div className="px-5 py-10">

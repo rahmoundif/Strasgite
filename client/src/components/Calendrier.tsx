@@ -1,10 +1,11 @@
 import Calendar from "react-calendar";
 import { useCalendar } from "../context/CalendarContext";
 import { useTranslation } from "../context/TranslationContext";
+//import { useForm } from "../context/FormContext";
 
 function Calendrier() {
   const { text_translation } = useTranslation();
-
+  //const {handleSubmit} = useForm();
   const {
     selectedDate,
     showAlert,
@@ -13,41 +14,29 @@ function Calendrier() {
     setShowAlert,
     handleValidation,
     handleChange,
-    loadDatesFromStorage,
     isDateDesactivee,
   } = useCalendar();
 
   return (
     <div>
-      {/* Bouton pour vérifier les disponibilités */}
-      <div className="mb-4 text-center">
-        <button
-          type="button"
-          onClick={loadDatesFromStorage}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-        >
-          {text_translation("calendrier_btn_check")}
-        </button>
-      </div>
-
       {/* Calendrier */}
       <Calendar
+        onChange={handleChange}
+        value={selectedDate}
+        selectRange
+        minDate={new Date(2025, 0, 1)}
+        maxDate={new Date(2026, 11, 31)}
         tileDisabled={({ date, view }) =>
           view === "month" && isDateDesactivee(date)
         }
         tileClassName={({ date, view }) =>
-          view === "month" && isDateDesactivee(date) ? "tile-desactivee" : null
+          view === "month" && isDateDesactivee(date)
+            ? "tile-desactivee"
+            : undefined
         }
-        navigationLabel={({ label }) => <span>{label}</span>}
-        goToRangeStartOnSelect
-        selectRange
-        minDate={new Date(2025, 0, 1)}
-        maxDate={new Date(2026, 11, 31)}
-        onChange={handleChange}
-        value={selectedDate}
       />
 
-      {/* Alerte sélection */}
+      {/* Alerte */}
       {showAlert && (
         <div className="fixed inset-0 flex items-center justify-center bg-[#2c7865]/70 z-50">
           <div className="bg-[#f4ebd0] p-6 rounded-lg shadow-lg max-w-md w-full text-center">
@@ -66,7 +55,7 @@ function Calendrier() {
         </div>
       )}
 
-      {/* Bouton validation de réservation */}
+      {/* Bouton Valider */}
       {showValidation && (
         <div className="mt-4 text-center">
           <button
