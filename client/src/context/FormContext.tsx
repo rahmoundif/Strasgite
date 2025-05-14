@@ -63,12 +63,14 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
     // Dates
     const rawDates = localStorage.getItem("reservationDates");
     if (rawDates) {
-      const saved = JSON.parse(rawDates) as string[];
+      const saved = JSON.parse(rawDates).dates as string[];
       const dates = saved
-        .map((s) => new Date(s))
-        .sort((a, b) => a.getTime() - b.getTime());
-      setSelectDateDepart(dates[0]);
-      setSelectDateArrivee(dates[dates.length - 1]);
+        ?.map((s: string) => new Date(s))
+        .sort((a: Date, b: Date) => a.getTime() - b.getTime());
+      if (dates?.length > 0) {
+        setSelectDateDepart(dates[0]);
+        setSelectDateArrivee(dates[dates.length - 1]);
+      }
     }
 
     const rawSearch = localStorage.getItem("search");
@@ -123,17 +125,18 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Soumission du formulaire
   const handleSubmit = () => {
-    console.log(
-      "🕐 départ:",
-      selectDateDepart,
-      "🕓 arrivée:",
-      selectDateArrivee,
-    );
     if (selectDateDepart && selectDateArrivee) {
       const dates = generateDateRange(selectDateDepart, selectDateArrivee);
-      console.log("Dates à sauver :", dates);
       localStorage.setItem("reservationDates", JSON.stringify(dates));
     }
+
+    /*localStorage.setItem(
+      "selectedDates",
+      JSON.stringify({
+        arrivee: selectDateArrivee,
+        depart: selectDateDepart,
+      }),
+    );*/
 
     const search = {
       motif,
