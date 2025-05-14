@@ -8,8 +8,7 @@ function EspaceVisiteur() {
   const { text_translation } = useTranslation();
   const navigate = useNavigate();
 
-  const { isConnected } = useLogin();
-  const { userRole } = useLogin();
+  const { isConnected, userRole } = useLogin();
 
   useEffect(() => {
     if (
@@ -21,6 +20,7 @@ function EspaceVisiteur() {
       navigate("/LogIn");
     }
   }, [isConnected, userRole, navigate]);
+
   return (
     <section>
       <h1>{text_translation("espace_visiteur_h1")}</h1>
