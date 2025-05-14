@@ -104,3 +104,15 @@ main {
 .custom-swiper .swiper-button-prev {
   color: #2c7865;
 }
+
+.tile-selected {
+  background-color: #2c7865 !important;
+  color: white !important;
+  border-radius: 10px;
+}
+.tile-desactivee {
+  background-color: #aaa !important;
+  color: white !important;
+  pointer-events: none;
+  border-radius: 10px;
+}

@@ -8,11 +8,7 @@ import {
 import type { Value } from "react-calendar/src/shared/types.js";
 import { useNavigate } from "react-router";
 import { useLogin } from "../context/LoginContext";
-//import { useForm } from "../context/FormContext";
 
-//const {selectDateDepart, selectDateArrivee} = useForm()
-
-// Typage
 interface CalendarContextType {
   selectedDate: Value;
   showAlert: boolean;
@@ -58,6 +54,13 @@ const datesDesactivees = [
   new Date(2025, 9, 9),
 ];
 
+const formatDate = (date: Date) => {
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+};
+
 export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -80,12 +83,11 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({
         isConnected === false
       ) {
         return [...datesDesactivees, ...datesReservees].some(
-          (d) => d.toDateString() === date.toDateString(),
+          (d) => formatDate(d) === formatDate(date),
         );
       }
       return false;
     },
-
     [userRole, isConnected, datesReservees],
   );
 
@@ -94,7 +96,10 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({
     if (resa) {
       try {
         const parsedDates: string[] = JSON.parse(resa);
-        const dates = parsedDates.map((dateStr) => new Date(dateStr));
+        const dates = parsedDates.map((dateStr) => {
+          const [year, month, day] = dateStr.split("-").map(Number);
+          return new Date(year, month - 1, day);
+        });
 
         if (dates.length > 1) {
           const start = dates[0];
@@ -113,7 +118,6 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({
           setSelectedDate([start, end]);
           setShowValidation(true);
         }
-        setDatesReservees(dates);
       } catch (error) {
         console.error("Erreur lors du parsing des dates réservées :", error);
       }
@@ -130,7 +134,7 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({
 
     if (Array.isArray(value)) {
       const [start, end] = value;
-      if (start && end) {
+      if (start instanceof Date && end instanceof Date) {
         const current = new Date(start);
         while (current <= end) {
           if (isDateDesactivee(current)) {
@@ -140,7 +144,7 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({
           }
           current.setDate(current.getDate() + 1);
         }
-        setSelectedDate(value);
+        setSelectedDate([start, end]);
         setShowValidation(true);
       }
     } else {
@@ -154,30 +158,28 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  /* const generateDateRange = (a: Date, b: Date): string[] => {
-    const [start, end] =
-      a < b ? [new Date(a), new Date(b)] : [new Date(b), new Date(a)];
-
+  const generateDateRange = (a: Date, b: Date): string[] => {
+    const [start, end] = a < b ? [a, b] : [b, a];
     const dates: string[] = [];
     const cur = new Date(start);
+
     while (cur <= end) {
-      dates.push(cur.toISOString().split("T")[0]);
+      dates.push(formatDate(cur));
       cur.setDate(cur.getDate() + 1);
     }
+
     return dates;
-  };*/
+  };
 
   const handleValidation = () => {
-    if (selectedDate) {
-      const reservationData = {
-        dates: selectedDate,
-      };
-      localStorage.setItem("reservationDates", JSON.stringify(reservationData));
+    let dates: string[] = [];
+    if (Array.isArray(selectedDate)) {
+      const [start, end] = selectedDate;
+      if (start instanceof Date && end instanceof Date) {
+        dates = generateDateRange(start, end);
+      }
     }
-    /*if (selectDateDepart && selectDateArrivee) {
-      const dates = generateDateRange(selectDateDepart, selectDateArrivee);
-      localStorage.setItem("reservationDates", JSON.stringify(dates));
-    }*/
+    localStorage.setItem("reservationDates", JSON.stringify(dates));
 
     setLoading(true);
     setTimeout(() => {
@@ -208,7 +210,6 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-// Hook personnalisé
 export const useCalendar = () => {
   const context = useContext(CalendarContext);
   if (!context) {

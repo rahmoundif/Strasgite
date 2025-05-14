@@ -1,11 +1,32 @@
 import Calendar from "react-calendar";
 import { useCalendar } from "../context/CalendarContext";
 import { useTranslation } from "../context/TranslationContext";
-//import { useForm } from "../context/FormContext";
+
+// Fonction utilitaire : format YYYY-MM-DD sans UTC
+function formatDate(date: Date): string {
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+// Génère toutes les dates entre start et end incluses
+function generateFormattedRange(start: Date, end: Date): string[] {
+  const range: string[] = [];
+  const cur = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+  const endDate = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+
+  while (cur <= endDate) {
+    range.push(formatDate(cur));
+    cur.setDate(cur.getDate() + 1);
+  }
+
+  return range;
+}
 
 function Calendrier() {
   const { text_translation } = useTranslation();
-  //const {handleSubmit} = useForm();
+
   const {
     selectedDate,
     showAlert,
@@ -16,6 +37,15 @@ function Calendrier() {
     handleChange,
     isDateDesactivee,
   } = useCalendar();
+
+  // Calcule les dates à surligner
+  let selectedRange: string[] = [];
+  if (Array.isArray(selectedDate)) {
+    const [start, end] = selectedDate;
+    if (start instanceof Date && end instanceof Date) {
+      selectedRange = generateFormattedRange(start, end);
+    }
+  }
 
   return (
     <div>
@@ -29,11 +59,13 @@ function Calendrier() {
         tileDisabled={({ date, view }) =>
           view === "month" && isDateDesactivee(date)
         }
-        tileClassName={({ date, view }) =>
-          view === "month" && isDateDesactivee(date)
-            ? "tile-desactivee"
-            : undefined
-        }
+        tileClassName={({ date, view }) => {
+          if (view !== "month") return;
+          const formatted = formatDate(date);
+
+          if (isDateDesactivee(date)) return "tile-desactivee";
+          if (selectedRange.includes(formatted)) return "tile-selected";
+        }}
       />
 
       {/* Alerte */}

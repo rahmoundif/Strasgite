@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-//import { useRooms } from "../context/RoomsContext";
 
 interface SearchData {
-  adults: number;
-  children: number;
-  beds: number;
+  motif: string;
+  nombreLitsSimples: number;
+  nombreLitsDoubles: number;
+  nombreVoyageurs: number;
+  nombreEnfants: number;
+  nombrePmr: number;
+  petitDej: string;
 }
 
 interface Reservation {
@@ -16,8 +19,6 @@ interface Reservation {
 }
 
 let reservationCounter = 21215;
-
-//const {}=useRooms();
 
 const Order = () => {
   const navigate = useNavigate();
@@ -50,13 +51,15 @@ const Order = () => {
       const nights = parsedDates.length;
       setReservation({ start, end, nights, allDates: parsedDates });
 
-      const parsedSearch = JSON.parse(rawSearch);
+      const parsedSearch: SearchData = JSON.parse(rawSearch);
       setSearch(parsedSearch);
 
-      const nbPersons = parsedSearch.adults + parsedSearch.children;
+      const nbPersonnes =
+        parsedSearch.nombreVoyageurs + parsedSearch.nombreEnfants;
       const chambre = 75 * nights;
-      const petitsDej = nbPersons * nights * 10;
-      const taxeSejour = nbPersons * nights * 1;
+      const petitsDej =
+        parsedSearch.petitDej === "oui" ? nbPersonnes * nights * 10 : 0;
+      const taxeSejour = nbPersonnes * nights * 1;
       const totalHT = chambre + petitsDej + taxeSejour;
       const tva = totalHT * 0.1;
       const total = totalHT + tva;
@@ -73,9 +76,10 @@ const Order = () => {
         nom: paymentInfo.name,
         numReservation: reservationCounter++,
         dateReservation: new Date().toLocaleDateString(),
-        nbPersonnes: (search?.adults || 0) + (search?.children || 0),
+        nbPersonnes:
+          (search?.nombreVoyageurs || 0) + (search?.nombreEnfants || 0),
         duree: reservation?.nights,
-        petitDejeuner: search ? "Oui" : "Non",
+        petitDejeuner: search?.petitDej === "oui" ? "Oui" : "Non",
         dates: reservation?.allDates,
       };
       localStorage.setItem("resavalide", JSON.stringify(resaData));
@@ -96,8 +100,12 @@ const Order = () => {
         <li>Arrivée : {reservation.start.toLocaleDateString()}</li>
         <li>Départ : {reservation.end.toLocaleDateString()}</li>
         <li>Nombre de nuits : {reservation.nights}</li>
-        <li>Adultes : {search.adults}</li>
-        <li>Enfants : {search.children}</li>
+        <li>Voyageurs : {search.nombreVoyageurs}</li>
+        <li>Enfants : {search.nombreEnfants}</li>
+        <li>Lits simples : {search.nombreLitsSimples}</li>
+        <li>Lits doubles : {search.nombreLitsDoubles}</li>
+        <li>PMR : {search.nombrePmr}</li>
+        <li>Petit-déjeuner : {search.petitDej === "oui" ? "Oui" : "Non"}</li>
       </ul>
 
       <div className="border-t pt-4 space-y-1">
