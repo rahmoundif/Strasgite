@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import EspacePerso from "../components/EspacePerso";
 import { useLogin } from "../context/LoginContext";
 import { useTranslation } from "../context/TranslationContext";
-import EspacePerso from "../components/EspacePerso";
 
 function EspaceVisiteur() {
   const { text_translation } = useTranslation();
