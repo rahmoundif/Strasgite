@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo} from "react";
+import { createContext, useContext, useMemo } from "react";
 import { useTranslation } from "../context/TranslationContext";
 import roomsData from "../data/roomsData.json";
 
@@ -24,7 +24,9 @@ interface RoomsContextType {
 // creation du context
 const RoomsContext = createContext<RoomsContextType | undefined>(undefined);
 
-export const RoomsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const RoomsProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const { text_translation } = useTranslation();
 
   const rooms = useMemo<Room[]>(
@@ -35,20 +37,18 @@ export const RoomsProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         description: text_translation(`room_${room.id}_description`),
         price: text_translation(`room_${room.id}_price`),
       })),
-    [text_translation]
+    [text_translation],
   );
 
-   return (
-    <RoomsContext.Provider value={{ rooms }}>
-      {children}
-    </RoomsContext.Provider>
+  return (
+    <RoomsContext.Provider value={{ rooms }}>{children}</RoomsContext.Provider>
   );
 };
 
 // Perso hook useRooms
 export const useRooms = (): Room[] => {
   const context = useContext(RoomsContext);
-  if (!context) throw new Error("useRooms doit être utilisé dans un RoomsProvider");
+  if (!context)
+    throw new Error("useRooms doit être utilisé dans un RoomsProvider");
   return context.rooms;
 };
-

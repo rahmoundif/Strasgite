@@ -5,7 +5,7 @@ function TranslationButtons() {
 
   return (
     <section className="p-4 flex">
-      <div >
+      <div>
         <button
           type="button"
           onClick={() => changeLanguage("german")}

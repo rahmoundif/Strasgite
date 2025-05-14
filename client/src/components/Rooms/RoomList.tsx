@@ -1,27 +1,24 @@
 import React, { useMemo } from "react";
-import { useRooms } from "../../context/RoomsContext";
 import { useForm } from "../../context/FormContext";
+import { useRooms } from "../../context/RoomsContext";
 import RoomCard from "./RoomCard";
 
 const RoomList: React.FC = () => {
   const rooms = useRooms();
-  const {
-    nombreEnfants,
-    nombrePmr,
-    nombreLitsSimples,
-    nombreLitsDoubles,
-  } = useForm();
+  const { nombreEnfants, nombrePmr, nombreLitsSimples, nombreLitsDoubles } =
+    useForm();
 
   // Filtrage des chambres selon les critères du formulaire
   const filteredRooms = useMemo(
     () =>
-      rooms.filter((room) =>
-        room.kids >= nombreEnfants &&
-        (nombrePmr > 0 ? room.pmrRoom : true) &&
-        room.sb_n >= nombreLitsSimples &&
-        room.db_n >= nombreLitsDoubles
+      rooms.filter(
+        (room) =>
+          room.kids >= nombreEnfants &&
+          (nombrePmr > 0 ? room.pmrRoom : true) &&
+          room.sb_n >= nombreLitsSimples &&
+          room.db_n >= nombreLitsDoubles,
       ),
-    [rooms, nombreEnfants, nombrePmr, nombreLitsSimples, nombreLitsDoubles]
+    [rooms, nombreEnfants, nombrePmr, nombreLitsSimples, nombreLitsDoubles],
   );
 
   if (filteredRooms.length === 0) {

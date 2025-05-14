@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 
 interface RoomCarouselProps {
   images: string[];
@@ -9,8 +9,8 @@ const RoomCarousel: React.FC<RoomCarouselProps> = ({ images }) => {
   const [current, setCurrent] = useState(0);
   const count = slides.length;
 
-  const prev = () => setCurrent(c => (c - 1 + count) % count);
-  const next = () => setCurrent(c => (c + 1) % count);
+  const prev = () => setCurrent((c) => (c - 1 + count) % count);
+  const next = () => setCurrent((c) => (c + 1) % count);
 
   if (count === 0) return null;
 
