@@ -59,7 +59,7 @@ function Services() {
       <div className="text-center">
         <Link
           to="/reservation"
-          className="inline-block py-3 px-6 bg-[#2c7865] text-[#E2B846] text-lg font-semibold rounded-lg shadow-lg hover:bg-[#1d5b49] transition"
+          className="py-5 px-5 bg-[#a84448] hover:bg-[#922f33] rounded-lg text-white text-base font-semibold transition duration-200"
         >
           {text_translation("services_button")}
         </Link>

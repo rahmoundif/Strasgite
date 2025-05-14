@@ -24,9 +24,9 @@ function Nos_Chambres() {
   return (
     <>
       <SearchFilterRooms />
-      <section className="m-4 grid lg:grid-cols-3 lg:grid-rows-2 gap-4 opacity-90 lg:mt-20">
+      <section className="m-4 grid md:grid-cols-2 lg:grid-cols-3 lg:grid-rows-2 gap-4 opacity-90 lg:mt-20 md:gap-7 md:mx-7">
         {filteredRooms.length > 0 ? (
-          filteredRooms.map((room) => <RoomCard key={room.id} {...room} />)
+          filteredRooms.map((room) => <RoomCard key={room.id} room={room} />)
         ) : (
           <p>{text_translation("no_rooms")}</p>
         )}

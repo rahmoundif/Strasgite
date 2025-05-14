@@ -1,105 +1,85 @@
 import Heart from "../Heart";
+import type { Room } from "../../context/RoomsContext";
 import RatingStars from "../RatingStars";
 import RoomCarousel from "../Rooms/RoomCarousel";
+import { useForm } from "../../context/FormContext";
 
 interface RoomCardProps {
-  key: number;
-  imageUrl: string;
-  title: string;
-  description: string;
-  price: string | number;
-  kids: number;
-  doubleBed: boolean;
-  db_n: number;
-  singleBed: boolean;
-  sb_n: number;
-  pmrRoom: boolean;
+  room: Room;
 }
 
-function RoomCard({
-  title,
-  description,
-  price,
-  kids,
-  doubleBed,
-  db_n,
-  singleBed,
-  sb_n,
-  pmrRoom,
-}: RoomCardProps) {
+const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
+  const {handleSubmit, loading}= useForm();
+  const { title, description, price, kids, singleBed, sb_n, doubleBed, db_n, pmrRoom, images } = room;
+  const slideImages = images.slice(0, 2);
   return (
-    <div className="rounded-2xl shadow-xl overflow-hidden ">
-      <div className=" relative z-20">
+    <div className="rounded-2xl shadow-xl overflow-hidden relative">
+      {/* Bouton like */}
+      <div className="absolute top-1 right-1 z-20">
         <Heart />
       </div>
+
+      {/* Carousel ou image unique */}
       <div className="relative">
-        <RoomCarousel />
+        <RoomCarousel images={slideImages} />
       </div>
+
       <div className="m-5">
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center">
           <h3 className="text-lg font-semibold">{title}</h3>
-          <div className="pb-3 ">
-            <RatingStars />
-          </div>
+          <RatingStars />
         </div>
 
-        <div className="gap-4 mt-2">
-          <p className="text-sm text-gray-600">{description}</p>
+        <p className="text-sm text-gray-600 mt-2">{description}</p>
 
-          <div className="flex flex-wrap justify-center items-start gap-2 pt-6">
-            <p className="flex mr-5">
-              <img src="baby.png" alt="kids" className="w-5 h-5" />
-              {kids}
-            </p>
-            <img src="wifi.png" alt="WiFi" className="w-6 h-6 flex mr-5" />
-            <img
-              src="concierge-bell.png"
-              alt="Service"
-              className="w-6 h-6 flex mr-5"
-            />
+        {/* Detail de la chambre */}
+        <div className="flex flex-wrap gap-4 mt-10">
+          {kids > 0 && (
+            <div className="flex items-center">
+              <img src="/baby.png" alt="Enfants" className="w-5 h-5 mr-1" />
+              <span>{kids}</span>
+            </div>
+          )}
 
-            {doubleBed && (
-              <p className="flex mr-5">
-                <img
-                  src="bed-double.png"
-                  alt="Bed double"
-                  className="w-6 h-6"
-                />
-                {db_n}
-              </p>
-            )}
-            {singleBed && (
-              <p className="flex mr-5">
-                <img
-                  src="bed-single.png"
-                  alt="Bed Single"
-                  className="w-6 h-6"
-                />
-                {sb_n}
-              </p>
-            )}
-            {pmrRoom && (
-              <img
-                src="accessibility.png"
-                alt="Accessibility"
-                className="w-6 h-6 flex mr-5"
-              />
-            )}
+          {doubleBed && (
+            <div className="flex items-center">
+              <img src="/bed-double.png" alt="Lits doubles" className="w-6 h-6 mr-1" />
+              <span>{db_n}</span>
+            </div>
+          )}
 
-            <img
-              src="sun-snow.png"
-              alt="air conditioning"
-              className="w-6 h-6 flex mr-5"
-            />
-          </div>
+          {singleBed && (
+            <div className="flex items-center">
+              <img src="/bed-single.png" alt="Lits simples" className="w-6 h-6 mr-1" />
+              <span>{sb_n}</span>
+            </div>
+          )}
 
-          <div className="flex justify-between items-center mt-3">
-            <span className="font-bold">{price} €</span>
-          </div>
+          {pmrRoom && <img src="/accessibility.png" alt="PMR" className="w-6 h-6" />}
         </div>
+
+        {/* Prix */}
+        <div className="mt-10 text-right text-lg font-bold justify-between flex">
+          <button
+          onClick={handleSubmit}
+          type="button"
+          className="py-2 px-5 bg-[#a84448] hover:bg-[#922f33] rounded-lg text-white text-base font-semibold transition duration-200"
+        >
+          {loading ? (
+            <span className="animate-spin inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
+          ) : (
+            "Reserver"
+          )}
+        </button>
+
+          {price}
+        
+        </div>
+
+        
       </div>
     </div>
   );
-}
+};
 
 export default RoomCard;
