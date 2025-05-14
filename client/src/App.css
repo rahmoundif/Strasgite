@@ -39,7 +39,8 @@ main {
 .react-calendar {
   width: 100%;
   border: 2px solid #2c7865;
-  border-radius: 0.375rem;
+  border-radius: 1rem;
+  padding: 5px;
 }
 
 .react-calendar__tile {
@@ -49,7 +50,7 @@ main {
 }
 
 .react-calendar__tile:hover {
-  background-color: #d9bf77;
+  background-color: #2c7865;
 }
 
 .react-calendar__tile--active {
@@ -58,14 +59,14 @@ main {
 }
 
 .react-calendar__tile--now {
-  border: 1px solid #2c7865;
+  border: 1px solid #000000;
 }
 
 .react-calendar__navigation {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
+  background-color: #f4ebd0;
   border-radius: 0.5rem;
 }
 
@@ -80,15 +81,9 @@ main {
   display: none;
 }
 
-.tile-desactivee {
-  background-color: #808080;
-  color: #d3d3d3;
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
 .react-calendar__month-view__weekdays__weekday {
-  color: #d9bf77;
+  color: #000000;
+  padding: 2px;
 }
 
 .react-calendar__navigation__arrow {
@@ -103,4 +98,20 @@ main {
 .custom-swiper .swiper-button-next,
 .custom-swiper .swiper-button-prev {
   color: #2c7865;
+}
+
+.tile-selected {
+  background-color: #2c7865 !important;
+  color: white !important;
+  border-radius: 10px;
+}
+.tile-desactivee {
+  background-color: #aaa !important;
+  color: white !important;
+  pointer-events: none;
+  border-radius: 10px;
+}
+
+.calendar-wrapper-formulaire .react-calendar {
+  border: none;
 }

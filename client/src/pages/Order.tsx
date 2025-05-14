@@ -109,6 +109,7 @@ const Order = () => {
     );
 
   return (
+
     <>
       <div className="p-6 max-w-xl mx-auto space-y-4">
         <h1 className="text-2xl font-bold">
@@ -150,6 +151,7 @@ const Order = () => {
           <p className="font-bold">Total :</p>
           <p className="text-end"> {totals.total.toFixed(2)} €</p>
         </div>
+
       </div>
 
       <div className="flex justify-center mt-6">

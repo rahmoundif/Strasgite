@@ -23,15 +23,11 @@ function Reservation() {
 
   return (
     <>
-      <h1 className="text-center text-2xl font-bold mb-5 text-[#2c7865]">
-        {text_translation("reservation_h1")}
-      </h1>
-
-      <div className="px-5 py-10">
+      <div className="xl:mt-[-35px]">
         <SearchFilterRooms />
       </div>
 
-      <div className="px-5 py-10">
+      <div className="px-5 py-5 xl:mx-20">
         <Calendrier />
       </div>
 

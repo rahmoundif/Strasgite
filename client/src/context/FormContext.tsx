@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Typage du contexte
 interface FormContextType {
   showCalendrierDepart: boolean;
   showCalendrierArrivee: boolean;
@@ -58,15 +57,11 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  // Lecture initiale
   useEffect(() => {
-    // Dates
     const rawDates = localStorage.getItem("reservationDates");
     if (rawDates) {
-      const saved = JSON.parse(rawDates).dates as string[];
-      const dates = saved
-        ?.map((s: string) => new Date(s))
-        .sort((a: Date, b: Date) => a.getTime() - b.getTime());
+      const saved = JSON.parse(rawDates) as string[];
+      const dates = saved.map((s: string) => new Date(s));
       if (dates?.length > 0) {
         setSelectDateDepart(dates[0]);
         setSelectDateArrivee(dates[dates.length - 1]);
@@ -87,7 +82,7 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  // Génère un tableau de dates ISO entre deux dates
+  // ✅ Format YYYY-MM-DD sans UTC
   const generateDateRange = (a: Date, b: Date): string[] => {
     const [start, end] =
       a < b ? [new Date(a), new Date(b)] : [new Date(b), new Date(a)];
@@ -95,13 +90,16 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
     const dates: string[] = [];
     const cur = new Date(start);
     while (cur <= end) {
-      dates.push(cur.toISOString().split("T")[0]);
+      const yyyy = cur.getFullYear();
+      const mm = String(cur.getMonth() + 1).padStart(2, "0");
+      const dd = String(cur.getDate()).padStart(2, "0");
+      dates.push(`${yyyy}-${mm}-${dd}`);
       cur.setDate(cur.getDate() + 1);
     }
+
     return dates;
   };
 
-  // Tous les handlers
   const handleOnChangeVoyageurs = (e: React.ChangeEvent<HTMLSelectElement>) =>
     setNombreVoyageurs(Number(e.target.value));
   const handleOnChangeEnfant = (e: React.ChangeEvent<HTMLSelectElement>) =>
@@ -123,20 +121,11 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
     setPetitDejOui(false);
   };
 
-  // Soumission du formulaire
   const handleSubmit = () => {
     if (selectDateDepart && selectDateArrivee) {
       const dates = generateDateRange(selectDateDepart, selectDateArrivee);
       localStorage.setItem("reservationDates", JSON.stringify(dates));
     }
-
-    /*localStorage.setItem(
-      "selectedDates",
-      JSON.stringify({
-        arrivee: selectDateArrivee,
-        depart: selectDateDepart,
-      }),
-    );*/
 
     const search = {
       motif,

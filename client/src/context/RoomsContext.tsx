@@ -1,11 +1,11 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useMemo } from "react";
 import { useTranslation } from "../context/TranslationContext";
 import roomsData from "../data/roomsData.json";
 
 //Typage d'une chambre
 export interface Room {
   id: number;
-  imageUrl: string;
+  images: string[];
   title: string;
   description: string;
   price: string | number;
@@ -17,37 +17,38 @@ export interface Room {
   pmrRoom: boolean;
 }
 
-//typage du tableau Json complet
 interface RoomsContextType {
   rooms: Room[];
 }
 
 // creation du context
-const RoomsContext = createContext<RoomsContextType>({ rooms: [] });
+const RoomsContext = createContext<RoomsContextType | undefined>(undefined);
 
 export const RoomsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const { text_translation } = useTranslation();
 
-  const localizedRooms: Room[] = roomsData.map((room) => ({
-    ...room,
-    description: text_translation(`room_${room.id}_description`),
-    price: text_translation(`room_${room.id}_price`),
-  }));
+  const rooms = useMemo<Room[]>(
+    () =>
+      roomsData.map((room) => ({
+        ...room,
+        images: room.images || [],
+        description: text_translation(`room_${room.id}_description`),
+        price: text_translation(`room_${room.id}_price`),
+      })),
+    [text_translation],
+  );
 
   return (
-    <RoomsContext.Provider value={{ rooms: localizedRooms }}>
-      {children}
-    </RoomsContext.Provider>
+    <RoomsContext.Provider value={{ rooms }}>{children}</RoomsContext.Provider>
   );
 };
 
 // Perso hook useRooms
 export const useRooms = (): Room[] => {
   const context = useContext(RoomsContext);
-  if (!context) {
-    throw new Error("useRooms must be used within a RoomProvider");
-  }
+  if (!context)
+    throw new Error("useRooms doit être utilisé dans un RoomsProvider");
   return context.rooms;
 };
