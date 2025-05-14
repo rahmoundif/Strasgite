@@ -1,7 +1,10 @@
 [
   {
     "id": 0,
-    "imageUrl": "https://i.ibb.co/vvgzbNN6/chambre-1.png",
+    "images": [
+      "https://i.ibb.co/vvgzbNN6/chambre-1.png",
+      "https://i.ibb.co/WvmBtbX5/chambre-1bis.png"
+    ],
     "title": "Le Coquelicot",
     "description": "Cette chambre lumineuse aux touches rouges vives vous plonge dans une ambiance chaleureuse. Lit double, petit bureau et vue sur le jardin fleuri offrent un cadre reposant.",
     "price": "75 €/ nuit",
@@ -14,7 +17,10 @@
   },
   {
     "id": 1,
-    "imageUrl": "https://i.ibb.co/W43KnWqx/chambre-2.png",
+    "images": [
+      "https://i.ibb.co/W43KnWqx/chambre-2.png",
+      "https://i.ibb.co/gFJwG09C/chambre-2bis.png"
+    ],
     "title": "La Lavande",
     "description": "Dominante de violet pastel et mobilier en bois clair, cette chambre invite à la détente. La grande fenêtre laisse entrer le parfum subtil des champs environnants.",
     "price": "80 € / nuit",
@@ -27,7 +33,10 @@
   },
   {
     "id": 2,
-    "imageUrl": "https://i.ibb.co/h1TMbCy9/chambre-3.png",
+    "images": [
+      "https://i.ibb.co/h1TMbCy9/chambre-3.png",
+      "https://i.ibb.co/tTz3t8hZ/chambre-3bis.png"
+    ],
     "title": "Le Tournesol",
     "description": "Couleurs chaudes et imprimés floraux, cette chambre ensoleillée rayonne toute la journée. Lit queen-size, chaise longue et table de nuit en rotin complètent l’ensemble.",
     "price": "70 € / nuit",
@@ -40,7 +49,10 @@
   },
   {
     "id": 3,
-    "imageUrl": "https://i.ibb.co/rKJSVMdg/chambre-4.png",
+    "images": [
+      "https://i.ibb.co/rKJSVMdg/chambre-4.png",
+      "https://i.ibb.co/dssyjW6J/chambre-4bis.png"
+    ],
     "title": "L’Érable",
     "description": "Avec ses murs couleur crème et son mobilier en bois d’érable, cette chambre dégage une élégance naturelle. Le coin lecture près de la fenêtre vous invite à la rêverie.",
     "price": "85 € / nuit",
@@ -53,7 +65,10 @@
   },
   {
     "id": 4,
-    "imageUrl": "https://i.ibb.co/FLyQPQrD/chambre-5.png",
+    "images": [
+      "https://i.ibb.co/FLyQPQrD/chambre-5.png",
+      "https://i.ibb.co/gMHvKrHd/chambre-5bis.png"
+    ],
     "title": "La Glycine",
     "description": "Ambiance romantique avec ses voilages légers et son papier peint à motif glycines. Lit à baldaquin, bougeoirs en fer forgé et parquet ancien créent un charme d’antan.",
     "price": "90 € / nuit",
@@ -66,7 +81,10 @@
   },
   {
     "id": 5,
-    "imageUrl": "https://i.ibb.co/W43KnWqx/chambre-2.png",
+    "images": [
+      "https://i.ibb.co/SwJ5tycP/chambre-6final.png",
+      "https://i.ibb.co/3mKBMSfD/chambre-6bis.png"
+    ],
     "title": "Le Nid Douillet",
     "description": "Petite chambre cosy aux tons neutres, idéale pour une escapade en duo. Couette moelleuse, suspensions douces et rangements pratiques pour un séjour minimaliste.",
     "price": "65 € / nuit",

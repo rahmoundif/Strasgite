@@ -81,7 +81,7 @@ function Formulaire() {
           readOnly
         />
         {showCalendrierArrivee && (
-          <div>
+          <div className="calendar-wrapper-formulaire bg-[var(--color-background)] text-black p-2 rounded-md">
             <Calendar
               onChange={(date) => {
                 setSelectDateArrivee(date as Date);
@@ -101,7 +101,7 @@ function Formulaire() {
           readOnly
         />
         {showCalendrierDepart && (
-          <div>
+          <div className="calendar-wrapper-formulaire bg-[var(--color-background)] text-black p-2 rounded-md">
             <Calendar
               onChange={(date) => {
                 setSelectDateDepart(date as Date);

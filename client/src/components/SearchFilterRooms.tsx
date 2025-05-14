@@ -68,7 +68,7 @@ function SearchFilterRooms() {
     );
 
   //Design du boutton pour activer le modal et design du modal
-  const buttonClass = "px-4 py-2 rounded-full ";
+  const buttonClass = "text-[#d9bf77] px-4 py-2 rounded-lg ";
   const modalClass =
     "mt-2 p-4 border rounded-lg bg-white shadow-lg absolute z-99";
 
@@ -77,7 +77,7 @@ function SearchFilterRooms() {
   return (
     //Design General
 
-    <div className="relative flex  justify-center items-center space-x-4 py-3 cursor-pointer border-2 ">
+    <div className="relative flex m-5 justify-center rounded-full bg-[#2c7865] shadow-sm items-center py-1 cursor-pointer md:mx-50 lg:mx-100 lg:mt-20">
       {/* Date Section */}
 
       <section className="relative">
@@ -161,7 +161,7 @@ function SearchFilterRooms() {
             }
           }}
         >
-          {text_translation("filter_visitors")}
+          <p>👥{text_translation("filter_visitors")}</p>
         </div>
         {visitorOpen && (
           <div className={modalClass} style={{ minWidth: 150 }}>
@@ -240,7 +240,7 @@ function SearchFilterRooms() {
             }
           }}
         >
-          {text_translation("filter_beds")}
+          <p>🛏️{text_translation("filter_beds")}</p>
         </div>
 
         {/* Lits Simple */}

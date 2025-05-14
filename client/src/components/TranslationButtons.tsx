@@ -9,7 +9,7 @@ function TranslationButtons() {
         <button
           type="button"
           onClick={() => changeLanguage("german")}
-          className={`px-2 py-1 w-12 shadow-2xl  cursor-pointer ${language === "german" ? "font-bold" : ""}`}
+          className={`px-2 py-1 w-12 xl:w-15 shadow-2xl xl:shadow-none cursor-pointer ${language === "german" ? "font-bold" : ""}`}
         >
           <img src="/germanflag.svg" alt="german" />
         </button>
@@ -17,7 +17,7 @@ function TranslationButtons() {
         <button
           type="button"
           onClick={() => changeLanguage("french")}
-          className={`px-2 py-1 w-12 shadow-2xl  cursor-pointer ${language === "french" ? "font-bold" : ""}`}
+          className={`px-2 py-1 w-12 xl:w-15 shadow-2xl  xl:shadow-none cursor-pointer ${language === "french" ? "font-bold" : ""}`}
         >
           <img src="/franceflag.svg" alt="French" />
         </button>
@@ -25,7 +25,7 @@ function TranslationButtons() {
         <button
           type="button"
           onClick={() => changeLanguage("english")}
-          className={`px-2 py-1 w-12 shadow-2xl  cursor-pointer ${language === "english" ? "font-bold" : ""}`}
+          className={`px-2 py-1 w-12 xl:w-15 shadow-2xl  xl:shadow-none cursor-pointer ${language === "english" ? "font-bold" : ""}`}
         >
           <img src="/britflag.svg" alt="English" />
         </button>

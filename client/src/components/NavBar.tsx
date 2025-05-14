@@ -43,17 +43,11 @@ const NavBar: React.FC<NavBarProps> = () => {
         <Burger toggleMenu={toggleMenu} isOpen={isNavOpen} />
       </div>
 
-      <div
-        className={`z-51 absolute top-1 md:hidden ${isNavOpen ? "hidden" : ""}`}
-      >
+      <div className="z-51 absolute top-0 md:hidden">
         <TranslationButtons />
       </div>
 
       {/* Navigation principale pour desktop */}
-
-      <div className="z-51 relative top- left-1 hidden md:block">
-        <TranslationButtons />
-      </div>
 
       <nav className="hidden md:flex md:justify-center md:items-center md:z-40 px-4 md:px-8 lg:px-12 ">
         <ul className="flex flex-wrap justify-center space-x-4 md:space-x-6 lg:space-x-8 m-4">

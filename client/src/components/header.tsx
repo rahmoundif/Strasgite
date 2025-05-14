@@ -1,5 +1,6 @@
 import { useTheme } from "../context/ThemeContext";
 import NavBar from "./NavBar";
+import TranslationButtons from "./TranslationButtons";
 import "../App.css";
 
 function Header() {
@@ -37,13 +38,21 @@ function Header() {
 
       {/* Titre juste sous l’image */}
       <div
-        className="w-full text-center text-xl md:text-2xl lg:text-4xl xl:text-6xl font-semibold py-4"
+        className="w-full md:justify-end text-center text-xl md:text-2xl lg:text-4xl xl:text-5xl font-semibold md:py-0 py-2 md:flex md:space-x-20 xl:space-x-25"
         style={{
           color: "var(--color-accent)",
           backgroundColor: "var(--color-primary)",
         }}
       >
-        La Maison Strasbourgeoise
+        <h1 className="md:flex md:flex-row md:items-center md:justify-center  ">
+          La Maison Strasbourgeoise
+        </h1>
+
+        <div className="hidden md:flex">
+          <TranslationButtons />
+        </div>
+
+        {/* Navigation principale pour desktop */}
       </div>
     </section>
   );
