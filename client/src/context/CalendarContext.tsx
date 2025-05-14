@@ -69,7 +69,7 @@ export const CalendarProvider: React.FC<{ children: React.ReactNode }> = ({
     new Date(),
   ]);
   const [showAlert, setShowAlert] = useState(false);
-  const [datesReservees, setDatesReservees] = useState<Date[]>([]);
+  const [datesReservees] = useState<Date[]>([]);
   const [showValidation, setShowValidation] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
