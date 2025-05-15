@@ -46,7 +46,7 @@ const RoomCarousel: React.FC<RoomCarouselProps> = ({ images }) => {
             <img
               src="/previous.png"
               alt="left Slide"
-              className="z-99 w-5 h-auto invert"
+              className="z-30 w-5 h-auto invert"
             />
           </button>
           <button
@@ -58,7 +58,7 @@ const RoomCarousel: React.FC<RoomCarouselProps> = ({ images }) => {
             <img
               src="/next.png"
               alt="right Slide"
-              className="z-99 w-5 h-auto invert"
+              className="z-30 w-5 h-auto invert"
             />
           </button>
         </>

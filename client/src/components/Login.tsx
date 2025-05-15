@@ -149,6 +149,9 @@ Example : PE-FR-RAH0054`}
                 {text_translation("login_btn_login")}
               </button>
             </div>
+            <p className="text-center text-white underline">
+              {text_translation("creation_account")}
+            </p>
           </form>
         </section>
       )}

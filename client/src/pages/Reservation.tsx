@@ -21,6 +21,10 @@ function Reservation() {
     }
   }, [isConnected, userRole, navigate]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <div className="xl:mt-[-35px]">

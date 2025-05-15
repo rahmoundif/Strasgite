@@ -23,6 +23,7 @@ const RoomCard: React.FC<RoomCardProps> = ({ room }) => {
     images,
   } = room;
   const slideImages = images.slice(0, 2);
+
   return (
     <div className="rounded-2xl shadow-xl overflow-hidden relative">
       {/* Bouton like */}

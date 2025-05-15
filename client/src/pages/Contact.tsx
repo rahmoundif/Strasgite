@@ -138,14 +138,30 @@ function Contact() {
         <div className="text-center">
           <button
             type="submit"
-            className="w-full p-3 mt-4 bg-[#2c7865] text-[#E2B846] rounded-lg"
+            className="w-full p-3 mt-4 bg-[#a84448] hover:bg-[#922f33]  text-white text-base font-semibold transition duration-200 rounded-lg"
             aria-label={text_translation("button_send")}
           >
             {text_translation("button_send")}
           </button>
         </div>
       </form>
+
+      <div className="w-full max-w-lg mx-auto mt-10 p-6 sm:p-8 bg-white shadow-md rounded-lg text-center border border-gray-300">
+        <h2 className="text-xl font-semibold mb-4">
+          La Maison Strasbourgeoise
+        </h2>
+        <p className="text-base mb-2">{text_translation("legal_1_address")}</p>
+        <p className="text-base mb-2">
+          {text_translation("label_phone")}: {text_translation("legal_1_phone")}
+        </p>
+        <p className="text-base">✉️ {text_translation("legal_1_email")}</p>
+      </div>
     </div>
+
+    // "legal_1_address": "8-9 quai Mullenheim 67000 STRASBOURG",
+    //"label_phone": "Téléphone",
+    //"legal_1_phone": "03.82.88.67.68",
+    //"legal_1_email": "contact@maisonstrasbourg.fr",
   );
 }
 

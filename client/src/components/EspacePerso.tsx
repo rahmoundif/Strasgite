@@ -68,12 +68,14 @@ function EspaceVisiteur() {
             {showPassword ? "Masquer" : "Afficher"}
           </button>
         </div>
-        <button
-          className="mt-4 bg-[#a84448] hover:bg-[#922f33] text-white px-4 py-2 rounded-lg"
-          type="button"
-        >
-          Modifier mes informations
-        </button>
+        <div className="text-center">
+          <button
+            className="mt-4 bg-[#a84448] hover:bg-[#922f33] text-white px-4 py-2 rounded-lg"
+            type="button"
+          >
+            Modifier mes informations
+          </button>
+        </div>
       </section>
 
       {/* Historique des réservations */}
@@ -104,10 +106,10 @@ function EspaceVisiteur() {
       </section>
 
       {/* Déconnexion */}
-      <div className="mt-8 text-right">
+      <div className="mt-8 text-center">
         <button
           onClick={handleLogout}
-          className="bg-[#a84448] hover:bg-[#922f33] text-white px-4 py-2 rounded-lg"
+          className="bg-[#a84448] hover:bg-[#922f33] text-white px-4 py-2 rounded-lg "
           type="button"
         >
           Se déconnecter
