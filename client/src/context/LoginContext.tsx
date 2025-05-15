@@ -121,6 +121,8 @@ export const LoginProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.removeItem("ConnexionVisiteur");
     localStorage.removeItem("ConnexionEurope");
     localStorage.removeItem("Mail");
+    localStorage.removeItem("language");
+    localStorage.removeItem("resavalide");
   };
 
   return (

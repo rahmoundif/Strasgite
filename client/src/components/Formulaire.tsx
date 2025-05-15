@@ -11,6 +11,8 @@ function Formulaire() {
     nombreVoyageurs,
     nombreEnfants,
     nombrePmr,
+    nombreLitsSimples,
+    nombreLitsDoubles,
     motif,
     petitDejOui,
     petitDejNon,
@@ -26,6 +28,8 @@ function Formulaire() {
     handleOnChangePetitDejNon,
     handleOnChangePetitDejOui,
     handleSubmit,
+    handleOnChangeLitsSimples,
+    handleOnChangeLitsDoubles,
   } = useForm();
 
   const { text_translation } = useTranslation();
@@ -138,22 +142,6 @@ function Formulaire() {
             onChange={handleOnChangeEnfant}
             className=""
           >
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-          </select>
-
-          <label htmlFor="nombrePMR" className="font-medium">
-            {text_translation("form_label_pmr")}
-          </label>
-          <select
-            id="nombrePMR"
-            value={nombrePmr}
-            onChange={handleOnChangePmr}
-            className=""
-          >
             <option value={0}>0</option>
             <option value={1}>1</option>
             <option value={2}>2</option>
@@ -161,7 +149,49 @@ function Formulaire() {
             <option value={4}>4</option>
             <option value={5}>5</option>
           </select>
+
+          <label htmlFor="nombreLitsDoubles" className="font-medium">
+            PMR
+          </label>
+          <select
+            id="nombrePmr"
+            value={nombrePmr}
+            onChange={handleOnChangePmr}
+            className=""
+          >
+            <option value={1}>0</option>
+            <option value={2}>1</option>
+          </select>
         </div>
+
+        <div className="flex justify-between items-center bg-white border border-[#d9bf77] text-sm text-gray-800 rounded-lg px-1 py-3 gap-2">
+          <label htmlFor="nombreLitsSimples" className="font-medium">
+            {text_translation("filter_single_beds")}
+          </label>
+          <select
+            id="nombreLitsSimples"
+            value={nombreLitsSimples}
+            onChange={handleOnChangeLitsSimples}
+            className=""
+          >
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+          </select>
+
+          <label htmlFor="nombresLitsDoubles" className="font-medium">
+            {text_translation("filter_single_beds")}
+          </label>
+          <select
+            id="nombresLitsDoubles"
+            value={nombreLitsDoubles}
+            onChange={handleOnChangeLitsDoubles}
+            className=""
+          >
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+          </select>
+        </div>
+
         <section className="mb-2 text-lg font-semibold text-[#f4ebd0]">
           <fieldset>
             <legend className="mb-2 text-center">
@@ -206,7 +236,7 @@ function Formulaire() {
           {loading ? (
             <span className="animate-spin inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
           ) : (
-            "Rechercher"
+            <p>{text_translation("button_search")}</p>
           )}
         </button>
       </form>

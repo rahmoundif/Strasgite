@@ -89,11 +89,11 @@ function Calendrier() {
 
       {/* Bouton Valider */}
       {showValidation && (
-        <div className="mt-4 text-center">
+        <div className="mt-4 flex justify-center text-center">
           <button
             type="button"
             onClick={handleValidation}
-            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition flex items-center justify-center gap-2 min-w-[200px]"
+            className="px-4 py-2 bg-[#a84448] hover:bg-[#922f33] text-white rounded transition flex items-center justify-center min-w-[200px]"
           >
             {loading ? (
               <span className="animate-spin inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full" />

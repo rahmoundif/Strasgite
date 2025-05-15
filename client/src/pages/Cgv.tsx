@@ -1,7 +1,12 @@
+import { useEffect } from "react";
 import { useTranslation } from "../context/TranslationContext";
 
 function Cgv() {
   const { text_translation } = useTranslation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <section id="top" className="max-w-screen-lg mx-auto p-10">

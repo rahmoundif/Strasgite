@@ -1,17 +1,21 @@
+import { useTranslation } from "../context/TranslationContext";
+
 function NotreAlsace() {
+  const { text_translation } = useTranslation();
   return (
     <div className="max-w-6xl mx-auto px-6 py-10 space-y-16">
       <h1 className="text-4xl font-bold text-center text-gray-800">
-        Notre Alsace
+        {text_translation("notre_alsace_h1")}
       </h1>
       <p className="text-center text-gray-600 max-w-2xl mx-auto">
-        À moins de 30 km de Strasbourg, vivez des expériences inoubliables à
-        partager en famille, entre amis ou en amoureux.
+        {text_translation("notre_alsace_intro")}
       </p>
 
       {/* Section En famille */}
       <section className="space-y-6">
-        <h2 className="text-3xl font-semibold text-green-700">🌿 En famille</h2>
+        <h2 className="text-3xl font-semibold text-green-700">
+          🌿 {text_translation("notre_alsace_section1_family")}
+        </h2>
         <div className="grid md:grid-cols-2 gap-8">
           <div className="flex gap-6 items-start mt-5 border-1 border-gray-400 rounded-lg p-4 shadow-xl h-38">
             <img
@@ -26,11 +30,10 @@ function NotreAlsace() {
                 rel="noreferrer"
                 className="font-bold text-blue-700 hover:underline"
               >
-                Parc Animalier de Sainte-Croix
+                {text_translation("notre_alsace_section1_card1title")}
               </a>
               <p className="text-sm text-gray-700">
-                Une journée au plus près des animaux dans un environnement
-                naturel.
+                {text_translation("notre_alsace_section1_card1description")}
               </p>
             </div>
           </div>
@@ -47,10 +50,10 @@ function NotreAlsace() {
                 rel="noreferrer"
                 className="font-bold text-blue-700 hover:underline"
               >
-                Europa Park (Rust, DE)
+                {text_translation("notre_alsace_section1_card2title")}
               </a>
               <p className="text-sm text-gray-700">
-                Le célèbre parc d’attractions ravira petits et grands.
+                {text_translation("notre_alsace_section1_card2description")}
               </p>
             </div>
           </div>
@@ -67,10 +70,10 @@ function NotreAlsace() {
                 rel="noreferrer"
                 className="font-bold text-blue-700 hover:underline"
               >
-                Le Vaisseau
+                {text_translation("notre_alsace_section1_card3title")}
               </a>
               <p className="text-sm text-gray-700">
-                Musée interactif où science et jeu se rencontrent.
+                {text_translation("notre_alsace_section1_card3description")}
               </p>
             </div>
           </div>
@@ -87,10 +90,10 @@ function NotreAlsace() {
                 rel="noreferrer"
                 className="font-bold text-blue-700 hover:underline"
               >
-                La Montagne des Singes
+                {text_translation("notre_alsace_section1_card4title")}
               </a>
               <p className="text-sm text-gray-700">
-                Promenade fascinante au milieu des macaques de Barbarie.
+                {text_translation("notre_alsace_section1_card4description")}
               </p>
             </div>
           </div>
@@ -100,7 +103,7 @@ function NotreAlsace() {
       {/* Section Entre amis */}
       <section className="space-y-6">
         <h2 className="text-3xl font-semibold text-yellow-700">
-          🍻 Entre amis
+          🍻 {text_translation("notre_alsace_section2_friends")}
         </h2>
         <div className="grid md:grid-cols-2 gap-8">
           <div className="flex gap-6 items-start border-1 border-gray-400 rounded-lg p-4 shadow-xl h-38">
@@ -116,10 +119,10 @@ function NotreAlsace() {
                 rel="noreferrer"
                 className="font-bold text-blue-700 hover:underline"
               >
-                Escape Game Strasbourg
+                {text_translation("notre_alsace_section2_card1title")}
               </a>
               <p className="text-sm text-gray-700">
-                Plusieurs salles à thème pour relever des défis ensemble.
+                {text_translation("notre_alsace_section2_card1description")}
               </p>
             </div>
           </div>
@@ -136,11 +139,10 @@ function NotreAlsace() {
                 rel="noreferrer"
                 className="font-bold text-blue-700 hover:underline"
               >
-                La Route des Vins d’Alsace
+                {text_translation("notre_alsace_section2_card2title")}
               </a>
               <p className="text-sm text-gray-700">
-                Découverte des caves et dégustations dans les villages
-                pittoresques.
+                {text_translation("notre_alsace_section2_card2description")}
               </p>
             </div>
           </div>
@@ -157,10 +159,10 @@ function NotreAlsace() {
                 rel="noreferrer"
                 className="font-bold text-blue-700 hover:underline"
               >
-                VTT ou kayak sur l’Ill
+                {text_translation("notre_alsace_section2_card3title")}
               </a>
               <p className="text-sm text-gray-700">
-                Activités sportives et fun en pleine nature.
+                {text_translation("notre_alsace_section2_card3description")}
               </p>
             </div>
           </div>
@@ -177,10 +179,10 @@ function NotreAlsace() {
                 rel="noreferrer"
                 className="font-bold text-blue-700 hover:underline"
               >
-                Bowling & Trampoline Park Geispolsheim
+                {text_translation("notre_alsace_section2_card4title")}
               </a>
               <p className="text-sm text-gray-700">
-                Rires garantis pour une soirée dynamique.
+                {text_translation("notre_alsace_section2_card4description")}
               </p>
             </div>
           </div>
@@ -189,7 +191,9 @@ function NotreAlsace() {
 
       {/* Section En couple */}
       <section className="space-y-6">
-        <h2 className="text-3xl font-semibold text-pink-700">❤️ En couple</h2>
+        <h2 className="text-3xl font-semibold text-pink-700">
+          ❤️ {text_translation("notre_alsace_section3_couple")}
+        </h2>
         <div className="grid md:grid-cols-2 gap-8">
           <div className="flex gap-6 items-start border-1 border-gray-400 rounded-lg p-4 shadow-xl h-38">
             <img
@@ -204,10 +208,10 @@ function NotreAlsace() {
                 rel="noreferrer"
                 className="font-bold text-blue-700 hover:underline"
               >
-                Parc de l'Orangerie
+                {text_translation("notre_alsace_section3_card1title")}
               </a>
               <p className="text-sm text-gray-700">
-                Cadre romantique, cygnes, barques et petit zoo.
+                {text_translation("notre_alsace_section3_card1description")}
               </p>
             </div>
           </div>
@@ -224,11 +228,10 @@ function NotreAlsace() {
                 rel="noreferrer"
                 className="font-bold text-blue-700 hover:underline"
               >
-                Centre de bien-être et soin dans un batiment classé monument
-                historique.
+                {text_translation("notre_alsace_section3_card2title")}
               </a>
               <p className="text-sm text-gray-700">
-                Parenthèse détente à Strasbourg.
+                {text_translation("notre_alsace_section3_card2description")}
               </p>
             </div>
           </div>
@@ -245,10 +248,10 @@ function NotreAlsace() {
                 rel="noreferrer"
                 className="font-bold text-blue-700 hover:underline"
               >
-                Dîner au bateau du Rhin
+                {text_translation("notre_alsace_section3_card3title")}
               </a>
               <p className="text-sm text-gray-700">
-                Un moment hors du temps sur l’eau en plein centre-ville.
+                {text_translation("notre_alsace_section3_card3description")}
               </p>
             </div>
           </div>
@@ -265,10 +268,10 @@ function NotreAlsace() {
                 rel="noreferrer"
                 className="font-bold text-blue-700 hover:underline"
               >
-                Forteresse de Mutzig
+                {text_translation("notre_alsace_section3_card4title")}
               </a>
               <p className="text-sm text-gray-700">
-                Pour les passionnés d’histoire et de découvertes.
+                {text_translation("notre_alsace_section3_card4description")}
               </p>
             </div>
           </div>
@@ -276,8 +279,7 @@ function NotreAlsace() {
       </section>
 
       <p className="mt-12 text-center text-sm text-gray-500">
-        Retrouvez encore plus d’idées à l’accueil ou contactez-nous pour des
-        conseils personnalisés à la réception !
+        {text_translation("notre_alsace_conclusion")}
       </p>
     </div>
   );

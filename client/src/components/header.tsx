@@ -38,7 +38,7 @@ function Header() {
 
       {/* Titre juste sous l’image */}
       <div
-        className="w-full md:justify-end text-center text-xl md:text-2xl lg:text-4xl xl:text-5xl font-semibold md:py-0 py-2 md:flex md:space-x-20 xl:space-x-25"
+        className="w-full md:justify-end text-center text-xl md:text-2xl lg:text-4xl xl:text-5xl font-semibold md:py-0 py-2 md:flex md:space-x-20 xl:space-x-100"
         style={{
           color: "var(--color-accent)",
           backgroundColor: "var(--color-primary)",

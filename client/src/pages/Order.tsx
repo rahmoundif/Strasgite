@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import RoomCarousel from "../components/Rooms/RoomCarousel";
+import { useTranslation } from "../context/TranslationContext";
 
 interface SearchData {
   motif: string;
@@ -25,6 +27,7 @@ interface Reservation {
 let reservationCounter = 21215;
 
 const Order = () => {
+  const { text_translation } = useTranslation();
   const navigate = useNavigate();
   const [reservation, setReservation] = useState<Reservation | null>(null);
   const [search, setSearch] = useState<SearchData | null>(null);
@@ -90,10 +93,10 @@ const Order = () => {
         total: totals.total || 0,
       };
       localStorage.setItem("resavalide", JSON.stringify(resaData));
-      localStorage.removeItem("search");
-      localStorage.removeItem("reservationDates");
+      /* localStorage.removeItem("search");
+      localStorage.removeItem("reservationDates"); */
       navigate("/");
-    }, 15500);
+    }, 12500);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,55 +106,61 @@ const Order = () => {
   if (!reservation || !search)
     return (
       <p className="text-center text-red-600 mt-20 md:mt-40">
-        Une erreur de chargement empêche l’exécution correcte de la page. Merci
-        de réessayer{" "}
+        {text_translation("loading_error")}{" "}
       </p>
     );
 
   return (
-
     <>
-      <div className="p-6 max-w-xl mx-auto space-y-4">
-        <h1 className="text-2xl font-bold">
-          Récapitulatif de votre réservation
+      <div className="p-6 max-w-xl mx-auto space-y-4 ">
+        <h1 className="text-2xl font-bold text-center">
+          {text_translation("order_title")}
         </h1>
-        <div className="flex justify-around items-center border rounded-gray-300 rounded-xl p-4 space-y-2">
-          <ul className="space-y-1">
-            <li>Arrivée : {reservation.start.toLocaleDateString()}</li>
-            <li>Départ : {reservation.end.toLocaleDateString()}</li>
-            <li>Nombre de nuits : {reservation.nights}</li>
-            <li>Voyageurs : {search.nombreVoyageurs}</li>
-            <li>Enfants : {search.nombreEnfants}</li>
-            <li>Lits simples : {search.nombreLitsSimples}</li>
-            <li>Lits doubles : {search.nombreLitsDoubles}</li>
-            <li>PMR : {search.nombrePmr}</li>
-            <li>
-              Petit-déjeuner : {search.petitDej === "oui" ? "Oui" : "Non"}
-            </li>
-          </ul>
-          <div>
-            {/*-------------------------------toChange----------------------------------*/}
-            <img
-              src="./avatar_f_asiatique.png"
-              alt="chambre selectionnée"
-              className="w-40 h-40 border-1 rounded-full"
-            />
-          </div>
+        <div className="">
+          {/*-------------------------------Room Picture----------------------------------*/}
+
+          <RoomCarousel
+            images={[
+              "https://i.ibb.co/vvgzbNN6/chambre-1.png",
+              "https://i.ibb.co/WvmBtbX5/chambre-1bis.png",
+            ]}
+          />
+        </div>
+        <div className="border-t pt-4 space-y-1 grid grid-cols-2 gap-3">
+          <p>{text_translation("arrival")}</p>{" "}
+          <p className="text-end"> {reservation.start.toLocaleDateString()}</p>
+          <p>{text_translation("departure")}</p>{" "}
+          <p className="text-end">{reservation.end.toLocaleDateString()}</p>
+          <p>{text_translation("night")}</p>{" "}
+          <p className="text-end">{reservation.nights}</p>
+          <p>{text_translation("travelers")}</p>{" "}
+          <p className="text-end">{search.nombreVoyageurs}</p>
+          <p>{text_translation("children")}</p>{" "}
+          <p className="text-end">{search.nombreEnfants}</p>
+          <p>{text_translation("single_beds")}</p>{" "}
+          <p className="text-end">{search.nombreLitsSimples}</p>
+          <p>{text_translation("double_beds")}</p>{" "}
+          <p className="text-end">{search.nombreLitsDoubles}</p>
+          <p>{text_translation("pmr")}</p>{" "}
+          <p className="text-end">{search.nombrePmr}</p>
+          <p>{text_translation("breakfast")}</p>{" "}
+          <p className="text-end">
+            {search.petitDej === "oui" ? "Oui" : "Non"}
+          </p>
         </div>
 
         <div className="border-t pt-4 space-y-1 grid grid-cols-2 gap-3">
-          <p>Chambre (base 75€/nuit) :</p>
+          <p>{text_translation("room_price")}</p>
           <p className="text-end"> {totals.chambre.toFixed(2)} €</p>
-          <p>Petit-déjeuner :</p>
+          <p>{text_translation("breakfast_price")}</p>
           <p className="text-end"> {totals.petitsDej.toFixed(2)} €</p>
-          <p>Taxe de séjour :</p>
+          <p>{text_translation("tourist_tax")}</p>
           <p className="text-end"> {totals.taxeSejour.toFixed(2)} €</p>
-          <p>TVA :</p>
+          <p>{text_translation("vat")}</p>
           <p className="text-end"> {totals.tva.toFixed(2)} €</p>
-          <p className="font-bold">Total :</p>
+          <p className="font-bold">{text_translation("total")}</p>
           <p className="text-end"> {totals.total.toFixed(2)} €</p>
         </div>
-
       </div>
 
       <div className="flex justify-center mt-6">
@@ -167,7 +176,7 @@ const Order = () => {
               <img
                 src="./credit-card.png"
                 alt="Carte Bleue"
-                className="w-24 h-20"
+                className="w-20 h-20 "
               />
               CB
             </button>
@@ -177,8 +186,14 @@ const Order = () => {
               onClick={() => setSelectedPayment("paypal")}
               className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-100 shadow-md"
             >
-              {/* logo PayPal */}
-              <img src="./paypal.png" alt="Paypal" className="w-31.5 h-20" />
+              <div className="">
+                {/* logo PayPal */}
+                <img
+                  src="./paypal.png"
+                  alt="Paypal"
+                  className="w-20 h-20 mx-10"
+                />
+              </div>
             </button>
 
             <button
@@ -190,7 +205,7 @@ const Order = () => {
               <img
                 src="./apple-pay.png"
                 alt="Apple Pay"
-                className="w-31.5 h-20"
+                className="w-20 h-20 mx-10"
               />
             </button>
 
@@ -203,7 +218,7 @@ const Order = () => {
               <img
                 src="./google-pay.png"
                 alt="Google Pay"
-                className="w-31.5 h-20"
+                className="w-20 h-20 mx-10"
               />
             </button>
           </div>
@@ -217,9 +232,9 @@ const Order = () => {
                 onClick={() => setSelectedPayment(null)}
                 className="text-blue-600 hover:underline mb-2"
               >
-                ← Choisir un autre moyen
+                {text_translation("choose_other_method")}
               </button>
-              <h2 className="font-bold">Paiement Carte Bleue</h2>
+              <h2 className="font-bold">{text_translation("payment_cb")}</h2>
               <input
                 className="w-full p-1 border"
                 placeholder="Nom"
@@ -249,7 +264,7 @@ const Order = () => {
                 onClick={handlePay}
                 className="bg-green-600 text-white px-4 py-2 rounded mt-4"
               >
-                Confirmer le paiement
+                {text_translation("confirm_payment")}
               </button>
             </div>
           )}
@@ -261,9 +276,11 @@ const Order = () => {
                 onClick={() => setSelectedPayment(null)}
                 className="text-blue-600 hover:underline mb-2"
               >
-                ← Choisir un autre moyen
+                {text_translation("choose_other_method")}
               </button>
-              <h2 className="font-bold">Paiement PayPal</h2>
+              <h2 className="font-bold">
+                {text_translation("payment_paypal")}
+              </h2>
               <button
                 type="button"
                 onClick={handlePay}
@@ -282,9 +299,11 @@ const Order = () => {
                 onClick={() => setSelectedPayment(null)}
                 className="text-blue-600 hover:underline mb-2"
               >
-                ← Choisir un autre moyen
+                {text_translation("choose_other_method")}
               </button>
-              <h2 className="font-bold">Paiement Apple Pay</h2>
+              <h2 className="font-bold">
+                {text_translation("payment_applepay")}
+              </h2>
               <button
                 type="button"
                 onClick={handlePay}
@@ -303,9 +322,11 @@ const Order = () => {
                 onClick={() => setSelectedPayment(null)}
                 className="text-blue-600 hover:underline mb-2"
               >
-                ← Choisir un autre moyen
+                {text_translation("choose_other_method")}
               </button>
-              <h2 className="font-bold">Paiement Google Pay</h2>
+              <h2 className="font-bold">
+                {text_translation("payment_googlepay")}
+              </h2>
               <button
                 type="button"
                 onClick={handlePay}
@@ -320,7 +341,7 @@ const Order = () => {
           {/* Et côté “attente de validation” */}
           {bankStep === 1 && (
             <p className="text-center text-gray-600 mt-4">
-              En attente de validation...
+              {text_translation("waiting_validation")}
             </p>
           )}
         </div>
@@ -329,35 +350,42 @@ const Order = () => {
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-6 rounded shadow-xl max-w-md w-full text-center space-y-2">
               <h2 className="text-xl font-bold text-green-700">
-                ✅ Paiement validé
+                ✅ {text_translation("payment_validated")}
               </h2>
               <p>
-                Merci <strong>{paymentInfo.name}</strong>, votre réservation est
-                enregistrée.
+                {text_translation("tank_you")}{" "}
+                <strong>{paymentInfo.name}</strong>,{" "}
+                {text_translation("reservation_recorded")}
               </p>
               <p>
-                Numéro : <strong>{reservationCounter - 1}</strong>
+                {text_translation("number")}
+                <strong>{reservationCounter - 1}</strong>
               </p>
               <p>
-                Dates :{" "}
+                {text_translation("dates")}{" "}
                 <strong>{reservation.start.toLocaleDateString()}</strong> →{" "}
                 <strong>{reservation.end.toLocaleDateString()}</strong>
               </p>
               <p>
-                Durée : <strong>{reservation.nights}</strong> nuit(s)
+                {text_translation("duration")}
+                <strong>{reservation.nights}</strong>{" "}
+                {text_translation("night")}
               </p>
               <p>
-                Voyageurs : <strong>{search.nombreVoyageurs}</strong>
+                {text_translation("travelers")}
+                <strong>{search.nombreVoyageurs}</strong>
               </p>
               <p>
-                Enfants : <strong>{search.nombreEnfants}</strong>
+                {text_translation("children")}
+                <strong>{search.nombreEnfants}</strong>
               </p>
               <p>
-                Petit-déjeuner :{" "}
+                {text_translation("breakfast")}{" "}
                 <strong>{search.petitDej === "oui" ? "Oui" : "Non"}</strong>
               </p>
               <p>
-                Total payé : <strong>{totals.total.toFixed(2)} €</strong>
+                {text_translation("paid_total")}
+                <strong>{totals.total.toFixed(2)} €</strong>
               </p>
             </div>
           </div>

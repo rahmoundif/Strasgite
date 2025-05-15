@@ -64,7 +64,7 @@ function SearchFilterRooms() {
     d ? (
       d.toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" })
     ) : (
-      <p>&#128197;</p>
+      <p>"&#128197;"</p>
     );
 
   //Design du boutton pour activer le modal et design du modal
@@ -77,7 +77,13 @@ function SearchFilterRooms() {
   return (
     //Design General
 
-    <div className="relative flex m-5 justify-center rounded-full bg-[#2c7865] shadow-sm items-center py-1 cursor-pointer md:mx-50 lg:mx-100 lg:mt-20">
+    <div
+      className="relative justify-around flex m-5 rounded-full bg-[#2c7865] shadow-sm items-center py-1 cursor-pointer md:mx-50 lg:mx-100 lg:mt-20"
+      style={{
+        color: "black",
+        backgroundColor: "var(--color-primary)",
+      }}
+    >
       {/* Date Section */}
 
       <section className="relative">
@@ -90,11 +96,20 @@ function SearchFilterRooms() {
             }
           }}
         >
-          <p>&#128197; {text_translation("filter_dates")}</p>
+          <img
+            src="/calendar.png"
+            alt="calendrier"
+            className="filter invert-100 w-5 "
+          />
         </div>
 
         {dateOpen && (
-          <div className={modalClass} style={{ minWidth: 250 }}>
+          <div
+            className={modalClass}
+            style={{
+              minWidth: 200,
+            }}
+          >
             {/* Sub Section Arrivée */}
 
             <article className="">
@@ -161,7 +176,11 @@ function SearchFilterRooms() {
             }
           }}
         >
-          <p>👥{text_translation("filter_visitors")}</p>
+          <img
+            src="/customer.png"
+            alt="customer"
+            className="filter invert-100 w-5 "
+          />
         </div>
         {visitorOpen && (
           <div className={modalClass} style={{ minWidth: 150 }}>
@@ -240,7 +259,11 @@ function SearchFilterRooms() {
             }
           }}
         >
-          <p>🛏️{text_translation("filter_beds")}</p>
+          <img
+            src="/sleeping.png"
+            alt="sleeping"
+            className="filter invert-100 w-5 "
+          />
         </div>
 
         {/* Lits Simple */}

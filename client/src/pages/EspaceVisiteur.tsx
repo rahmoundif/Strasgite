@@ -2,10 +2,8 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import EspacePerso from "../components/EspacePerso";
 import { useLogin } from "../context/LoginContext";
-import { useTranslation } from "../context/TranslationContext";
 
 function EspaceVisiteur() {
-  const { text_translation } = useTranslation();
   const navigate = useNavigate();
 
   const { isConnected, userRole } = useLogin();
@@ -23,7 +21,6 @@ function EspaceVisiteur() {
 
   return (
     <section>
-      <h1>{text_translation("espace_visiteur_h1")}</h1>
       <EspacePerso />
     </section>
   );
