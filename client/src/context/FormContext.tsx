@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
-// Typage du contexte
 interface FormContextType {
   showCalendrierDepart: boolean;
   showCalendrierArrivee: boolean;
@@ -14,6 +13,8 @@ interface FormContextType {
   petitDejOui: boolean;
   petitDejNon: boolean;
   loading: boolean;
+  nombreLitsSimples: number;
+  nombreLitsDoubles: number;
   setShowCalendrierDepart: React.Dispatch<React.SetStateAction<boolean>>;
   setShowCalendrierArrivee: React.Dispatch<React.SetStateAction<boolean>>;
   setSelectDateDepart: React.Dispatch<React.SetStateAction<Date | null>>;
@@ -25,16 +26,18 @@ interface FormContextType {
   setPetitDejOui: React.Dispatch<React.SetStateAction<boolean>>;
   setPetitDejNon: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setNombreLitsSimples: React.Dispatch<React.SetStateAction<number>>;
+  setNombreLitsDoubles: React.Dispatch<React.SetStateAction<number>>;
   handleOnChangeVoyageurs: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleOnChangePmr: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleOnChangeEnfant: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleOnChangeMotif: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleOnChangeLitsSimples: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleOnChangeLitsDoubles: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleOnChangePetitDejNon: () => void;
   handleOnChangePetitDejOui: () => void;
   handleSubmit: () => void;
 }
-
-// creation du contexte
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
@@ -44,79 +47,104 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
   const [selectDateDepart, setSelectDateDepart] = useState<Date | null>(null);
   const [selectDateArrivee, setSelectDateArrivee] = useState<Date | null>(null);
   const [nombreVoyageurs, setNombreVoyageurs] = useState<number>(1);
-  const [nombreEnfants, setNombreEnfants] = useState<number>(1);
+  const [nombreEnfants, setNombreEnfants] = useState<number>(0);
   const [nombrePmr, setNombrePmr] = useState<number>(0);
-  const [motif, setMotif] = useState("...");
-  const [petitDejOui, setPetitDejOui] = useState(false);
-  const [petitDejNon, setPetitDejNon] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [motif, setMotif] = useState<string>("...");
+  const [petitDejOui, setPetitDejOui] = useState<boolean>(false);
+  const [petitDejNon, setPetitDejNon] = useState<boolean>(false);
+  const [nombreLitsSimples, setNombreLitsSimples] = useState<number>(0);
+  const [nombreLitsDoubles, setNombreLitsDoubles] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  // Vérification du localStorage et initialisation des valeurs du formulaire
   useEffect(() => {
-    const saved = localStorage.getItem("search");
-    if (saved) {
-      const data = JSON.parse(saved);
+    const rawDates = localStorage.getItem("reservationDates");
+    if (rawDates) {
+      const saved = JSON.parse(rawDates) as string[];
+      const dates = saved.map((s: string) => new Date(s));
+      if (dates?.length > 0) {
+        setSelectDateDepart(dates[0]);
+        setSelectDateArrivee(dates[dates.length - 1]);
+      }
+    }
+
+    const rawSearch = localStorage.getItem("search");
+    if (rawSearch) {
+      const data = JSON.parse(rawSearch);
       setMotif(data.motif || "...");
-      setSelectDateDepart(data.datedepart ? new Date(data.datedepart) : null);
-      setSelectDateArrivee(
-        data.datearrivee ? new Date(data.datearrivee) : null,
-      );
+      setNombreLitsSimples(data.nombreLitsSimples || 0);
+      setNombreLitsDoubles(data.nombreLitsDoubles || 0);
       setNombreVoyageurs(data.nombreVoyageurs || 1);
-      setNombreEnfants(data.nombreEnfants || 1);
+      setNombreEnfants(data.nombreEnfants || 0);
       setNombrePmr(data.nombrePmr || 0);
       setPetitDejOui(data.petitDej === "oui");
       setPetitDejNon(data.petitDej === "non");
     }
   }, []);
 
-  const handleOnChangeVoyageurs = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setNombreVoyageurs(Number(event.target.value));
-  };
-  const handleOnChangeEnfant = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setNombreEnfants(Number(event.target.value));
-  };
-  const handleOnChangePmr = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setNombrePmr(Number(event.target.value));
-  };
-  const handleOnChangeMotif = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setMotif(event.target.value);
+  // ✅ Format YYYY-MM-DD sans UTC
+  const generateDateRange = (a: Date, b: Date): string[] => {
+    const [start, end] =
+      a < b ? [new Date(a), new Date(b)] : [new Date(b), new Date(a)];
+
+    const dates: string[] = [];
+    const cur = new Date(start);
+    while (cur <= end) {
+      const yyyy = cur.getFullYear();
+      const mm = String(cur.getMonth() + 1).padStart(2, "0");
+      const dd = String(cur.getDate()).padStart(2, "0");
+      dates.push(`${yyyy}-${mm}-${dd}`);
+      cur.setDate(cur.getDate() + 1);
+    }
+
+    return dates;
   };
 
+  const handleOnChangeVoyageurs = (e: React.ChangeEvent<HTMLSelectElement>) =>
+    setNombreVoyageurs(Number(e.target.value));
+  const handleOnChangeEnfant = (e: React.ChangeEvent<HTMLSelectElement>) =>
+    setNombreEnfants(Number(e.target.value));
+  const handleOnChangePmr = (e: React.ChangeEvent<HTMLSelectElement>) =>
+    setNombrePmr(Number(e.target.value));
+  const handleOnChangeMotif = (e: React.ChangeEvent<HTMLSelectElement>) =>
+    setMotif(e.target.value);
+  const handleOnChangeLitsSimples = (e: React.ChangeEvent<HTMLSelectElement>) =>
+    setNombreLitsSimples(Number(e.target.value));
+  const handleOnChangeLitsDoubles = (e: React.ChangeEvent<HTMLSelectElement>) =>
+    setNombreLitsDoubles(Number(e.target.value));
   const handleOnChangePetitDejOui = () => {
-    setPetitDejOui(!petitDejOui);
-    setPetitDejNon(false); // décocher l'autre
+    setPetitDejOui((prev) => !prev);
+    setPetitDejNon(false);
+  };
+  const handleOnChangePetitDejNon = () => {
+    setPetitDejNon((prev) => !prev);
+    setPetitDejOui(false);
   };
 
-  const handleOnChangePetitDejNon = () => {
-    setPetitDejNon(!petitDejNon);
-    setPetitDejOui(false); // décocher l'autre
-  };
   const handleSubmit = () => {
+    if (selectDateDepart && selectDateArrivee) {
+      const dates = generateDateRange(selectDateDepart, selectDateArrivee);
+      localStorage.setItem("reservationDates", JSON.stringify(dates));
+    }
+
     const search = {
-      motif: motif,
-      datedepart: selectDateDepart,
-      datearrivee: selectDateArrivee,
-      nombreVoyageurs: nombreVoyageurs,
-      nombreEnfants: nombreEnfants,
-      nombrePmr: nombrePmr,
+      motif,
+      nombreLitsDoubles,
+      nombreLitsSimples,
+      nombreVoyageurs,
+      nombreEnfants,
+      nombrePmr,
       petitDej: petitDejOui ? "oui" : petitDejNon ? "non" : "",
     };
-
     localStorage.setItem("search", JSON.stringify(search));
 
-    setLoading(true); // Démarrer l'animation de chargement
-
+    setLoading(true);
     setTimeout(() => {
-      // Après 1,5 seconde, rediriger vers la page Reservation
       navigate("/Reservation");
       setLoading(false);
     }, 1500);
   };
+
   return (
     <FormContext.Provider
       value={{
@@ -131,6 +159,8 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
         petitDejOui,
         petitDejNon,
         loading,
+        nombreLitsSimples,
+        nombreLitsDoubles,
         setShowCalendrierDepart,
         setShowCalendrierArrivee,
         setSelectDateDepart,
@@ -142,12 +172,16 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
         setPetitDejOui,
         setPetitDejNon,
         setLoading,
+        setNombreLitsSimples,
+        setNombreLitsDoubles,
         handleOnChangeVoyageurs,
         handleOnChangePmr,
         handleOnChangeEnfant,
         handleOnChangeMotif,
-        handleOnChangePetitDejNon,
+        handleOnChangeLitsSimples,
+        handleOnChangeLitsDoubles,
         handleOnChangePetitDejOui,
+        handleOnChangePetitDejNon,
         handleSubmit,
       }}
     >
@@ -156,11 +190,8 @@ export const FormProvider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// Hook personnalisé
 export const useForm = () => {
   const context = useContext(FormContext);
-  if (!context) {
-    throw new Error("useForm must be used within a FormProvider");
-  }
+  if (!context) throw new Error("useForm must be used within a FormProvider");
   return context;
 };

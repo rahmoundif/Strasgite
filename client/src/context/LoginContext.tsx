@@ -47,7 +47,7 @@ export const LoginProvider = ({ children }: { children: React.ReactNode }) => {
       localStorage.getItem("ConnexionAdmin") === "true"
         ? "Admin"
         : localStorage.getItem("ConnexionVisiteur") === "true"
-          ? "User" // ou "Europe" si besoin
+          ? "User"
           : localStorage.getItem("ConnexionEurope") === "true"
             ? "Europe"
             : "";
@@ -55,7 +55,7 @@ export const LoginProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   const [code, setCode] = useState("");
-  const [mail, setMail] = useState("");
+  const [mail, setMail] = useState(() => localStorage.getItem("Mail") || "");
   const [pemid, setPemid] = useState("");
   const [message, setMessage] = useState("");
 
@@ -72,14 +72,18 @@ export const LoginProvider = ({ children }: { children: React.ReactNode }) => {
       setIsConnected(true);
       setMessage("Vous êtes connecté");
       setUserRole("User");
+      setMail(mail);
       localStorage.setItem("ConnexionVisiteur", "true");
+      localStorage.setItem("Mail", mail);
     }
 
     if (code === "Admin" && mail === "dave.lopp@gmail.com") {
       setIsConnected(true);
       setMessage("Vous êtes connecté");
       setUserRole("Admin");
+      setMail(mail);
       localStorage.setItem("ConnexionAdmin", "true");
+      localStorage.setItem("Mail", mail);
     }
 
     if (
@@ -90,7 +94,9 @@ export const LoginProvider = ({ children }: { children: React.ReactNode }) => {
       setIsConnected(true);
       setMessage("Vous êtes connecté");
       setUserRole("Europe");
+      setMail(mail);
       localStorage.setItem("ConnexionEurope", "true");
+      localStorage.setItem("Mail", mail);
     }
 
     if (
@@ -110,9 +116,13 @@ export const LoginProvider = ({ children }: { children: React.ReactNode }) => {
     setIsConnected(false);
     setUserRole("");
     setMessage("");
+    setMail("");
     localStorage.removeItem("ConnexionAdmin");
     localStorage.removeItem("ConnexionVisiteur");
     localStorage.removeItem("ConnexionEurope");
+    localStorage.removeItem("Mail");
+    localStorage.removeItem("language");
+    localStorage.removeItem("resavalide");
   };
 
   return (

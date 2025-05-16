@@ -1,188 +1,104 @@
-import { useEffect, useState } from "react";
-
 import Calendar from "react-calendar";
-import { useNavigate } from "react-router";
-import "../App.css";
+import { useCalendar } from "../context/CalendarContext";
+import { useTranslation } from "../context/TranslationContext";
 
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+// Fonction utilitaire : format YYYY-MM-DD sans UTC
+function formatDate(date: Date): string {
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const dd = String(date.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+// Génère toutes les dates entre start et end incluses
+function generateFormattedRange(start: Date, end: Date): string[] {
+  const range: string[] = [];
+  const cur = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+  const endDate = new Date(end.getFullYear(), end.getMonth(), end.getDate());
+
+  while (cur <= endDate) {
+    range.push(formatDate(cur));
+    cur.setDate(cur.getDate() + 1);
+  }
+
+  return range;
+}
 
 function Calendrier() {
-  const [selectedDate, setSelectedDate] = useState<Value>(new Date());
-  const [showAlert, setShowAlert] = useState(false);
-  const [datesReservees, setDatesReservees] = useState<Date[]>([]);
-  const [showValidation, setShowValidation] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const { text_translation } = useTranslation();
 
-  useEffect(() => {
-    const resa = localStorage.getItem("search");
-    if (resa) {
-      try {
-        const parsedDates = JSON.parse(resa);
-        const dates = parsedDates.map((dateStr: string) => new Date(dateStr));
-        setDatesReservees(dates);
-      } catch (error) {
-        console.error("Erreur lors du parsing des dates réservées :", error);
-      }
+  const {
+    selectedDate,
+    showAlert,
+    showValidation,
+    loading,
+    setShowAlert,
+    handleValidation,
+    handleChange,
+    isDateDesactivee,
+  } = useCalendar();
+
+  // Calcule les dates à surligner
+  let selectedRange: string[] = [];
+  if (Array.isArray(selectedDate)) {
+    const [start, end] = selectedDate;
+    if (start instanceof Date && end instanceof Date) {
+      selectedRange = generateFormattedRange(start, end);
     }
-  }, []);
-
-  const datesDesactivees = [
-    new Date(2025, 4, 5),
-    new Date(2025, 4, 6),
-    new Date(2025, 4, 7),
-    new Date(2025, 4, 8),
-    new Date(2025, 4, 10),
-    new Date(2025, 4, 15),
-    new Date(2025, 5, 2),
-    new Date(2025, 5, 3),
-    new Date(2025, 5, 4),
-    new Date(2025, 5, 5),
-    new Date(2025, 6, 7),
-    new Date(2025, 6, 8),
-    new Date(2025, 6, 9),
-    new Date(2025, 6, 10),
-    new Date(2025, 8, 8),
-    new Date(2025, 8, 9),
-    new Date(2025, 8, 10),
-    new Date(2025, 8, 11),
-    new Date(2025, 9, 6),
-    new Date(2025, 9, 7),
-    new Date(2025, 9, 8),
-    new Date(2025, 9, 9),
-  ];
-
-  const isDateDesactivee = (date: Date): boolean => {
-    return [...datesDesactivees, ...datesReservees].some(
-      (d) => d.toDateString() === date.toDateString(),
-    );
-  };
-
-  // Gestion du changement de date
-
-  const handleChange = (value: Value) => {
-    setShowAlert(false);
-    setShowValidation(false);
-
-    if (Array.isArray(value)) {
-      const [start, end] = value;
-      if (start && end) {
-        const currentDate = new Date(start);
-        while (currentDate <= end) {
-          if (isDateDesactivee(currentDate)) {
-            setSelectedDate(null);
-            setShowAlert(true);
-            return;
-          }
-          currentDate.setDate(currentDate.getDate() + 1);
-        }
-      }
-    } else {
-      if (value && isDateDesactivee(value)) {
-        setSelectedDate(null);
-        setShowAlert(true);
-        return;
-      }
-    }
-
-    setSelectedDate(value);
-    setShowValidation(true);
-  };
-
-  const handleValidation = () => {
-    if (selectedDate) {
-      const reservationData = {
-        dates: selectedDate,
-      };
-      localStorage.setItem("search", JSON.stringify(reservationData));
-    }
-
-    setLoading(true);
-    setTimeout(() => {
-      navigate("/Order");
-    }, 1500);
-  };
-
-  // Fonction pour charger les dates depuis le localStorage et mettre à jour le calendrier
-  const loadDatesFromStorage = () => {
-    const resa = localStorage.getItem("search");
-    if (resa) {
-      try {
-        const parsedDates = JSON.parse(resa);
-        const dates = parsedDates.map((dateStr: string) => new Date(dateStr));
-        setDatesReservees(dates);
-        // Appliquer les dates réservées directement au calendrier
-        setSelectedDate(dates); // Met à jour la sélection du calendrier
-      } catch (error) {
-        console.error("Erreur lors du parsing des dates réservées :", error);
-      }
-    }
-  };
+  }
 
   return (
     <div>
-      {/* Bouton pour vérifier les disponibilités et charger les dates */}
-      <div className="mb-4 text-center">
-        <button
-          type="button"
-          onClick={loadDatesFromStorage}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-        >
-          Vérifier les disponibilités
-        </button>
-      </div>
-
       {/* Calendrier */}
       <Calendar
-        tileDisabled={({ date, view }) =>
-          view === "month" && isDateDesactivee(date)
-        }
-        tileClassName={({ date, view }) =>
-          view === "month" && isDateDesactivee(date) ? "tile-desactivee" : null
-        }
-        navigationLabel={({ label }) => <span>{label}</span>}
-        goToRangeStartOnSelect
+        onChange={handleChange}
+        value={selectedDate}
         selectRange
         minDate={new Date(2025, 0, 1)}
         maxDate={new Date(2026, 11, 31)}
-        onChange={handleChange}
-        value={selectedDate}
+        tileDisabled={({ date, view }) =>
+          view === "month" && isDateDesactivee(date)
+        }
+        tileClassName={({ date, view }) => {
+          if (view !== "month") return;
+          const formatted = formatDate(date);
+
+          if (isDateDesactivee(date)) return "tile-desactivee";
+          if (selectedRange.includes(formatted)) return "tile-selected";
+        }}
       />
 
-      {/* affichage alerte erreur date */}
-
+      {/* Alerte */}
       {showAlert && (
         <div className="fixed inset-0 flex items-center justify-center bg-[#2c7865]/70 z-50">
           <div className="bg-[#f4ebd0] p-6 rounded-lg shadow-lg max-w-md w-full text-center">
             <p className="text-gray-800 mb-4">
-              <b>Alerte</b> : Votre sélection inclut une ou plusieurs dates déjà
-              réservées. Veuillez ajuster vos dates de réservation.
+              <b>{text_translation("calendrier_alert_title")}</b> :{" "}
+              {text_translation("calendrier_alert_message")}
             </p>
             <button
               type="button"
               onClick={() => setShowAlert(false)}
               className="mt-2 px-4 py-2 bg-[#2c7865] text-white rounded hover:bg-red-700 transition"
             >
-              Fermer
+              {text_translation("calendrier_btn_close")}
             </button>
           </div>
         </div>
       )}
 
-      {/* CAffichage bouton validation de réservation */}
-
+      {/* Bouton Valider */}
       {showValidation && (
-        <div className="mt-4 text-center">
+        <div className="mt-4 flex justify-center text-center">
           <button
             type="button"
             onClick={handleValidation}
-            className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition flex items-center justify-center gap-2 min-w-[200px]"
+            className="px-4 py-2 bg-[#a84448] hover:bg-[#922f33] text-white rounded transition flex items-center justify-center min-w-[200px]"
           >
             {loading ? (
               <span className="animate-spin inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
             ) : (
-              "Valider la réservation"
+              text_translation("calendrier_btn_validate")
             )}
           </button>
         </div>

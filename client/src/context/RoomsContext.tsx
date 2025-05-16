@@ -1,9 +1,11 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useMemo } from "react";
+import { useTranslation } from "../context/TranslationContext";
 import roomsData from "../data/roomsData.json";
 
-interface Room {
-  key: number;
-  imageUrl: string;
+//Typage d'une chambre
+export interface Room {
+  id: number;
+  images: string[];
   title: string;
   description: string;
   price: string | number;
@@ -19,27 +21,34 @@ interface RoomsContextType {
   rooms: Room[];
 }
 
-const rooms: Room[] = roomsData as Room[];
-
 // creation du context
 const RoomsContext = createContext<RoomsContextType | undefined>(undefined);
 
-// creation du provider afin de consommer le context avec securité
 export const RoomsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const { text_translation } = useTranslation();
+
+  const rooms = useMemo<Room[]>(
+    () =>
+      roomsData.map((room) => ({
+        ...room,
+        images: room.images || [],
+        description: text_translation(`room_${room.id}_description`),
+        price: text_translation(`room_${room.id}_price`),
+      })),
+    [text_translation],
+  );
+
   return (
     <RoomsContext.Provider value={{ rooms }}>{children}</RoomsContext.Provider>
   );
 };
 
-// initialisation du hook useRooms
-export const useRooms = (): RoomsContextType => {
+// Perso hook useRooms
+export const useRooms = (): Room[] => {
   const context = useContext(RoomsContext);
-  if (!context) {
-    throw new Error("Error");
-  }
-  return context;
+  if (!context)
+    throw new Error("useRooms doit être utilisé dans un RoomsProvider");
+  return context.rooms;
 };
-
-export default RoomsContext;

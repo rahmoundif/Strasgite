@@ -1,12 +1,15 @@
+import RoomCarousel from "./RoomCarousel";
+
 function RoomShow() {
   return (
-    <section className="md:flex justify-center my-10 place-items-center m-10">
+    <section className="md:flex justify-center mt-15 md:my-10 place-items-center">
       <div className="md:flex md:flex-col md:gap-5">
         <div className="md:flex md:justify-center">
-          <img
-            src="https://i.ibb.co/vvgzbNN6/chambre-1.png"
-            alt="room 1"
-            className=" md:w-105 object-cover rounded-2xl"
+          <RoomCarousel
+            images={[
+              "https://i.ibb.co/vvgzbNN6/chambre-1.png",
+              "https://i.ibb.co/WvmBtbX5/chambre-1bis.png",
+            ]}
           />
         </div>
 
@@ -14,12 +17,12 @@ function RoomShow() {
           <img
             src="https://i.ibb.co/rKJSVMdg/chambre-4.png"
             alt="room 2"
-            className=" md:mr-0 mr-5 md:w-50 w-36 object-cover rounded-2xl "
+            className=" md:mr-0 mr-5 md:w-50 w-42 object-cover rounded-2xl "
           />
           <img
             src="https://i.ibb.co/FLyQPQrD/chambre-5.png"
             alt="room 3"
-            className=" md:w-50 w-36 object-cover rounded-2xl "
+            className=" md:w-50 w-42 object-cover rounded-2xl "
           />
         </div>
       </div>

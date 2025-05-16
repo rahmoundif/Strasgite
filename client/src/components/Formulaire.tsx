@@ -1,5 +1,6 @@
 import Calendar from "react-calendar";
 import { useForm } from "../../src/context/FormContext";
+import { useTranslation } from "../context/TranslationContext";
 
 function Formulaire() {
   const {
@@ -10,6 +11,8 @@ function Formulaire() {
     nombreVoyageurs,
     nombreEnfants,
     nombrePmr,
+    nombreLitsSimples,
+    nombreLitsDoubles,
     motif,
     petitDejOui,
     petitDejNon,
@@ -25,17 +28,27 @@ function Formulaire() {
     handleOnChangePetitDejNon,
     handleOnChangePetitDejOui,
     handleSubmit,
+    handleOnChangeLitsSimples,
+    handleOnChangeLitsDoubles,
   } = useForm();
+
+  const { text_translation } = useTranslation();
 
   return (
     <>
-      <form className="flex flex-col bg-[#2c7865] p-6 gap-6 rounded-xl shadow-md">
+      <form
+        className="flex flex-col bg-[#2c7865] p-6 gap-6 rounded-xl shadow-md"
+        style={{
+          color: "var(--color-accent)",
+          backgroundColor: "var(--color-primary)",
+        }}
+      >
         <div>
           <label
             htmlFor="motifVoyage"
             className="block mb-2 text-lg font-semibold text-[#f4ebd0]"
           >
-            Motif du séjour :
+            {text_translation("form_motif_label")}
           </label>
           <select
             id="motifVoyage"
@@ -46,34 +59,20 @@ function Formulaire() {
             <option value={"..."} disabled hidden>
               ...
             </option>
-            <option value={"Loisir"}>Loisir</option>
-            <option value={"Tourisme"}>Tourisme</option>
-            <option value={"Professionnel"}>Professionnel</option>
+            <option value={"Loisir"}>
+              {text_translation("form_option_loisir")}
+            </option>
+            <option value={"Tourisme"}>
+              {text_translation("form_option_tourisme")}
+            </option>
+            <option value={"Professionnel"}>
+              {text_translation("form_option_professionnel")}
+            </option>
             <option value={"Séance Plénière"}>
-              Séance plénière du parlement Européen
+              {text_translation("form_option_pleniere")}
             </option>
           </select>
         </div>
-
-        <input
-          type="text"
-          placeholder="Départ"
-          className="p-3 bg-white border border-[#d9bf77] text-gray-800 text-base rounded-lg focus:ring-[#d9bf77] focus:border-[#d9bf77] block w-full"
-          onClick={() => setShowCalendrierDepart(!showCalendrierDepart)}
-          value={selectDateDepart ? selectDateDepart.toLocaleDateString() : ""}
-          readOnly
-        />
-        {showCalendrierDepart && (
-          <div>
-            <Calendar
-              onChange={(date) => {
-                setSelectDateDepart(date as Date);
-                setShowCalendrierDepart(false);
-              }}
-              value={selectDateDepart}
-            />
-          </div>
-        )}
 
         <input
           type="text"
@@ -86,7 +85,7 @@ function Formulaire() {
           readOnly
         />
         {showCalendrierArrivee && (
-          <div>
+          <div className="calendar-wrapper-formulaire bg-[var(--color-background)] text-black p-2 rounded-md">
             <Calendar
               onChange={(date) => {
                 setSelectDateArrivee(date as Date);
@@ -97,9 +96,29 @@ function Formulaire() {
           </div>
         )}
 
+        <input
+          type="text"
+          placeholder="Départ"
+          className="p-3 bg-white border border-[#d9bf77] text-gray-800 text-base rounded-lg focus:ring-[#d9bf77] focus:border-[#d9bf77] block w-full"
+          onClick={() => setShowCalendrierDepart(!showCalendrierDepart)}
+          value={selectDateDepart ? selectDateDepart.toLocaleDateString() : ""}
+          readOnly
+        />
+        {showCalendrierDepart && (
+          <div className="calendar-wrapper-formulaire bg-[var(--color-background)] text-black p-2 rounded-md">
+            <Calendar
+              onChange={(date) => {
+                setSelectDateDepart(date as Date);
+                setShowCalendrierDepart(false);
+              }}
+              value={selectDateDepart}
+            />
+          </div>
+        )}
+
         <div className="flex justify-between items-center bg-white border border-[#d9bf77] text-sm text-gray-800 rounded-lg px-1 py-3 gap-2">
           <label htmlFor="nombreVoyageurs" className="font-medium">
-            Adultes :
+            {text_translation("form_label_adultes")}
           </label>
           <select
             id="nombreVoyageurs"
@@ -115,28 +134,12 @@ function Formulaire() {
           </select>
 
           <label htmlFor="nombreEnfants" className="font-medium">
-            Enfants :
+            {text_translation("form_label_enfants")}
           </label>
           <select
             id="nombreEnfants"
             value={nombreEnfants}
             onChange={handleOnChangeEnfant}
-            className=""
-          >
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={3}>3</option>
-            <option value={4}>4</option>
-            <option value={5}>5</option>
-          </select>
-
-          <label htmlFor="nombrePMR" className="font-medium">
-            PMR :
-          </label>
-          <select
-            id="nombrePMR"
-            value={nombrePmr}
-            onChange={handleOnChangePmr}
             className=""
           >
             <option value={0}>0</option>
@@ -146,11 +149,53 @@ function Formulaire() {
             <option value={4}>4</option>
             <option value={5}>5</option>
           </select>
+
+          <label htmlFor="nombreLitsDoubles" className="font-medium">
+            PMR
+          </label>
+          <select
+            id="nombrePmr"
+            value={nombrePmr}
+            onChange={handleOnChangePmr}
+            className=""
+          >
+            <option value={1}>0</option>
+            <option value={2}>1</option>
+          </select>
         </div>
+
+        <div className="flex justify-between items-center bg-white border border-[#d9bf77] text-sm text-gray-800 rounded-lg px-1 py-3 gap-2">
+          <label htmlFor="nombreLitsSimples" className="font-medium">
+            {text_translation("filter_single_beds")}
+          </label>
+          <select
+            id="nombreLitsSimples"
+            value={nombreLitsSimples}
+            onChange={handleOnChangeLitsSimples}
+            className=""
+          >
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+          </select>
+
+          <label htmlFor="nombresLitsDoubles" className="font-medium">
+            {text_translation("filter_single_beds")}
+          </label>
+          <select
+            id="nombresLitsDoubles"
+            value={nombreLitsDoubles}
+            onChange={handleOnChangeLitsDoubles}
+            className=""
+          >
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+          </select>
+        </div>
+
         <section className="mb-2 text-lg font-semibold text-[#f4ebd0]">
           <fieldset>
             <legend className="mb-2 text-center">
-              Souhaitez-vous un petit déjeuner ?
+              {text_translation("form_breakfast_legend")}
             </legend>
             <div className="flex flex-row items-center justify-center gap-x-4">
               <div className="flex items-center gap-1">
@@ -162,7 +207,9 @@ function Formulaire() {
                   checked={petitDejOui}
                   onChange={handleOnChangePetitDejOui}
                 />
-                <label htmlFor="oui">Oui</label>
+                <label htmlFor="oui">
+                  {text_translation("form_checkbox_yes")}
+                </label>
               </div>
               <div className="flex items-center gap-1">
                 <input
@@ -173,7 +220,9 @@ function Formulaire() {
                   checked={petitDejNon}
                   onChange={handleOnChangePetitDejNon}
                 />
-                <label htmlFor="non">Non</label>
+                <label htmlFor="non">
+                  {text_translation("form_checkbox_no")}
+                </label>
               </div>
             </div>
           </fieldset>
@@ -187,7 +236,7 @@ function Formulaire() {
           {loading ? (
             <span className="animate-spin inline-block w-5 h-5 border-2 border-white border-t-transparent rounded-full" />
           ) : (
-            "Rechercher"
+            <p>{text_translation("button_search")}</p>
           )}
         </button>
       </form>

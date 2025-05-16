@@ -1,167 +1,125 @@
+import { useEffect } from "react";
+import { useTranslation } from "../context/TranslationContext";
+
 function Cgv() {
+  const { text_translation } = useTranslation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <section id="top" className="max-w-screen-lg mx-auto p-10">
       <h1 className="text-2xl font-bold mb-5 text-[#2c7865]">
-        Conditions Générales de Vente – Gîte à Strasbourg
+        {text_translation("cgv_h1")}
       </h1>
 
       <div className="mb-8 shadow-xl border-1 border-[#D9BF77] p-5 rounded-xl">
         <h2 className="text-xl text-[#2c7865] font-semibold mb-3 underline">
-          1. Objet
+          {text_translation("cgv_1_title")}
         </h2>
-        <p>
-          Les présentes Conditions Générales de Vente régissent la réservation,
-          le paiement et l'utilisation des services proposés par le Gîte La
-          Maison Strasbourgeoise, situé à Strasbourg, France. Toute réservation
-          implique l'adhésion sans réserve du client aux présentes conditions.
-        </p>
+        <p>{text_translation("cgv_1_paragraph")}</p>
       </div>
 
       <div className="mb-8 shadow-xl border-1 border-[#D9BF77] p-5 rounded-xl">
         <h2 className="text-xl text-[#2c7865] font-semibold mb-3 underline">
-          2. Réservations
+          {text_translation("cgv_2_title")}
         </h2>
-        <p>
-          La réservation devient effective dès réception d’un acompte équivalent
-          à 30% du montant total du séjour. Le solde est à régler au plus tard à
-          l’arrivée au gîte.
-        </p>
+        <p>{text_translation("cgv_2_paragraph")}</p>
       </div>
 
       <div className="mb-8 shadow-xl border-1 border-[#D9BF77] p-5 rounded-xl">
         <h2 className="text-xl text-[#2c7865] font-semibold mb-3 underline">
-          3. Tarifs
+          {text_translation("cgv_3_title")}
         </h2>
-        <p>
-          Les tarifs sont exprimés en euros, toutes taxes comprises (TTC). Ils
-          peuvent varier en fonction des saisons et des offres promotionnelles.
-          Le prix confirmé lors de la réservation est ferme et définitif.
-        </p>
+        <p>{text_translation("cgv_3_paragraph")}</p>
       </div>
 
       <div className="mb-8 shadow-xl border-1 border-[#D9BF77] p-5 rounded-xl">
         <h2 className="text-xl text-[#2c7865] font-semibold mb-3 underline">
-          4. Annulation et modification
+          {text_translation("cgv_4_title")}
         </h2>
         <p>
-          <strong>Par le client :</strong> en cas d’annulation plus de 15 jours
-          avant la date d’arrivée, l’acompte est remboursé intégralement. Moins
-          de 15 jours avant l’arrivée, l’acompte est conservé.
+          <strong>{text_translation("client_label")} :</strong>{" "}
+          {text_translation("cgv_4_client")}
         </p>
         <p className="mt-2">
-          <strong>Par le gîte :</strong> en cas d’impossibilité d’accueil (ex. :
-          force majeure), un remboursement intégral sera effectué sans autre
-          compensation.
+          <strong>{text_translation("gite_label")} :</strong>{" "}
+          {text_translation("cgv_4_gite")}
         </p>
       </div>
 
       <div className="mb-8 shadow-xl border-1 border-[#D9BF77] p-5 rounded-xl">
         <h2 className="text-xl text-[#2c7865] font-semibold mb-3 underline">
-          5. Arrivée et départ
+          {text_translation("cgv_5_title")}
         </h2>
-        <p>
-          Arrivée : à partir de 16h
-          <br />
-          Départ : avant 11h
-        </p>
-        <p className="mt-2">
-          Tout départ tardif non convenu pourra entraîner une facturation
-          supplémentaire.
-        </p>
+        <p>{text_translation("cgv_5_paragraph1")}</p>
+        <p className="mt-2">{text_translation("cgv_5_paragraph2")}</p>
       </div>
 
       <div className="mb-8 shadow-xl border-1 border-[#D9BF77] p-5 rounded-xl">
         <h2 className="text-xl text-[#2c7865] font-semibold mb-3 underline">
-          6. Règlement intérieur
+          {text_translation("cgv_6_title")}
         </h2>
-        <p>
-          Le client s’engage à respecter les lieux, le mobilier et le voisinage.
-          Le gîte est <strong>non-fumeur</strong> à l’intérieur. Les animaux ne
-          sont pas admis, sauf accord préalable.
-        </p>
+        <p>{text_translation("cgv_6_paragraph")}</p>
       </div>
 
       <div className="mb-8 shadow-xl border-1 border-[#D9BF77] p-5 rounded-xl">
         <h2 className="text-xl text-[#2c7865] font-semibold mb-3 underline">
-          7. Prestations – Petit-déjeuner
+          {text_translation("cgv_7_title")}
         </h2>
-        <p>
-          Le petit-déjeuner est proposé en option, sous forme de panier ou servi
-          dans l’espace commun selon la formule choisie. Il inclut généralement
-          : boissons chaudes, jus de fruits, pain, viennoiseries, confitures,
-          produits laitiers, fruits frais.
-        </p>
+        <p>{text_translation("cgv_7_paragraph")}</p>
       </div>
 
       <div className="mb-8 shadow-xl border-1 border-[#D9BF77] p-5 rounded-xl">
         <h2 className="text-xl text-[#2c7865] font-semibold mb-3 underline">
-          8. Allergènes
+          {text_translation("cgv_8_title")}
         </h2>
-        <p>
-          Nous attirons l’attention des clients sur le fait que les
-          petits-déjeuners peuvent contenir ou avoir été en contact avec les{" "}
-          <strong>14 allergènes majeurs</strong> reconnus par l’UE :
-        </p>
+        <p>{text_translation("cgv_8_intro")}</p>
         <ul className="list-disc list-inside mt-2 space-y-1">
-          <li>Céréales contenant du gluten</li>
-          <li>Lait (et produits laitiers)</li>
-          <li>Œufs</li>
-          <li>Fruits à coque (noix, noisettes, amandes, etc.)</li>
-          <li>Arachides</li>
-          <li>Soja</li>
-          <li>Poissons</li>
-          <li>Crustacés</li>
-          <li>Mollusques</li>
-          <li>Moutarde</li>
-          <li>Céleri</li>
-          <li>Graines de sésame</li>
-          <li>Lupin</li>
-          <li>Anhydride sulfureux et sulfites</li>
+          <li>{text_translation("cgv_8_item1")}</li>
+          <li>{text_translation("cgv_8_item2")}</li>
+          <li>{text_translation("cgv_8_item3")}</li>
+          <li>{text_translation("cgv_8_item4")}</li>
+          <li>{text_translation("cgv_8_item5")}</li>
+          <li>{text_translation("cgv_8_item6")}</li>
+          <li>{text_translation("cgv_8_item7")}</li>
+          <li>{text_translation("cgv_8_item8")}</li>
+          <li>{text_translation("cgv_8_item9")}</li>
+          <li>{text_translation("cgv_8_item10")}</li>
+          <li>{text_translation("cgv_8_item11")}</li>
+          <li>{text_translation("cgv_8_item12")}</li>
+          <li>{text_translation("cgv_8_item13")}</li>
+          <li>{text_translation("cgv_8_item14")}</li>
         </ul>
         <p className="mt-2">
-          <strong>
-            Il est de la responsabilité du client de signaler toute allergie ou
-            intolérance alimentaire au moment de la réservation ou, au plus
-            tard, à son arrivée.
-          </strong>{" "}
-          Le gîte ne pourra être tenu responsable en cas de réaction allergique
-          si cette information n’a pas été communiquée.
+          <strong>{text_translation("cgv_8_responsibility")}</strong>
         </p>
       </div>
 
       <div className="mb-8 shadow-xl border-1 border-[#D9BF77] p-5 rounded-xl">
         <h2 className="text-xl text-[#2c7865] font-semibold mb-3 underline">
-          9. Responsabilité
+          {text_translation("cgv_9_title")}
         </h2>
-        <p>
-          Le gîte décline toute responsabilité en cas de perte, vol ou
-          détérioration d’effets personnels dans les lieux loués.
-        </p>
+        <p>{text_translation("cgv_9_paragraph")}</p>
       </div>
 
       <div className="mb-8 shadow-xl border-1 border-[#D9BF77] p-5 rounded-xl">
         <h2 className="text-xl text-[#2c7865] font-semibold mb-3 underline">
-          10. Données personnelles
+          {text_translation("cgv_10_title")}
         </h2>
-        <p>
-          Les données collectées sont utilisées exclusivement dans le cadre de
-          la gestion des réservations et ne seront jamais transmises à des tiers
-          sans consentement.
-        </p>
+        <p>{text_translation("cgv_10_paragraph")}</p>
       </div>
 
       <div className="mb-8 shadow-xl border-1 border-[#D9BF77] p-5 rounded-xl">
         <h2 className="text-xl text-[#2c7865] font-semibold mb-3 underline">
-          11. Litiges
+          {text_translation("cgv_11_title")}
         </h2>
-        <p>
-          En cas de litige, une solution amiable sera recherchée en priorité. À
-          défaut, le tribunal compétent sera celui du lieu de situation du gîte.
-        </p>
+        <p>{text_translation("cgv_11_paragraph")}</p>
       </div>
 
-      <div className="mb-10">
-        <a href="#top" className="flex justify-center mt-10">
+      <div className="mb-10 flex justify-center mt-10">
+        <a href="#top">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="48"
@@ -174,7 +132,7 @@ function Cgv() {
             strokeLinejoin="round"
             className="hover:scale-125 transition-transform duration-300"
           >
-            <title>Retour en haut de page</title>
+            <title>{text_translation("cgv_back_to_top")}</title>
             <polyline points="18 15 12 9 6 15" />
           </svg>
         </a>

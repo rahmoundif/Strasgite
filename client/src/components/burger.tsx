@@ -5,7 +5,13 @@ type BurgerProps = {
 
 function Burger({ toggleMenu, isOpen }: BurgerProps) {
   return (
-    <section className="absolute top-5 right-5 z-50 bg-[#2c7865]/70 rounded-sm h-9 w-10 cursor-pointer p-1">
+    <section
+      className="absolute top-5 right-5 z-50 bg-[#2c7865]/70 rounded-sm h-9 w-10 cursor-pointer p-1"
+      style={{
+        color: "var(--color-accent)",
+        backgroundColor: "var(--color-primary)",
+      }}
+    >
       <div onClick={toggleMenu} onKeyDown={toggleMenu}>
         <div className="relative w-11 h-11">
           <span
