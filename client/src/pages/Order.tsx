@@ -353,7 +353,7 @@ const Order = () => {
                 ✅ {text_translation("payment_validated")}
               </h2>
               <p>
-                {text_translation("tank_you")}{" "}
+                {text_translation("thank_you")}{" "}
                 <strong>{paymentInfo.name}</strong>,{" "}
                 {text_translation("reservation_recorded")}
               </p>

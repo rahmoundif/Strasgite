@@ -174,12 +174,13 @@ function Formulaire() {
             onChange={handleOnChangeLitsSimples}
             className=""
           >
+            <option value={0}>0</option>
             <option value={1}>1</option>
             <option value={2}>2</option>
           </select>
 
           <label htmlFor="nombresLitsDoubles" className="font-medium">
-            {text_translation("filter_single_beds")}
+            {text_translation("filter_double_beds")}
           </label>
           <select
             id="nombresLitsDoubles"
@@ -187,6 +188,7 @@ function Formulaire() {
             onChange={handleOnChangeLitsDoubles}
             className=""
           >
+            <option value={0}>0</option>
             <option value={1}>1</option>
             <option value={2}>2</option>
           </select>
