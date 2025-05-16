@@ -126,7 +126,7 @@ function NotreAlsace() {
               </p>
             </div>
           </div>
-          <div className="flex gap-6 items-start border-1 border-gray-400 rounded-lg p-4 shadow-xl mt-20">
+          <div className="flex gap-6 items-start md:mt-20 border-1 border-gray-400 rounded-lg p-4 shadow-xl">
             <img
               src="https://routedesvins89.fr/wp-content/uploads/2018/05/route-vin-alsace-0.jpg"
               alt="Route des Vins"
@@ -166,7 +166,7 @@ function NotreAlsace() {
               </p>
             </div>
           </div>
-          <div className="flex gap-6 items-start border-1 border-gray-400 rounded-lg p-4 shadow-xl mt-20">
+          <div className="flex gap-6 items-start md:mt-20 border-1 border-gray-400 rounded-lg p-4 shadow-xl">
             <img
               src="https://www.trampolinepark.fr/repository/image/offres/park-thumb-entreprise-ce.jpg"
               alt="Trampoline Bowling Geispolsheim"
@@ -215,7 +215,7 @@ function NotreAlsace() {
               </p>
             </div>
           </div>
-          <div className="flex gap-6 items-start border-1 border-gray-400 rounded-lg p-4 shadow-xl mt-20">
+          <div className="flex gap-6 items-start md:mt-20 border-1 border-gray-400 rounded-lg p-4 shadow-xl">
             <img
               src="https://bulletindescommunes.net/wp-content/uploads/2021/04/bain.jpg"
               alt="bains municipaux strasbourg"
@@ -255,7 +255,7 @@ function NotreAlsace() {
               </p>
             </div>
           </div>
-          <div className="flex gap-6 items-start border-1 border-gray-400 rounded-lg p-4 shadow-xl mt-20">
+          <div className="flex gap-6 items-start md:mt-20 border-1 border-gray-400 rounded-lg p-4 shadow-xl">
             <img
               src="https://www.rue89strasbourg.com/wp-content/uploads/2015/07/Capture-d%E2%80%99%C3%A9cran-2015-07-24-%C3%A0-15.39.33.png"
               alt="Forteresse Frere"
